@@ -164,170 +164,35 @@ export default function Services() {
   ];
 
   return (
-    <section id="services" className="py-24 bg-riva-blue-light dark:bg-riva-dark-bg relative overflow-hidden">
-      {/* Background Effects */}
-      <div className="absolute inset-0">
-        <div className="absolute top-10 right-10 w-64 h-64 bg-riva-blue/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-10 left-10 w-48 h-48 bg-riva-blue-light/10 rounded-full blur-3xl" />
-      </div>
-
-      <div className="relative z-10 max-w-full mx-auto px-4 md:px-8">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-20"
-        >
-          <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: 0.1 }}
-            className="text-4xl md:text-5xl font-extrabold text-riva-blue mb-6 font-sans"
-          >
-            What Riva Delivers
-          </motion.h2>
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: 0.2 }}
-            className="text-xl text-riva-blue max-w-3xl mx-auto leading-relaxed"
-          >
-            We don't just build websites - we build <span className="font-bold text-riva-blue">growth engines</span> that drive real business results
-          </motion.p>
-        </motion.div>
-
-        {/* Stats Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 mb-20"
-        >
-          {stats.map((stat, i) => (
-            <motion.div
-              key={stat.label}
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.8 + i * 0.1 }}
-              className="text-center p-6 bg-white/80 dark:bg-riva-dark-card/80 rounded-2xl backdrop-blur-sm border border-riva-blue/30 dark:border-riva-dark-border shadow-xl"
-            >
-              <div className="text-3xl mb-3">{stat.icon}</div>
-              <div className="text-2xl font-black text-riva-blue dark:text-riva-blue">{stat.number}</div>
-              <div className="text-sm font-semibold text-riva-blue dark:text-riva-dark-text">{stat.label}</div>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* Services Grid */}
-        <div className="grid lg:grid-cols-2 gap-8 mb-20">
-          {services.map((service, i) => (
-            <motion.div
-              key={service.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: i * 0.1 }}
-              className="bg-white/90 dark:bg-riva-dark-card/90 rounded-3xl p-8 shadow-2xl backdrop-blur-md border border-riva-blue/30 dark:border-riva-dark-border hover:shadow-3xl transition-all duration-300"
-            >
-              {/* Service Header */}
-              <div className="flex items-start gap-6 mb-8">
-                <div className="p-4 bg-riva-blue/10 dark:bg-riva-darkest/30 rounded-2xl text-riva-blue dark:text-riva-blue">
-                  {service.icon}
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-2xl font-bold text-riva-blue dark:text-riva-dark-text mb-3">{service.title}</h3>
-                  <p className="text-riva-blue dark:text-riva-dark-muted leading-relaxed">{service.description}</p>
-                </div>
+    <section id="services" className="py-20 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-5xl font-bold mb-6">
+            The <span className="bg-gradient-to-r from-riva-blue via-riva-violet to-riva-teal bg-clip-text text-transparent">AI core</span> behind scalable growth
+          </h2>
+          <p className="text-xl text-white/90 max-w-3xl mx-auto">
+            Digital solutions aren't here to overwhelm you—they're here to work for you. Effortlessly integrate the right tools into your process, supercharging productivity and growth.
+          </p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {services.map((service, index) => (
+            <div key={index} className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/10 hover:border-riva-violet/50 transition-all duration-300 group hover:scale-105">
+              <div className="mb-4 group-hover:scale-110 transition-transform text-riva-blue">
+                {service.icon}
               </div>
-
-              {/* Features */}
-              <div className="mb-8">
-                <h4 className="text-lg font-semibold text-riva-blue dark:text-riva-blue mb-4">What's Included:</h4>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  {service.features.map((feature, j) => (
-                    <div key={j} className="flex items-center gap-3">
-                      <div className="w-2 h-2 bg-riva-blue dark:bg-riva-blue rounded-full"></div>
-                      <span className="text-sm text-riva-blue dark:text-riva-dark-text">{feature}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Technologies */}
-              <div className="mb-8">
-                <h4 className="text-lg font-semibold text-riva-blue dark:text-riva-blue mb-4">Technologies:</h4>
-                <div className="flex flex-wrap gap-2">
-                  {service.technologies.map((tech, j) => (
-                    <span key={j} className="px-3 py-1 bg-riva-blue/10 dark:bg-riva-darkest/30 text-riva-blue dark:text-riva-blue rounded-full text-sm font-medium">
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              {/* Pricing */}
-              <div className="border-t border-riva-blue/20 dark:border-riva-dark-border pt-6">
-                <h4 className="text-lg font-semibold text-riva-blue dark:text-riva-blue mb-4">Pricing:</h4>
-                <div className="grid grid-cols-3 gap-4">
-                  <div className="text-center p-3 bg-riva-blue/5 dark:bg-riva-darkest/20 rounded-xl">
-                    <div className="text-sm font-medium text-riva-blue dark:text-riva-dark-text">Basic</div>
-                    <div className="text-lg font-bold text-riva-blue dark:text-riva-blue">{service.pricing.basic}</div>
+              <h3 className="text-xl font-semibold mb-4 text-white/90">{service.title}</h3>
+              <p className="text-white/80 mb-6">{service.description}</p>
+              <div className="space-y-2">
+                {service.features.map((feature, featureIndex) => (
+                  <div key={featureIndex} className="flex items-center">
+                    <span className="w-2 h-2 rounded-full bg-riva-teal mr-2 inline-block"></span>
+                    <span className="text-sm text-white/80">{feature}</span>
                   </div>
-                  <div className="text-center p-3 bg-riva-blue/10 dark:bg-riva-darkest/40 rounded-xl">
-                    <div className="text-sm font-medium text-riva-blue dark:text-riva-dark-text">Pro</div>
-                    <div className="text-lg font-bold text-riva-blue dark:text-riva-blue">{service.pricing.pro}</div>
-                  </div>
-                  <div className="text-center p-3 bg-riva-blue/15 dark:bg-riva-darkest/60 rounded-xl">
-                    <div className="text-sm font-medium text-riva-blue dark:text-riva-dark-text">Enterprise</div>
-                    <div className="text-lg font-bold text-riva-blue dark:text-riva-blue">{service.pricing.enterprise}</div>
-                  </div>
-                </div>
+                ))}
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
-
-        {/* CTA Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="text-center"
-        >
-          <motion.h3 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-3xl font-bold text-riva-blue dark:text-riva-dark-text mb-6"
-          >
-            Ready to Transform Your Business?
-          </motion.h3>
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-lg text-riva-blue dark:text-riva-dark-muted mb-8 max-w-2xl mx-auto"
-          >
-            Let's discuss your project requirements and create a custom solution that drives results.
-          </motion.p>
-          <motion.a
-            href="#contact"
-            whileHover={{ scale: 1.03, y: -2 }}
-            whileTap={{ scale: 0.98 }}
-            className="inline-block px-8 py-4 bg-white/90 dark:bg-riva-darkest text-riva-blue dark:text-riva-blue-light font-semibold text-lg rounded-xl shadow-md border border-riva-blue/30 dark:border-riva-dark-border hover:shadow-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-riva-blue/30"
-          >
-            Start Your Project
-          </motion.a>
-        </motion.div>
       </div>
     </section>
   );

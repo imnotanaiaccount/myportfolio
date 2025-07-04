@@ -4,35 +4,33 @@ import projects from '../data/projects';
 
 export default function Examples() {
   return (
-    <section className="py-32 bg-riva-blue dark:bg-riva-dark-blue relative overflow-hidden">
-      <div className="max-w-6xl mx-auto px-4 md:px-8">
-        <h2 className="text-4xl md:text-5xl font-extrabold text-riva-blue mb-6 font-sans">
-          Riva in Action
-        </h2>
-        <p className="text-xl text-riva-blue max-w-3xl mx-auto leading-relaxed">
-          See how we've helped businesses like yours achieve <span className="font-bold text-riva-blue">real results</span> and <span className="font-bold text-riva-blue">measurable growth</span>
-        </p>
-        <div className="grid md:grid-cols-2 gap-12">
-          {projects.map(project => (
-            <div key={project.name} className="rounded-2xl shadow-lg bg-riva-light-blue dark:bg-riva-dark-card p-6 flex flex-col">
-              <img src={project.screenshot} alt={project.name} className="rounded-xl mb-4 w-full aspect-video object-cover" />
-              <div className="flex items-center gap-3 mb-2">
+    <section id="examples" className="py-20 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-5xl font-bold mb-6">
+            Riva in <span className="bg-gradient-to-r from-riva-blue via-riva-violet to-riva-teal bg-clip-text text-transparent">Action</span>
+          </h2>
+          <p className="text-xl text-white/90 max-w-3xl mx-auto">
+            See how we've helped businesses like yours achieve <span className="font-bold text-riva-blue">real results</span> and <span className="font-bold text-riva-blue">measurable growth</span>
+          </p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {projects.map((project, index) => (
+            <div key={index} className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/10 hover:border-riva-violet/50 transition-all duration-300 group hover:scale-105">
+              <div className="mb-4 group-hover:scale-110 transition-transform text-riva-blue">
+                {/* Example image or icon here */}
                 {project.logo && <img src={project.logo} alt="" className="w-10 h-10 rounded-full" />}
-                <h3 className="text-xl font-bold">{project.name}</h3>
               </div>
-              <p className="text-riva-blue-dark dark:text-riva-muted mb-2">{project.description}</p>
-              <div className="flex gap-2 mb-2 flex-wrap">
-                {project.tech.map(t => (
-                  <span key={t} className="px-3 py-1 bg-riva-blue-light text-riva-blue-dark rounded-full text-xs font-semibold">{t}</span>
+              <h3 className="text-xl font-semibold mb-4 text-white/90">{project.name}</h3>
+              <p className="text-white/80 mb-6">{project.description}</p>
+              <div className="space-y-2">
+                {project.results.map((result, resultIndex) => (
+                  <div key={resultIndex} className="flex items-center">
+                    <span className="w-2 h-2 rounded-full bg-riva-teal mr-2 inline-block"></span>
+                    <span className="text-sm text-white/80">{result}</span>
+                  </div>
                 ))}
               </div>
-              {project.testimonial && (
-                <blockquote className="italic text-sm text-riva-blue-dark dark:text-riva-muted mb-2">"{project.testimonial}"</blockquote>
-              )}
-              {project.client && (
-                <div className="text-xs text-riva-blue-light dark:text-riva-muted mb-2">{project.client}</div>
-              )}
-              <a href={project.url} target="_blank" rel="noopener" className="inline-block mt-auto px-5 py-2 bg-riva-blue text-white rounded-lg font-semibold hover:bg-riva-blue-dark transition">View Live Site</a>
             </div>
           ))}
         </div>

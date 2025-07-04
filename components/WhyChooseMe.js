@@ -67,69 +67,32 @@ const reasons = [
 
 export default function WhyChooseMe() {
   return (
-    <section id="why" className="py-24 bg-facebook-bg dark:bg-dark-bg">
-      <div className="max-w-full mx-auto px-4 md:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-extrabold text-riva-blue mb-6 font-sans">
-            Why Choose Riva?
-          </h2>
-          <p className="text-xl text-riva-blue max-w-3xl mx-auto leading-relaxed">
-            More than just a developer - I'm your strategic partner in <span className="font-bold text-riva-blue">digital success</span> and <span className="font-bold text-riva-blue">business growth</span>
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {reasons.map((reason, i) => (
-            <motion.div
-              key={reason.title}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: i * 0.05 }}
-              viewport={{ once: true }}
-              className="bg-white/95 dark:bg-dark-card/95 rounded-3xl p-8 shadow-2xl backdrop-blur-md border border-white/30 dark:border-dark-border hover:shadow-3xl hover:-translate-y-2 transition-all duration-300 group"
-            >
-              <div className="mb-6 p-4 bg-facebook/10 dark:bg-facebook/20 rounded-2xl w-fit text-facebook dark:text-facebook group-hover:bg-facebook/20 dark:group-hover:bg-facebook/30 transition-all duration-300">
-                {reason.icon}
-              </div>
-              
-              <h3 className="text-xl font-bold mb-4 text-facebook-dark dark:text-dark-text">
-                {reason.title}
-              </h3>
-              
-              <p className="text-facebook-light dark:text-dark-muted leading-relaxed">
-                {reason.desc}
-              </p>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Stats Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          viewport={{ once: true }}
-          className="mt-20 bg-white/95 dark:bg-dark-card/95 rounded-3xl p-12 shadow-2xl backdrop-blur-md border border-white/30 dark:border-dark-border"
-        >
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            <div>
-              <div className="text-3xl font-bold text-facebook dark:text-facebook mb-2">50+</div>
-              <div className="text-facebook-light dark:text-dark-muted font-medium">Projects Delivered</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold text-facebook dark:text-facebook mb-2">100%</div>
-              <div className="text-facebook-light dark:text-dark-muted font-medium">Client Satisfaction</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold text-facebook dark:text-facebook mb-2">24/7</div>
-              <div className="text-facebook-light dark:text-dark-muted font-medium">Support Available</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold text-facebook dark:text-facebook mb-2">10+</div>
-              <div className="text-facebook-light dark:text-dark-muted font-medium">Years Experience</div>
-            </div>
-          </div>
-        </motion.div>
+    <section id="why-choose-me" className="py-20 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto bg-white/10 backdrop-blur-sm rounded-2xl p-12 border border-white/10 shadow-xl">
+        <h2 className="text-3xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-riva-blue via-riva-violet to-riva-teal bg-clip-text text-transparent text-center">
+          Why Choose <span className="font-extrabold">Riva</span>?
+        </h2>
+        <p className="text-xl text-white/90 max-w-3xl mx-auto leading-relaxed text-center mb-8">
+          More than just a developer—I'm your strategic partner in <span className="font-bold text-riva-blue">digital success</span> and <span className="font-bold text-riva-blue">business growth</span>.
+        </p>
+        <ul className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+          <li className="flex items-center gap-3">
+            <span className="w-3 h-3 rounded-full bg-riva-teal inline-block"></span>
+            <span className="text-white/80">10+ years of experience delivering results</span>
+          </li>
+          <li className="flex items-center gap-3">
+            <span className="w-3 h-3 rounded-full bg-riva-teal inline-block"></span>
+            <span className="text-white/80">Proven track record with startups & enterprises</span>
+          </li>
+          <li className="flex items-center gap-3">
+            <span className="w-3 h-3 rounded-full bg-riva-teal inline-block"></span>
+            <span className="text-white/80">Cutting-edge design & technology</span>
+          </li>
+          <li className="flex items-center gap-3">
+            <span className="w-3 h-3 rounded-full bg-riva-teal inline-block"></span>
+            <span className="text-white/80">Personalized, hands-on approach</span>
+          </li>
+        </ul>
       </div>
     </section>
   );
