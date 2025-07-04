@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import { businessTypes, filterBusinessTypes } from '../data/businessTypes';
 // 1. Import Heroicons at the top
 import { CheckCircleIcon, ChartBarIcon, RocketLaunchIcon, UserGroupIcon, LockClosedIcon, MagnifyingGlassIcon, PaintBrushIcon, ComputerDesktopIcon, ArrowTrendingUpIcon, StarIcon, ShieldCheckIcon, CurrencyDollarIcon, ShoppingCartIcon, ArrowUpOnSquareIcon, InboxIcon } from '@heroicons/react/24/solid';
 
 export default function Contact() {
-  const [formData, setFormData] = React.useState({
+  const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
     email: '',
@@ -14,17 +14,17 @@ export default function Contact() {
     budget: '',
     description: ''
   });
-  const [isSubmitting, setIsSubmitting] = React.useState(false);
-  const [submitStatus, setSubmitStatus] = React.useState(null);
-  const [selectedServices, setSelectedServices] = React.useState([]);
-  const [serviceError, setServiceError] = React.useState('');
-  const [businessType, setBusinessType] = React.useState('');
-  const [businessTypeSuggestions, setBusinessTypeSuggestions] = React.useState([]);
-  const [showSuggestions, setShowSuggestions] = React.useState(false);
-  const [highlightedIndex, setHighlightedIndex] = React.useState(-1);
-  const debounceTimeout = React.useRef();
-  const [validationErrors, setValidationErrors] = React.useState({});
-  const [isValidating, setIsValidating] = React.useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null);
+  const [selectedServices, setSelectedServices] = useState([]);
+  const [serviceError, setServiceError] = useState('');
+  const [businessType, setBusinessType] = useState('');
+  const [businessTypeSuggestions, setBusinessTypeSuggestions] = useState([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [highlightedIndex, setHighlightedIndex] = useState(-1);
+  const debounceTimeout = useRef();
+  const [validationErrors, setValidationErrors] = useState({});
+  const [isValidating, setIsValidating] = useState(false);
 
   // 2. Update the services array to use Heroicons instead of emoji
   const services = [
