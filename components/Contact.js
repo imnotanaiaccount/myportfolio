@@ -15,6 +15,7 @@ export default function Contact() {
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [submitStatus, setSubmitStatus] = React.useState(null);
   const [selectedServices, setSelectedServices] = React.useState([]);
+  const [serviceError, setServiceError] = React.useState('');
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -28,14 +29,19 @@ export default function Contact() {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitStatus(null);
-
+    setServiceError('');
+    if (selectedServices.length === 0) {
+      setServiceError('Please select at least one service.');
+      setIsSubmitting(false);
+      return;
+    }
     try {
       const response = await fetch('/.netlify/functions/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify({ ...formData, services: selectedServices })
       });
 
       const result = await response.json();
@@ -52,6 +58,7 @@ export default function Contact() {
           budget: '',
           description: ''
         });
+        setSelectedServices([]); // Clear selected services on successful submission
       } else {
         setSubmitStatus({ type: 'error', message: result.message || 'Something went wrong. Please try again.' });
       }
@@ -266,6 +273,50 @@ export default function Contact() {
                     </select>
                   </div>
                 </div>
+                {/* Service Selection - Integrated into the form */}
+                <div>
+                  <label className="block text-sm font-semibold text-facebook-dark dark:text-dark-text mb-2">
+                    Which services do you need? <span className="text-red-500">*</span>
+                  </label>
+                  <div className="flex flex-wrap gap-3 mb-2">
+                    {services.map((service, i) => (
+                      <button
+                        key={i}
+                        type="button"
+                        onClick={() => {
+                          setSelectedServices((prev) =>
+                            prev.includes(service.name)
+                              ? prev.filter((s) => s !== service.name)
+                              : [...prev, service.name]
+                          );
+                          setServiceError('');
+                        }}
+                        className={`px-5 py-2 rounded-full font-semibold border transition-all duration-200 shadow-sm flex items-center gap-2 text-base
+                          ${selectedServices.includes(service.name)
+                            ? 'bg-blue-600 text-white border-blue-600 scale-105'
+                            : 'bg-white dark:bg-neutral-900 text-facebook-dark dark:text-dark-text border-facebook/20 dark:border-dark-border hover:bg-blue-50 dark:hover:bg-blue-900/30'}
+                        `}
+                        aria-pressed={selectedServices.includes(service.name)}
+                        aria-label={service.name}
+                      >
+                        <span className="text-xl">{service.icon}</span>
+                        {service.name}
+                      </button>
+                    ))}
+                  </div>
+                  {serviceError && (
+                    <div className="text-red-600 text-sm font-semibold mb-2">{serviceError}</div>
+                  )}
+                  {selectedServices.length > 0 && (
+                    <div className="flex flex-wrap gap-2 mt-1">
+                      {selectedServices.map((service, i) => (
+                        <span key={i} className="px-3 py-1 rounded-full bg-blue-600 text-white text-sm font-semibold">
+                          {service}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
                 <div>
                   <label className="block text-sm font-semibold text-facebook-dark dark:text-dark-text mb-2">
                     Project Description *
@@ -279,20 +330,6 @@ export default function Contact() {
                     className="w-full px-4 py-3 bg-white/90 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-300 text-blue-900 dark:text-blue-100 placeholder-gray-400 dark:placeholder-gray-500 transition-all duration-200 resize-none"
                     placeholder="Tell us about your project goals, requirements, and timeline..."
                   ></textarea>
-                  {selectedServices.length > 0 && (
-                    <div className="mt-4">
-                      <label className="block text-sm font-semibold text-facebook-dark dark:text-dark-text mb-2">
-                        Selected Services
-                      </label>
-                      <div className="flex flex-wrap gap-2">
-                        {selectedServices.map((service, i) => (
-                          <span key={i} className="px-3 py-1 rounded-full bg-blue-600 text-white text-sm font-semibold">
-                            {service}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  )}
                 </div>
                 {submitStatus && (
                   <div className={`p-4 rounded-xl text-center ${
@@ -320,13 +357,13 @@ export default function Contact() {
             </div>
           </motion.div>
 
-          {/* Contact Information, Services, and Stats - Stacked Below */}
+          {/* Contact Information and Stats - Adjusted Row (removed Services Offered) */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="w-full max-w-7xl flex flex-col md:flex-row gap-8 mt-12"
+            className="w-full max-w-4xl flex flex-col md:flex-row gap-8 mt-12"
           >
             {/* Contact Details */}
             <div className="flex-1 min-w-0 bg-white/95 dark:bg-dark-card/95 rounded-3xl p-8 shadow-2xl backdrop-blur-md border border-white/30 dark:border-dark-border flex flex-col items-center justify-center">
@@ -352,42 +389,6 @@ export default function Contact() {
                 </div>
               </div>
             </div>
-
-            {/* Services Offered */}
-            <div className="flex-1 min-w-0 bg-white/95 dark:bg-dark-card/95 rounded-3xl p-8 shadow-2xl backdrop-blur-md border border-white/30 dark:border-dark-border flex flex-col items-center justify-center">
-              <h3 className="text-2xl font-bold text-facebook-dark dark:text-dark-text mb-6">Services Offered</h3>
-              <div className="mb-4 text-facebook-dark dark:text-dark-text text-lg font-semibold text-center">Pick as many as you want! <span className='text-blue-600 dark:text-cyan-400'>Tap to select your dream team of services:</span></div>
-              <div className="flex flex-wrap gap-3 mb-4 justify-center">
-                {services.map((service, i) => (
-                  <button
-                    key={i}
-                    type="button"
-                    onClick={() => {
-                      setSelectedServices((prev) =>
-                        prev.includes(service.name)
-                          ? prev.filter((s) => s !== service.name)
-                          : [...prev, service.name]
-                      );
-                    }}
-                    className={`px-5 py-2 rounded-full font-semibold border transition-all duration-200 shadow-sm flex items-center gap-2 text-base
-                      ${selectedServices.includes(service.name)
-                        ? 'bg-blue-600 text-white border-blue-600 scale-105'
-                        : 'bg-white dark:bg-neutral-900 text-facebook-dark dark:text-dark-text border-facebook/20 dark:border-dark-border hover:bg-blue-50 dark:hover:bg-blue-900/30'}
-                    `}
-                  >
-                    <span className="text-xl">{service.icon}</span>
-                    {service.name}
-                  </button>
-                ))}
-              </div>
-              {selectedServices.length > 0 && (
-                <div className="mt-2 text-green-600 dark:text-green-400 font-semibold flex items-center gap-2 justify-center">
-                  <svg className="w-5 h-5 inline-block" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 00-1.414 0L9 11.586 6.707 9.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l7-7a1 1 0 000-1.414z"/></svg>
-                  Selected: {selectedServices.join(', ')}
-                </div>
-              )}
-            </div>
-
             {/* Quick Stats */}
             <div className="flex-1 min-w-0 bg-white/95 dark:bg-dark-card/95 rounded-3xl p-8 shadow-2xl backdrop-blur-md border border-white/30 dark:border-dark-border flex flex-col items-center justify-center">
               <h3 className="text-2xl font-bold text-facebook-dark dark:text-dark-text mb-6">Why Choose Us</h3>
