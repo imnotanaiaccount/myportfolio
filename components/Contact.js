@@ -176,7 +176,7 @@ export default function Contact() {
                       value={formData.firstName}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-4 py-3 bg-white/50 dark:bg-dark-card/50 border border-blue-200 dark:border-cyan-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-cyan-400 transition-all duration-300"
+                      className="w-full px-4 py-3 bg-white/90 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-300 text-blue-900 dark:text-blue-100 placeholder-gray-400 dark:placeholder-gray-500 transition-all duration-200"
                       placeholder="Your first name"
                     />
                   </div>
@@ -190,7 +190,7 @@ export default function Contact() {
                       value={formData.email}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-4 py-3 bg-white/50 dark:bg-dark-card/50 border border-blue-200 dark:border-cyan-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-cyan-400 transition-all duration-300"
+                      className="w-full px-4 py-3 bg-white/90 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-300 text-blue-900 dark:text-blue-100 placeholder-gray-400 dark:placeholder-gray-500 transition-all duration-200"
                       placeholder="your@email.com"
                     />
                   </div>
@@ -205,7 +205,7 @@ export default function Contact() {
                       name="phone"
                       value={formData.phone}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 bg-white/50 dark:bg-dark-card/50 border border-blue-200 dark:border-cyan-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-cyan-400 transition-all duration-300"
+                      className="w-full px-4 py-3 bg-white/90 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-300 text-blue-900 dark:text-blue-100 placeholder-gray-400 dark:placeholder-gray-500 transition-all duration-200"
                       placeholder="+1 (555) 123-4567"
                     />
                   </div>
@@ -218,7 +218,7 @@ export default function Contact() {
                       name="company"
                       value={formData.company}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 bg-white/50 dark:bg-dark-card/50 border border-blue-200 dark:border-cyan-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-cyan-400 transition-all duration-300"
+                      className="w-full px-4 py-3 bg-white/90 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-300 text-blue-900 dark:text-blue-100 placeholder-gray-400 dark:placeholder-gray-500 transition-all duration-200"
                       placeholder="Your company name"
                     />
                   </div>
@@ -233,7 +233,7 @@ export default function Contact() {
                       value={formData.projectType}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-4 py-3 bg-white/50 dark:bg-dark-card/50 border border-blue-200 dark:border-cyan-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-cyan-400 transition-all duration-300"
+                      className="w-full px-4 py-3 bg-white/90 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-300 text-blue-900 dark:text-blue-100 transition-all duration-200"
                     >
                       <option value="">Select a project type</option>
                       <option value="web-development">Web Development</option>
@@ -254,7 +254,7 @@ export default function Contact() {
                       value={formData.budget}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-4 py-3 bg-white/50 dark:bg-dark-card/50 border border-blue-200 dark:border-cyan-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-cyan-400 transition-all duration-300"
+                      className="w-full px-4 py-3 bg-white/90 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-300 text-blue-900 dark:text-blue-100 transition-all duration-200"
                     >
                       <option value="">Select budget range</option>
                       <option value="5k-10k">$5,000 - $10,000</option>
@@ -275,7 +275,7 @@ export default function Contact() {
                     onChange={handleInputChange}
                     required
                     rows={6}
-                    className="w-full px-4 py-3 bg-white/50 dark:bg-dark-card/50 border border-blue-200 dark:border-cyan-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-cyan-400 transition-all duration-300 resize-none"
+                    className="w-full px-4 py-3 bg-white/90 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-300 text-blue-900 dark:text-blue-100 placeholder-gray-400 dark:placeholder-gray-500 transition-all duration-200 resize-none"
                     placeholder="Tell us about your project goals, requirements, and timeline..."
                   ></textarea>
                 </div>
@@ -291,12 +291,12 @@ export default function Contact() {
                 <motion.button 
                   type="submit" 
                   disabled={isSubmitting}
-                  whileHover={{ scale: isSubmitting ? 1 : 1.05, y: isSubmitting ? 0 : -3 }}
+                  whileHover={{ scale: isSubmitting ? 1 : 1.03, y: isSubmitting ? 0 : -2 }}
                   whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
-                  className={`w-full font-black text-xl py-5 rounded-2xl shadow-2xl transition-all duration-300 ${
+                  className={`w-full font-semibold text-lg py-4 rounded-xl shadow-md transition-all duration-200 ${
                     isSubmitting 
-                      ? 'bg-gray-400 dark:bg-gray-600 text-white cursor-not-allowed' 
-                      : 'bg-gradient-to-r from-blue-600 via-blue-400 to-cyan-400 text-white hover:shadow-3xl hover:from-cyan-400 hover:to-blue-600 focus:outline-none focus:ring-4 focus:ring-cyan-300'
+                      ? 'bg-gray-300 dark:bg-neutral-800 text-gray-500 cursor-not-allowed' 
+                      : 'bg-white/90 dark:bg-neutral-900 text-blue-700 dark:text-blue-200 border border-neutral-200 dark:border-neutral-800 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-300'
                   }`}
                 >
                   {isSubmitting ? 'Sending...' : 'Get My Free Strategy Session'}
@@ -319,19 +319,19 @@ export default function Contact() {
               <div className="space-y-6">
                 <div>
                   <p className="font-semibold text-facebook-dark dark:text-dark-text">Email</p>
-                  <a href="mailto:hello@instagrowmedia.com" className="text-facebook hover:text-facebook-lighter dark:hover:text-facebook-lighter transition-colors duration-200">
+                  <a href="mailto:hello@instagrowmedia.com" className="text-blue-700 dark:text-blue-200 hover:text-blue-900 dark:hover:text-blue-300 font-medium transition-colors duration-150">
                     hello@instagrowmedia.com
                   </a>
                 </div>
                 <div>
                   <p className="font-semibold text-facebook-dark dark:text-dark-text">Phone</p>
-                  <a href="tel:+16163031433" className="text-facebook hover:text-facebook-lighter dark:hover:text-facebook-lighter transition-colors duration-200">
+                  <a href="tel:+16163031433" className="text-blue-700 dark:text-blue-200 hover:text-blue-900 dark:hover:text-blue-300 font-medium transition-colors duration-150">
                     616-303-1433
                   </a>
                 </div>
                 <div>
                   <p className="font-semibold text-facebook-dark dark:text-dark-text">LinkedIn</p>
-                  <a href="https://www.linkedin.com/company/instagrowmedia/" target="_blank" rel="noopener" className="text-facebook hover:text-facebook-lighter dark:hover:text-facebook-lighter transition-colors duration-200">
+                  <a href="https://www.linkedin.com/company/instagrowmedia/" target="_blank" rel="noopener" className="text-blue-700 dark:text-blue-200 hover:text-blue-900 dark:hover:text-blue-300 font-medium transition-colors duration-150">
                     @instagrowmedia
                   </a>
                 </div>

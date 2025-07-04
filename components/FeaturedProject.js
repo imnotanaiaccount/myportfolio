@@ -110,15 +110,11 @@ export default function FeaturedProject() {
                     href="https://jacksoninvestmentsolutions2.netlify.app/" 
                     target="_blank" 
                     rel="noopener"
-                    whileHover={{ 
-                      scale: 1.05, 
-                      boxShadow: "0 20px 40px rgba(24, 119, 242, 0.3)",
-                      y: -5
-                    }}
-                    whileTap={{ scale: 0.95 }}
-                    className="btn-primary text-center text-lg py-4 font-bold"
+                    whileHover={{ scale: 1.03, y: -2 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="inline-block px-7 py-3 bg-white/90 dark:bg-neutral-900 text-blue-700 dark:text-blue-200 font-semibold text-base rounded-xl shadow-md border border-neutral-200 dark:border-neutral-800 hover:shadow-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-300"
                   >
-                    Visit Live Site
+                    View Project
                   </motion.a>
                   <motion.a 
                     href="#contact" 

@@ -23,20 +23,10 @@ export default function Layout({ children }) {
           </Link>
           
           <div className="flex items-center gap-8">
-            <a href="#services" className="hover:text-facebook-lighter dark:hover:text-facebook-lighter font-semibold text-facebook dark:text-dark-text transition-colors duration-150">Services</a>
-            <a href="#examples" className="hover:text-facebook-lighter dark:hover:text-facebook-lighter font-semibold text-facebook dark:text-dark-text transition-colors duration-150">Work</a>
-            <a href="#contact" className="hover:text-facebook-lighter dark:hover:text-facebook-lighter font-semibold text-facebook dark:text-dark-text transition-colors duration-150">Contact</a>
-            <button
-              aria-label="Toggle dark mode"
-              className="ml-4 p-3 rounded-xl bg-facebook/10 dark:bg-facebook/20 hover:bg-facebook/20 dark:hover:bg-facebook/30 transition-all duration-200 shadow-md"
-              onClick={() => setDark((d) => !d)}
-            >
-              {dark ? (
-                <svg width="20" height="20" fill="none" stroke="#1877F2" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/></svg>
-              ) : (
-                <svg width="20" height="20" fill="none" stroke="#1877F2" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2m0 18v2m11-11h-2M3 12H1m16.95 6.95-1.41-1.41M6.46 6.46 5.05 5.05m12.02 0-1.41 1.41M6.46 17.54l-1.41 1.41"/></svg>
-              )}
-            </button>
+            <a href="#services" className="font-semibold text-blue-700 dark:text-blue-200 hover:text-blue-900 dark:hover:text-blue-300 transition-colors duration-150 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-300">Services</a>
+            <a href="#examples" className="font-semibold text-blue-700 dark:text-blue-200 hover:text-blue-900 dark:hover:text-blue-300 transition-colors duration-150 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-300">Work</a>
+            <a href="#contact" className="font-semibold text-blue-700 dark:text-blue-200 hover:text-blue-900 dark:hover:text-blue-300 transition-colors duration-150 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-300">Contact</a>
+            <button className="bg-white/90 dark:bg-neutral-900 text-blue-700 dark:text-blue-200 font-semibold rounded-xl shadow-md border border-neutral-200 dark:border-neutral-800 px-5 py-2 ml-4 hover:shadow-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-300">Menu</button>
           </div>
         </nav>
       </header>

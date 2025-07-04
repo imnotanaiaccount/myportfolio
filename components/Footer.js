@@ -15,27 +15,27 @@ export default function Footer() {
           <div className="space-y-4">
             <h3 className="font-bold text-facebook-dark dark:text-dark-text">Services</h3>
             <div className="space-y-2 text-sm">
-              <a href="#services" className="block text-facebook-light dark:text-dark-muted hover:text-facebook dark:hover:text-facebook transition-colors duration-200">Website Design</a>
-              <a href="#services" className="block text-facebook-light dark:text-dark-muted hover:text-facebook dark:hover:text-facebook transition-colors duration-200">Automation</a>
-              <a href="#services" className="block text-facebook-light dark:text-dark-muted hover:text-facebook dark:hover:text-facebook transition-colors duration-200">Analytics</a>
+              <a href="#services" className="block text-blue-700 dark:text-blue-200 hover:text-blue-900 dark:hover:text-blue-300 font-medium transition-colors duration-150 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-300">Website Design</a>
+              <a href="#services" className="block text-blue-700 dark:text-blue-200 hover:text-blue-900 dark:hover:text-blue-300 font-medium transition-colors duration-150 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-300">Automation</a>
+              <a href="#services" className="block text-blue-700 dark:text-blue-200 hover:text-blue-900 dark:hover:text-blue-300 font-medium transition-colors duration-150 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-300">Analytics</a>
             </div>
           </div>
           
           <div className="space-y-4">
             <h3 className="font-bold text-facebook-dark dark:text-dark-text">Company</h3>
             <div className="space-y-2 text-sm">
-              <a href="#about" className="block text-facebook-light dark:text-dark-muted hover:text-facebook dark:hover:text-facebook transition-colors duration-200">About</a>
-              <a href="#contact" className="block text-facebook-light dark:text-dark-muted hover:text-facebook dark:hover:text-facebook transition-colors duration-200">Contact</a>
-              <a href="#examples" className="block text-facebook-light dark:text-dark-muted hover:text-facebook dark:hover:text-facebook transition-colors duration-200">Portfolio</a>
+              <a href="#about" className="block text-blue-700 dark:text-blue-200 hover:text-blue-900 dark:hover:text-blue-300 font-medium transition-colors duration-150 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-300">About</a>
+              <a href="#contact" className="block text-blue-700 dark:text-blue-200 hover:text-blue-900 dark:hover:text-blue-300 font-medium transition-colors duration-150 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-300">Contact</a>
+              <a href="#examples" className="block text-blue-700 dark:text-blue-200 hover:text-blue-900 dark:hover:text-blue-300 font-medium transition-colors duration-150 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-300">Portfolio</a>
             </div>
           </div>
           
           <div className="space-y-4">
             <h3 className="font-bold text-facebook-dark dark:text-dark-text">Connect</h3>
             <div className="space-y-2 text-sm">
-              <a href="mailto:your@email.com" className="block text-facebook-light dark:text-dark-muted hover:text-facebook dark:hover:text-facebook transition-colors duration-200">Email</a>
-              <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener" className="block text-facebook-light dark:text-dark-muted hover:text-facebook dark:hover:text-facebook transition-colors duration-200">LinkedIn</a>
-              <a href="tel:+1234567890" className="block text-facebook-light dark:text-dark-muted hover:text-facebook dark:hover:text-facebook transition-colors duration-200">Phone</a>
+              <a href="mailto:your@email.com" className="block text-blue-700 dark:text-blue-200 hover:text-blue-900 dark:hover:text-blue-300 font-medium transition-colors duration-150 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-300">Email</a>
+              <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener" className="block text-blue-700 dark:text-blue-200 hover:text-blue-900 dark:hover:text-blue-300 font-medium transition-colors duration-150 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-300">LinkedIn</a>
+              <a href="tel:+1234567890" className="block text-blue-700 dark:text-blue-200 hover:text-blue-900 dark:hover:text-blue-300 font-medium transition-colors duration-150 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-300">Phone</a>
             </div>
           </div>
         </div>

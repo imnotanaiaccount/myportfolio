@@ -319,13 +319,13 @@ export default function Services() {
           >
             Let's discuss your project requirements and create a custom solution that drives results.
           </motion.p>
-          <motion.a 
-            href="#contact" 
-            whileHover={{ scale: 1.05, y: -5 }}
-            whileTap={{ scale: 0.95 }}
-            className="inline-block bg-facebook dark:bg-facebook-darkest text-white font-bold text-lg px-10 py-4 rounded-2xl shadow-xl hover:shadow-2xl hover:bg-facebook-lighter dark:hover:bg-facebook-dark hover:-translate-y-1 transition-all duration-300"
+          <motion.a
+            href="#contact"
+            whileHover={{ scale: 1.03, y: -2 }}
+            whileTap={{ scale: 0.98 }}
+            className="inline-block px-8 py-4 bg-white/90 dark:bg-neutral-900 text-blue-700 dark:text-blue-200 font-semibold text-lg rounded-xl shadow-md border border-neutral-200 dark:border-neutral-800 hover:shadow-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-300"
           >
-            Get Started Today
+            Start Your Project
           </motion.a>
         </motion.div>
       </div>

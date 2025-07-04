@@ -266,23 +266,17 @@ export default function Hero() {
             className="flex flex-col sm:flex-row gap-6 justify-center items-center relative z-10"
           >
             <motion.a 
-              href="#contact" 
-              whileHover={{ 
-                scale: 1.08, 
-                boxShadow: "0 24px 48px rgba(0, 184, 255, 0.35)",
-                y: -7
-              }}
-              whileTap={{ scale: 0.97 }}
-              className="px-14 py-6 bg-gradient-to-r from-blue-600 via-blue-400 to-cyan-400 text-white font-black text-2xl rounded-3xl shadow-2xl hover:shadow-3xl transition-all duration-300 relative overflow-hidden group border-4 border-white/20 focus:outline-none focus:ring-4 focus:ring-cyan-300"
-            >
-              <span className="relative z-10">Claim My Free Strategy Call</span>
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                initial={{ x: '-100%' }}
-                whileHover={{ x: '100%' }}
-                transition={{ duration: 0.6 }}
-              />
-            </motion.a>
+                href="#contact" 
+                whileHover={{ 
+                  scale: 1.03, 
+                  boxShadow: "0 4px 24px rgba(0,0,0,0.10)",
+                  y: -2
+                }}
+                whileTap={{ scale: 0.98 }}
+                className="px-10 py-4 bg-white/90 dark:bg-neutral-900 text-blue-700 dark:text-blue-200 font-semibold text-lg rounded-xl shadow-md hover:shadow-lg border border-neutral-200 dark:border-neutral-800 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-300"
+              >
+                <span className="relative z-10">Claim My Free Strategy Call</span>
+              </motion.a>
             <motion.a 
               href="#services" 
               whileHover={{ scale: 1.05, y: -5 }}
