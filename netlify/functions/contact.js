@@ -89,27 +89,78 @@ exports.handler = async (event, context) => {
     let brevoResponse = null;
     if (process.env.BREVO_API_KEY) {
       try {
+        // Create a simple HTML email without using templates
+        const emailHtml = `
+          <!DOCTYPE html>
+          <html>
+          <head>
+            <meta charset="utf-8">
+            <title>New Contact Form Submission</title>
+            <style>
+              body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+              .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+              .header { background: #1877f2; color: white; padding: 20px; text-align: center; }
+              .content { padding: 20px; background: #f9f9f9; }
+              .field { margin-bottom: 15px; }
+              .label { font-weight: bold; color: #1877f2; }
+              .value { background: white; padding: 10px; border-radius: 5px; }
+            </style>
+          </head>
+          <body>
+            <div class="container">
+              <div class="header">
+                <h1>🎉 New Contact Form Submission</h1>
+              </div>
+              <div class="content">
+                <div class="field">
+                  <div class="label">👤 Name:</div>
+                  <div class="value">${webhookData.firstName} ${webhookData.lastName}</div>
+                </div>
+                <div class="field">
+                  <div class="label">📧 Email:</div>
+                  <div class="value">${webhookData.email}</div>
+                </div>
+                <div class="field">
+                  <div class="label">📞 Phone:</div>
+                  <div class="value">${webhookData.phone || 'Not provided'}</div>
+                </div>
+                <div class="field">
+                  <div class="label">🏢 Company:</div>
+                  <div class="value">${webhookData.company || 'Not provided'}</div>
+                </div>
+                <div class="field">
+                  <div class="label">🛠️ Project Type:</div>
+                  <div class="value">${webhookData.projectType || 'Not specified'}</div>
+                </div>
+                <div class="field">
+                  <div class="label">💰 Budget:</div>
+                  <div class="value">${webhookData.budget || 'Not specified'}</div>
+                </div>
+                <div class="field">
+                  <div class="label">💬 Message:</div>
+                  <div class="value">${webhookData.description || 'No message provided'}</div>
+                </div>
+                <div class="field">
+                  <div class="label">⏰ Submitted:</div>
+                  <div class="value">${webhookData.timestamp}</div>
+                </div>
+              </div>
+            </div>
+          </body>
+          </html>
+        `;
+
         const brevoEmailData = {
           sender: {
             name: 'Portfolio Contact Form',
-            email: process.env.BREVO_SENDER_EMAIL || 'noreply@yourdomain.com'
+            email: 'contact@brevo.com'
           },
           to: [{
-            email: process.env.NOTIFICATION_EMAIL || 'your-email@example.com',
+            email: process.env.NOTIFICATION_EMAIL || 'joshhawleyproductions@gmail.com',
             name: 'Portfolio Contact'
           }],
-          templateId: parseInt(process.env.BREVO_TEMPLATE_ID || '1'),
-          params: {
-            firstName: webhookData.firstName,
-            lastName: webhookData.lastName,
-            email: webhookData.email,
-            phone: webhookData.phone,
-            company: webhookData.company,
-            projectType: webhookData.projectType,
-            budget: webhookData.budget,
-            message: webhookData.description,
-            timestamp: webhookData.timestamp
-          }
+          subject: `New Contact Form Submission - ${webhookData.firstName} ${webhookData.lastName}`,
+          htmlContent: emailHtml
         };
 
         brevoResponse = await fetch('https://api.brevo.com/v3/smtp/email', {
@@ -123,6 +174,8 @@ exports.handler = async (event, context) => {
         });
 
         if (!brevoResponse.ok) {
+          const errorText = await brevoResponse.text();
+          console.error('Brevo API error:', brevoResponse.status, errorText);
           throw new Error(`Brevo API error: ${brevoResponse.status}`);
         }
       } catch (error) {

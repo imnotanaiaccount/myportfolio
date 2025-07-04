@@ -18,6 +18,16 @@ export default function Hero() {
     "React", "Next.js", "Node.js", "TypeScript", "Python", "AWS", "Docker", "MongoDB", "PostgreSQL", "GraphQL", "Tailwind CSS", "Framer Motion"
   ];
 
+  // Enhanced particle system
+  const particles = Array.from({ length: 50 }, (_, i) => ({
+    id: i,
+    x: Math.random() * 100,
+    y: Math.random() * 100,
+    size: Math.random() * 4 + 1,
+    duration: Math.random() * 20 + 10,
+    delay: Math.random() * 5
+  }));
+
   return (
     <section className="min-h-screen bg-gradient-to-br from-facebook via-facebook-light to-facebook-lighter dark:from-facebook-darkest dark:via-facebook-dark dark:to-facebook relative overflow-hidden">
       {/* Enhanced Background Effects */}
@@ -25,9 +35,68 @@ export default function Hero() {
         <div className="absolute top-20 left-20 w-96 h-96 bg-white/5 rounded-full blur-3xl animate-pulse" />
         <div className="absolute bottom-20 right-20 w-80 h-80 bg-facebook-lighter/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-white/3 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '2s' }} />
+        
+        {/* Animated gradient orbs */}
+        <motion.div
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0.3, 0.6, 0.3],
+            rotate: [0, 180, 360]
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+          className="absolute top-1/4 right-1/4 w-32 h-32 bg-gradient-to-r from-facebook-lighter to-facebook-light rounded-full blur-xl"
+        />
+        
+        <motion.div
+          animate={{
+            scale: [1.2, 1, 1.2],
+            opacity: [0.4, 0.8, 0.4],
+            rotate: [360, 180, 0]
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 2
+          }}
+          className="absolute bottom-1/4 left-1/4 w-24 h-24 bg-gradient-to-r from-facebook to-facebook-light rounded-full blur-lg"
+        />
       </div>
 
-      {/* Floating Technology Icons */}
+      {/* Enhanced Particle System */}
+      <div className="absolute inset-0">
+        {particles.map((particle) => (
+          <motion.div
+            key={particle.id}
+            animate={{
+              y: [-20, -100, -20],
+              x: [0, Math.random() * 100 - 50, 0],
+              opacity: [0, 0.8, 0],
+              scale: [0, 1, 0],
+            }}
+            transition={{
+              duration: particle.duration,
+              repeat: Infinity,
+              delay: particle.delay,
+              ease: "easeInOut"
+            }}
+            className="absolute text-white/30 text-xs font-mono"
+            style={{
+              left: `${particle.x}%`,
+              top: `${particle.y}%`,
+              fontSize: `${particle.size}px`,
+            }}
+          >
+            {technologies[particle.id % technologies.length]}
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Floating Technology Icons with enhanced animations */}
       <div className="absolute inset-0">
         {technologies.map((tech, i) => (
           <motion.div
@@ -36,11 +105,13 @@ export default function Hero() {
               y: [-20, -100, -20],
               x: [0, Math.random() * 100 - 50, 0],
               opacity: [0, 0.6, 0],
+              rotate: [0, 360, 720],
             }}
             transition={{
               duration: 8 + Math.random() * 4,
               repeat: Infinity,
               delay: Math.random() * 5,
+              ease: "easeInOut"
             }}
             className="absolute text-white/20 text-sm font-mono"
             style={{
@@ -53,32 +124,87 @@ export default function Hero() {
         ))}
       </div>
 
+      {/* Geometric shapes for visual interest */}
+      <div className="absolute inset-0">
+        <motion.div
+          animate={{
+            rotate: [0, 360],
+            scale: [1, 1.1, 1],
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+          className="absolute top-10 right-10 w-20 h-20 border-2 border-white/10 rounded-full"
+        />
+        <motion.div
+          animate={{
+            rotate: [360, 0],
+            scale: [1.1, 1, 1.1],
+          }}
+          transition={{
+            duration: 15,
+            repeat: Infinity,
+            ease: "linear",
+            delay: 5
+          }}
+          className="absolute bottom-10 left-10 w-16 h-16 border-2 border-white/10 transform rotate-45"
+        />
+      </div>
+
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
         className="relative z-10 max-w-7xl mx-auto px-6 py-20"
       >
-        {/* Enhanced Main Content */}
+        {/* Enhanced Main Content with glassmorphism */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9, rotateY: -15 }}
           animate={{ opacity: 1, scale: 1, rotateY: 0 }}
           transition={{ duration: 1, delay: 0.3 }}
-          className="bg-white/95 dark:bg-dark-card/95 rounded-3xl p-16 mb-12 shadow-2xl backdrop-blur-md border border-white/30 dark:border-dark-border"
+          className="bg-white/95 dark:bg-dark-card/95 rounded-3xl p-16 mb-12 shadow-2xl backdrop-blur-md border border-white/30 dark:border-dark-border relative overflow-hidden"
         >
+          {/* Subtle animated background pattern */}
+          <div className="absolute inset-0 opacity-5">
+            <div className="absolute inset-0" style={{
+              backgroundImage: `radial-gradient(circle at 25% 25%, #1877f2 0%, transparent 50%),
+                                radial-gradient(circle at 75% 75%, #42a5f5 0%, transparent 50%)`,
+              backgroundSize: '100px 100px, 150px 150px',
+              animation: 'float 20s ease-in-out infinite'
+            }} />
+          </div>
+
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
-            className="mb-10"
+            className="relative z-10 mb-10"
           >
             <motion.h1 
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.7 }}
-              className="text-6xl md:text-8xl font-black tracking-tight text-facebook dark:text-facebook mb-8 font-nunito drop-shadow-lg"
+              className="text-6xl md:text-8xl font-black tracking-tight text-facebook dark:text-facebook mb-8 font-nunito drop-shadow-lg relative"
             >
-              Joshua Hawley
+              <span className="relative">
+                Joshua Hawley
+                <motion.div
+                  animate={{
+                    backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                  className="absolute inset-0 bg-gradient-to-r from-facebook via-facebook-light to-facebook bg-clip-text text-transparent opacity-20"
+                  style={{
+                    backgroundSize: '200% 200%',
+                  }}
+                />
+              </span>
             </motion.h1>
             
             <motion.h2 
@@ -100,7 +226,7 @@ export default function Hero() {
               <span className="font-extrabold text-facebook dark:text-facebook">Minimal. Powerful. Unforgettable.</span>
             </motion.p>
 
-            {/* Achievement Stats */}
+            {/* Enhanced Achievement Stats with hover effects */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -113,9 +239,20 @@ export default function Hero() {
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.6, delay: 1.5 + i * 0.1 }}
-                  className="text-center p-4 bg-facebook/10 dark:bg-facebook-darkest/30 rounded-2xl backdrop-blur-sm border border-facebook/20"
+                  whileHover={{ 
+                    scale: 1.05, 
+                    y: -5,
+                    boxShadow: "0 20px 40px rgba(24, 119, 242, 0.2)"
+                  }}
+                  className="text-center p-4 bg-facebook/10 dark:bg-facebook-darkest/30 rounded-2xl backdrop-blur-sm border border-facebook/20 hover:border-facebook/40 transition-all duration-300 cursor-pointer"
                 >
-                  <div className="text-3xl mb-2">{achievement.icon}</div>
+                  <motion.div 
+                    className="text-3xl mb-2"
+                    animate={{ rotate: [0, 10, -10, 0] }}
+                    transition={{ duration: 2, repeat: Infinity, delay: i * 0.5 }}
+                  >
+                    {achievement.icon}
+                  </motion.div>
                   <div className="text-2xl font-black text-facebook dark:text-facebook">{achievement.number}</div>
                   <div className="text-sm font-semibold text-facebook-dark dark:text-dark-text">{achievement.label}</div>
                 </motion.div>
@@ -127,7 +264,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1.3 }}
-            className="flex flex-col sm:flex-row gap-6 justify-center items-center"
+            className="flex flex-col sm:flex-row gap-6 justify-center items-center relative z-10"
           >
             <motion.a 
               href="#contact" 
@@ -137,9 +274,15 @@ export default function Hero() {
                 y: -5
               }}
               whileTap={{ scale: 0.95 }}
-              className="px-12 py-5 bg-facebook dark:bg-facebook-darkest text-white font-black text-xl rounded-2xl shadow-2xl hover:shadow-3xl hover:bg-facebook-lighter dark:hover:bg-facebook-dark transition-all duration-300"
+              className="px-12 py-5 bg-facebook dark:bg-facebook-darkest text-white font-black text-xl rounded-2xl shadow-2xl hover:shadow-3xl hover:bg-facebook-lighter dark:hover:bg-facebook-dark transition-all duration-300 relative overflow-hidden group"
             >
-              Request Consultation
+              <span className="relative z-10">Request Consultation</span>
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-facebook-light to-facebook-lighter opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                initial={{ x: '-100%' }}
+                whileHover={{ x: '100%' }}
+                transition={{ duration: 0.6 }}
+              />
             </motion.a>
             
             <motion.a 
@@ -176,13 +319,25 @@ export default function Hero() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 1.9 + i * 0.2 }}
-                className="bg-facebook/5 dark:bg-facebook-darkest/20 p-6 rounded-2xl border border-facebook/10"
+                whileHover={{ 
+                  scale: 1.02, 
+                  y: -5,
+                  boxShadow: "0 10px 30px rgba(24, 119, 242, 0.15)"
+                }}
+                className="bg-facebook/5 dark:bg-facebook-darkest/20 p-6 rounded-2xl border border-facebook/10 hover:border-facebook/30 transition-all duration-300 cursor-pointer"
               >
                 <div className="flex items-center mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
-                    <svg key={i} className="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                    <motion.svg 
+                      key={i}
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      transition={{ delay: 2.1 + i * 0.1 }}
+                      className="w-5 h-5 text-yellow-400 fill-current" 
+                      viewBox="0 0 20 20"
+                    >
                       <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
-                    </svg>
+                    </motion.svg>
                   ))}
                 </div>
                 <p className="text-facebook-dark dark:text-dark-text mb-4 italic">"{testimonial.content}"</p>
@@ -199,91 +354,26 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.5 }}
-          className="bg-white/95 dark:bg-dark-card/95 rounded-2xl p-8 shadow-2xl backdrop-blur-md border border-white/30 dark:border-dark-border"
+          transition={{ duration: 0.8, delay: 2.1 }}
+          className="text-center"
         >
-          <motion.p 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.7 }}
-            className="text-facebook-dark dark:text-dark-text font-semibold mb-6 text-lg text-center"
+          <motion.div
+            animate={{ opacity: [0.5, 1, 0.5] }}
+            transition={{ duration: 2, repeat: Infinity }}
+            className="text-white/60 text-sm font-medium"
           >
-            Trusted by industry leaders worldwide
-          </motion.p>
-          
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 1.9 }}
-            className="flex flex-wrap justify-center items-center gap-8 text-facebook-light dark:text-dark-muted"
-          >
-            <motion.div
-              whileHover={{ scale: 1.1, y: -5 }}
-              className="flex items-center gap-3 bg-facebook/10 dark:bg-facebook/20 px-4 py-3 rounded-xl backdrop-blur-sm border border-facebook/20 transition-all duration-300"
-            >
-              <div className="w-8 h-8 bg-facebook/20 dark:bg-facebook/30 rounded-lg flex items-center justify-center">
-                <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" className="text-facebook dark:text-facebook">
-                  <polyline points="13,2 3,14 12,14 11,22 21,10 12,10 13,2"/>
-                </svg>
-              </div>
-              <span className="font-semibold text-facebook-dark dark:text-dark-text">500+ Projects</span>
-            </motion.div>
-            <motion.div
-              whileHover={{ scale: 1.1, y: -5 }}
-              className="flex items-center gap-3 bg-facebook/10 dark:bg-facebook/20 px-4 py-3 rounded-xl backdrop-blur-sm border border-facebook/20 transition-all duration-300"
-            >
-              <div className="w-8 h-8 bg-facebook/20 dark:bg-facebook/30 rounded-lg flex items-center justify-center">
-                <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" className="text-facebook dark:text-facebook">
-                  <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/>
-                </svg>
-              </div>
-              <span className="font-semibold text-facebook-dark dark:text-dark-text">5-Star Reviews</span>
-            </motion.div>
-            <motion.div
-              whileHover={{ scale: 1.1, y: -5 }}
-              className="flex items-center gap-3 bg-facebook/10 dark:bg-facebook/20 px-4 py-3 rounded-xl backdrop-blur-sm border border-facebook/20 transition-all duration-300"
-            >
-              <div className="w-8 h-8 bg-facebook/20 dark:bg-facebook/30 rounded-lg flex items-center justify-center">
-                <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" className="text-facebook dark:text-facebook">
-                  <polyline points="13,2 3,14 12,14 11,22 21,10 12,10 13,2"/>
-                </svg>
-              </div>
-              <span className="font-semibold text-facebook-dark dark:text-dark-text">99.9% Uptime</span>
-            </motion.div>
-            <motion.div
-              whileHover={{ scale: 1.1, y: -5 }}
-              className="flex items-center gap-3 bg-facebook/10 dark:bg-facebook/20 px-4 py-3 rounded-xl backdrop-blur-sm border border-facebook/20 transition-all duration-300"
-            >
-              <div className="w-8 h-8 bg-facebook/20 dark:bg-facebook/30 rounded-lg flex items-center justify-center">
-                <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" className="text-facebook dark:text-facebook">
-                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                </svg>
-              </div>
-              <span className="font-semibold text-facebook-dark dark:text-dark-text">Award Winner</span>
-            </motion.div>
+            Trusted by 500+ businesses worldwide
           </motion.div>
         </motion.div>
       </motion.div>
 
-      {/* Scroll Indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 2.5 }}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-      >
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="w-6 h-10 border-2 border-facebook/50 dark:border-facebook rounded-full flex justify-center"
-        >
-          <motion.div
-            animate={{ y: [0, 12, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="w-1 h-3 bg-facebook dark:bg-facebook rounded-full mt-2"
-          />
-        </motion.div>
-      </motion.div>
+      {/* Custom CSS for animations */}
+      <style jsx>{`
+        @keyframes float {
+          0%, 100% { transform: translateY(0px) rotate(0deg); }
+          50% { transform: translateY(-20px) rotate(180deg); }
+        }
+      `}</style>
     </section>
   );
 } 
