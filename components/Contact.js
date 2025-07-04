@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { businessTypes, filterBusinessTypes } from '../data/businessTypes';
 
 export default function Contact() {
   const [formData, setFormData] = React.useState({
@@ -24,8 +25,15 @@ export default function Contact() {
   const [validationErrors, setValidationErrors] = React.useState({});
   const [isValidating, setIsValidating] = React.useState(false);
 
-  const businessTypeOptions = [
-    'Real Estate', 'Ecommerce', 'Sales', 'Artist', 'Baker', 'Consultant', 'Coach', 'Restaurant', 'Healthcare', 'Education', 'Finance', 'Legal', 'Marketing', 'Nonprofit', 'Technology', 'Fitness', 'Construction', 'Retail', 'Entertainment', 'Accounting', 'Advertising', 'Agriculture', 'Apparel', 'Architecture', 'Automotive', 'Aviation', 'Beauty', 'Blogging', 'Catering', 'Cleaning', 'Communications', 'Computer', 'Crafts', 'Dance', 'Data Science', 'Dentistry', 'Design', 'Distribution', 'Dog Walking', 'Elder Care', 'Engineering', 'Event Planning', 'Fashion', 'Film', 'Florist', 'Food Truck', 'Freelance', 'Gaming', 'Gardening', 'Graphic Design', 'Handyman', 'Home Decor', 'HR', 'Import/Export', 'Influencer', 'Insurance', 'Interior Design', 'Investment', 'IT', 'Jewelry', 'Landscaping', 'Laundry', 'Logistics', 'Manufacturing', 'Media', 'Medical', 'Mental Health', 'Mobile Apps', 'Mortgage', 'Moving', 'Music', 'Nutrition', 'Online Courses', 'Optometry', 'Painting', 'Pest Control', 'Pet Care', 'Pharmacy', 'Photography', 'Plumbing', 'Podcasting', 'Printing', 'PR', 'Productivity', 'Property Management', 'Public Speaking', 'Publishing', 'Realty', 'Recruitment', 'Repair', 'Research', 'Reselling', 'Restaurant Supply', 'Retail Tech', 'Roofing', 'Security', 'SEO', 'Shipping', 'Skincare', 'Social Media', 'Software', 'Solar', 'Spa', 'Sports', 'Staffing', 'Startup', 'Storage', 'Subscription Box', 'Supply Chain', 'Tattoo', 'Tax', 'Therapy', 'Tourism', 'Translation', 'Transportation', 'Travel', 'Tutoring', 'UX/UI', 'Venture Capital', 'Veterinary', 'Video', 'Virtual Assistant', 'Voiceover', 'Web Design', 'Web Development', 'Wedding', 'Wellness', 'Wholesale', 'Writing', 'Yoga', 'Other',
+  const services = [
+    { name: 'Web Development', icon: '🌐' },
+    { name: 'Mobile App Development', icon: '📱' },
+    { name: 'UI/UX Design', icon: '🎨' },
+    { name: 'Digital Marketing', icon: '📈' },
+    { name: 'SEO Optimization', icon: '🔍' },
+    { name: 'Cloud Solutions', icon: '☁️' },
+    { name: 'E-commerce Development', icon: '🛒' },
+    { name: 'Consulting', icon: '💼' }
   ];
 
   // Validation patterns
@@ -88,17 +96,11 @@ export default function Contact() {
     if (name === 'businessType') {
       setBusinessType(value);
       if (value.length > 0) {
-        setBusinessTypeSuggestions(businessTypeOptions.filter(opt => opt.toLowerCase().includes(value.toLowerCase())));
+        setBusinessTypeSuggestions(filterBusinessTypes(value, 15));
       } else {
         setBusinessTypeSuggestions([]);
       }
     }
-  };
-
-  const filterBusinessTypes = (value) => {
-    if (!value) return businessTypeOptions.slice(0, 12);
-    const matches = businessTypeOptions.filter(opt => opt.toLowerCase().includes(value.toLowerCase()));
-    return matches.length > 0 ? matches.slice(0, 12) : [];
   };
 
   const handleBusinessTypeChange = (e) => {
@@ -107,13 +109,13 @@ export default function Contact() {
     setHighlightedIndex(-1);
     clearTimeout(debounceTimeout.current);
     debounceTimeout.current = setTimeout(() => {
-      setBusinessTypeSuggestions(filterBusinessTypes(value));
+      setBusinessTypeSuggestions(filterBusinessTypes(value, 15));
       setShowSuggestions(true);
     }, 120);
   };
 
   const handleBusinessTypeFocus = () => {
-    setBusinessTypeSuggestions(filterBusinessTypes(businessType));
+    setBusinessTypeSuggestions(filterBusinessTypes(businessType, 15));
     setShowSuggestions(true);
   };
 
@@ -211,15 +213,6 @@ export default function Contact() {
       question: "Do you provide hosting and domain services?",
       answer: "Yes, we offer comprehensive hosting solutions with AWS, including domain management, SSL certificates, CDN setup, and performance optimization to ensure your site runs smoothly."
     }
-  ];
-
-  const services = [
-    { name: "Web Development", icon: "🌐", description: "Custom websites and web applications" },
-    { name: "Mobile Apps", icon: "📱", description: "iOS and Android applications" },
-    { name: "UI/UX Design", icon: "🎨", description: "User experience and interface design" },
-    { name: "Digital Marketing", icon: "📈", description: "SEO, PPC, and social media marketing" },
-    { name: "Cloud Solutions", icon: "☁️", description: "AWS, Azure, and DevOps services" },
-    { name: "Consulting", icon: "💡", description: "Technology strategy and consulting" }
   ];
 
   const testimonials = [
