@@ -26,14 +26,14 @@ export default function Contact() {
   const [isValidating, setIsValidating] = React.useState(false);
 
   const services = [
-    { name: 'Web Development', icon: '🌐' },
-    { name: 'Mobile App Development', icon: '📱' },
-    { name: 'UI/UX Design', icon: '🎨' },
-    { name: 'Digital Marketing', icon: '📈' },
-    { name: 'SEO Optimization', icon: '🔍' },
-    { name: 'Cloud Solutions', icon: '☁️' },
-    { name: 'E-commerce Development', icon: '🛒' },
-    { name: 'Consulting', icon: '💼' }
+    { name: 'More Sales', icon: '💰' },
+    { name: 'More Leads', icon: '📋' },
+    { name: 'Better Brand Awareness', icon: '🚀' },
+    { name: 'Automate My Business', icon: '🤖' },
+    { name: 'Improve Customer Experience', icon: '🤝' },
+    { name: 'Launch a New Product', icon: '🎉' },
+    { name: 'Grow My Audience', icon: '📢' },
+    { name: 'Other (Describe Below)', icon: '📝' }
   ];
 
   // Validation patterns
