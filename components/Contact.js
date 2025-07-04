@@ -134,18 +134,18 @@ export default function Contact() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-5xl md:text-6xl font-black text-facebook dark:text-facebook mb-6 font-nunito"
+            className="text-5xl md:text-6xl font-black text-blue-600 dark:text-cyan-400 mb-6 font-nunito"
           >
-            Let's Work Together
+            Get Your Free Growth Strategy Session
           </motion.h2>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-xl md:text-2xl text-facebook-dark dark:text-dark-text max-w-4xl mx-auto leading-relaxed"
+            className="text-xl md:text-2xl text-facebook-dark dark:text-dark-text max-w-3xl mx-auto leading-relaxed"
           >
-            Ready to transform your business with cutting-edge digital solutions? Let's discuss your project and create something extraordinary together.
+            Share your vision and let our experts map out a custom plan to skyrocket your results. <span className='font-bold text-blue-600 dark:text-cyan-400'>No obligation. 100% confidential. Limited spots available.</span>
           </motion.p>
         </motion.div>
 
@@ -159,126 +159,112 @@ export default function Contact() {
             className="lg:col-span-2"
           >
             <div className="bg-white/95 dark:bg-dark-card/95 rounded-3xl p-8 shadow-2xl backdrop-blur-md border border-white/30 dark:border-dark-border">
-              <h3 className="text-2xl font-bold text-facebook-dark dark:text-dark-text mb-6">Start Your Project</h3>
-              
-                             <form className="space-y-6" onSubmit={handleSubmit}>
+              <h3 className="text-2xl font-bold text-blue-600 dark:text-cyan-400 mb-6">Start Your Project</h3>
+              <div className="flex items-center gap-2 mb-4">
+                <svg className="w-6 h-6 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 00-1.414 0L9 11.586 6.707 9.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l7-7a1 1 0 000-1.414z"/></svg>
+                <span className="text-green-600 font-semibold text-sm">100% Privacy & No Spam</span>
+              </div>
+              <form className="space-y-6" onSubmit={handleSubmit}>
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-sm font-semibold text-facebook-dark dark:text-dark-text mb-2">
                       First Name *
                     </label>
-                                         <input
-                       type="text"
-                       name="firstName"
-                       value={formData.firstName}
-                       onChange={handleInputChange}
-                       required
-                       className="w-full px-4 py-3 bg-white/50 dark:bg-dark-card/50 border border-facebook/20 dark:border-dark-border rounded-xl focus:outline-none focus:ring-2 focus:ring-facebook dark:focus:ring-facebook transition-all duration-300"
-                       placeholder="Your first name"
-                     />
+                    <input
+                      type="text"
+                      name="firstName"
+                      value={formData.firstName}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full px-4 py-3 bg-white/50 dark:bg-dark-card/50 border border-blue-200 dark:border-cyan-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-cyan-400 transition-all duration-300"
+                      placeholder="Your first name"
+                    />
                   </div>
-                  <div>
-                    <label className="block text-sm font-semibold text-facebook-dark dark:text-dark-text mb-2">
-                      Last Name *
-                    </label>
-                                         <input
-                       type="text"
-                       name="lastName"
-                       value={formData.lastName}
-                       onChange={handleInputChange}
-                       required
-                       className="w-full px-4 py-3 bg-white/50 dark:bg-dark-card/50 border border-facebook/20 dark:border-dark-border rounded-xl focus:outline-none focus:ring-2 focus:ring-facebook dark:focus:ring-facebook transition-all duration-300"
-                       placeholder="Your last name"
-                     />
-                  </div>
-                </div>
-
-                <div className="grid md:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-sm font-semibold text-facebook-dark dark:text-dark-text mb-2">
                       Email *
                     </label>
-                                         <input
-                       type="email"
-                       name="email"
-                       value={formData.email}
-                       onChange={handleInputChange}
-                       required
-                       className="w-full px-4 py-3 bg-white/50 dark:bg-dark-card/50 border border-facebook/20 dark:border-dark-border rounded-xl focus:outline-none focus:ring-2 focus:ring-facebook dark:focus:ring-facebook transition-all duration-300"
-                       placeholder="your@email.com"
-                     />
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full px-4 py-3 bg-white/50 dark:bg-dark-card/50 border border-blue-200 dark:border-cyan-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-cyan-400 transition-all duration-300"
+                      placeholder="your@email.com"
+                    />
                   </div>
+                </div>
+                <div className="grid md:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-sm font-semibold text-facebook-dark dark:text-dark-text mb-2">
                       Phone
                     </label>
-                                         <input
-                       type="tel"
-                       name="phone"
-                       value={formData.phone}
-                       onChange={handleInputChange}
-                       className="w-full px-4 py-3 bg-white/50 dark:bg-dark-card/50 border border-facebook/20 dark:border-dark-border rounded-xl focus:outline-none focus:ring-2 focus:ring-facebook dark:focus:ring-facebook transition-all duration-300"
-                       placeholder="+1 (555) 123-4567"
-                     />
+                    <input
+                      type="tel"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-3 bg-white/50 dark:bg-dark-card/50 border border-blue-200 dark:border-cyan-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-cyan-400 transition-all duration-300"
+                      placeholder="+1 (555) 123-4567"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-semibold text-facebook-dark dark:text-dark-text mb-2">
+                      Company
+                    </label>
+                    <input
+                      type="text"
+                      name="company"
+                      value={formData.company}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-3 bg-white/50 dark:bg-dark-card/50 border border-blue-200 dark:border-cyan-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-cyan-400 transition-all duration-300"
+                      placeholder="Your company name"
+                    />
                   </div>
                 </div>
-
-                <div>
-                  <label className="block text-sm font-semibold text-facebook-dark dark:text-dark-text mb-2">
-                    Company
-                  </label>
-                                     <input
-                     type="text"
-                     name="company"
-                     value={formData.company}
-                     onChange={handleInputChange}
-                     className="w-full px-4 py-3 bg-white/50 dark:bg-dark-card/50 border border-facebook/20 dark:border-dark-border rounded-xl focus:outline-none focus:ring-2 focus:ring-facebook dark:focus:ring-facebook transition-all duration-300"
-                     placeholder="Your company name"
-                   />
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-sm font-semibold text-facebook-dark dark:text-dark-text mb-2">
+                      Project Type *
+                    </label>
+                    <select
+                      name="projectType"
+                      value={formData.projectType}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full px-4 py-3 bg-white/50 dark:bg-dark-card/50 border border-blue-200 dark:border-cyan-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-cyan-400 transition-all duration-300"
+                    >
+                      <option value="">Select a project type</option>
+                      <option value="web-development">Web Development</option>
+                      <option value="mobile-app">Mobile App Development</option>
+                      <option value="ui-ux-design">UI/UX Design</option>
+                      <option value="digital-marketing">Digital Marketing</option>
+                      <option value="cloud-solutions">Cloud Solutions</option>
+                      <option value="consulting">Consulting</option>
+                      <option value="other">Other</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-semibold text-facebook-dark dark:text-dark-text mb-2">
+                      Project Budget *
+                    </label>
+                    <select
+                      name="budget"
+                      value={formData.budget}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full px-4 py-3 bg-white/50 dark:bg-dark-card/50 border border-blue-200 dark:border-cyan-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-cyan-400 transition-all duration-300"
+                    >
+                      <option value="">Select budget range</option>
+                      <option value="5k-10k">$5,000 - $10,000</option>
+                      <option value="10k-25k">$10,000 - $25,000</option>
+                      <option value="25k-50k">$25,000 - $50,000</option>
+                      <option value="50k-100k">$50,000 - $100,000</option>
+                      <option value="100k+">$100,000+</option>
+                    </select>
+                  </div>
                 </div>
-
-                <div>
-                  <label className="block text-sm font-semibold text-facebook-dark dark:text-dark-text mb-2">
-                    Project Type *
-                  </label>
-                  <select
-                    name="projectType"
-                    value={formData.projectType}
-                    onChange={handleInputChange}
-                    required
-                    className="w-full px-4 py-3 bg-white/50 dark:bg-dark-card/50 border border-facebook/20 dark:border-dark-border rounded-xl focus:outline-none focus:ring-2 focus:ring-facebook dark:focus:ring-facebook transition-all duration-300"
-                  >
-                    <option value="">Select a project type</option>
-                    <option value="web-development">Web Development</option>
-                    <option value="mobile-app">Mobile App Development</option>
-                    <option value="ui-ux-design">UI/UX Design</option>
-                    <option value="digital-marketing">Digital Marketing</option>
-                    <option value="cloud-solutions">Cloud Solutions</option>
-                    <option value="consulting">Consulting</option>
-                    <option value="other">Other</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-semibold text-facebook-dark dark:text-dark-text mb-2">
-                    Project Budget *
-                  </label>
-                  <select
-                    name="budget"
-                    value={formData.budget}
-                    onChange={handleInputChange}
-                    required
-                    className="w-full px-4 py-3 bg-white/50 dark:bg-dark-card/50 border border-facebook/20 dark:border-dark-border rounded-xl focus:outline-none focus:ring-2 focus:ring-facebook dark:focus:ring-facebook transition-all duration-300"
-                  >
-                    <option value="">Select budget range</option>
-                    <option value="5k-10k">$5,000 - $10,000</option>
-                    <option value="10k-25k">$10,000 - $25,000</option>
-                    <option value="25k-50k">$25,000 - $50,000</option>
-                    <option value="50k-100k">$50,000 - $100,000</option>
-                    <option value="100k+">$100,000+</option>
-                  </select>
-                </div>
-
                 <div>
                   <label className="block text-sm font-semibold text-facebook-dark dark:text-dark-text mb-2">
                     Project Description *
@@ -289,11 +275,10 @@ export default function Contact() {
                     onChange={handleInputChange}
                     required
                     rows={6}
-                    className="w-full px-4 py-3 bg-white/50 dark:bg-dark-card/50 border border-facebook/20 dark:border-dark-border rounded-xl focus:outline-none focus:ring-2 focus:ring-facebook dark:focus:ring-facebook transition-all duration-300 resize-none"
+                    className="w-full px-4 py-3 bg-white/50 dark:bg-dark-card/50 border border-blue-200 dark:border-cyan-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-cyan-400 transition-all duration-300 resize-none"
                     placeholder="Tell us about your project goals, requirements, and timeline..."
                   ></textarea>
                 </div>
-
                 {submitStatus && (
                   <div className={`p-4 rounded-xl text-center ${
                     submitStatus.type === 'success' 
@@ -303,19 +288,18 @@ export default function Contact() {
                     {submitStatus.message}
                   </div>
                 )}
-
                 <motion.button 
                   type="submit" 
                   disabled={isSubmitting}
-                  whileHover={{ scale: isSubmitting ? 1 : 1.02, y: isSubmitting ? 0 : -2 }}
+                  whileHover={{ scale: isSubmitting ? 1 : 1.05, y: isSubmitting ? 0 : -3 }}
                   whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
-                  className={`w-full font-bold text-lg py-4 rounded-2xl shadow-xl transition-all duration-300 ${
+                  className={`w-full font-black text-xl py-5 rounded-2xl shadow-2xl transition-all duration-300 ${
                     isSubmitting 
                       ? 'bg-gray-400 dark:bg-gray-600 text-white cursor-not-allowed' 
-                      : 'bg-facebook dark:bg-facebook-darkest text-white hover:shadow-2xl hover:bg-facebook-lighter dark:hover:bg-facebook-dark hover:-translate-y-1'
+                      : 'bg-gradient-to-r from-blue-600 via-blue-400 to-cyan-400 text-white hover:shadow-3xl hover:from-cyan-400 hover:to-blue-600 focus:outline-none focus:ring-4 focus:ring-cyan-300'
                   }`}
                 >
-                  {isSubmitting ? 'Sending...' : 'Send Message'}
+                  {isSubmitting ? 'Sending...' : 'Get My Free Strategy Session'}
                 </motion.button>
               </form>
             </div>
@@ -332,26 +316,23 @@ export default function Contact() {
             {/* Contact Details */}
             <div className="bg-white/95 dark:bg-dark-card/95 rounded-3xl p-8 shadow-2xl backdrop-blur-md border border-white/30 dark:border-dark-border">
               <h3 className="text-2xl font-bold text-facebook-dark dark:text-dark-text mb-6">Get In Touch</h3>
-              
               <div className="space-y-6">
                 <div>
                   <p className="font-semibold text-facebook-dark dark:text-dark-text">Email</p>
-                  <a href="mailto:joshhawleyofficial@gmail.com" className="text-facebook hover:text-facebook-lighter dark:hover:text-facebook-lighter transition-colors duration-200">
-                    joshhawleyofficial@gmail.com
+                  <a href="mailto:hello@instagrowmedia.com" className="text-facebook hover:text-facebook-lighter dark:hover:text-facebook-lighter transition-colors duration-200">
+                    hello@instagrowmedia.com
                   </a>
                 </div>
-                
                 <div>
                   <p className="font-semibold text-facebook-dark dark:text-dark-text">Phone</p>
                   <a href="tel:+16163031433" className="text-facebook hover:text-facebook-lighter dark:hover:text-facebook-lighter transition-colors duration-200">
                     616-303-1433
                   </a>
                 </div>
-                
                 <div>
                   <p className="font-semibold text-facebook-dark dark:text-dark-text">LinkedIn</p>
-                  <a href="https://www.linkedin.com/in/thejoshhawley/" target="_blank" rel="noopener" className="text-facebook hover:text-facebook-lighter dark:hover:text-facebook-lighter transition-colors duration-200">
-                    @thejoshhawley
+                  <a href="https://www.linkedin.com/company/instagrowmedia/" target="_blank" rel="noopener" className="text-facebook hover:text-facebook-lighter dark:hover:text-facebook-lighter transition-colors duration-200">
+                    @instagrowmedia
                   </a>
                 </div>
               </div>

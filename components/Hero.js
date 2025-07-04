@@ -189,7 +189,7 @@ export default function Hero() {
               className="text-6xl md:text-8xl font-black tracking-tight text-facebook dark:text-facebook mb-8 font-nunito drop-shadow-lg relative"
             >
               <span className="relative">
-                Joshua Hawley
+                Ready to Dominate Your Market?
                 <motion.div
                   animate={{
                     backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
@@ -199,7 +199,7 @@ export default function Hero() {
                     repeat: Infinity,
                     ease: "easeInOut"
                   }}
-                  className="absolute inset-0 bg-gradient-to-r from-facebook via-facebook-light to-facebook bg-clip-text text-transparent opacity-20"
+                  className="absolute inset-0 bg-gradient-to-r from-blue-600 via-blue-400 to-cyan-400 bg-clip-text text-transparent opacity-20"
                   style={{
                     backgroundSize: '200% 200%',
                   }}
@@ -211,19 +211,18 @@ export default function Hero() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.5 }}
-              className="text-3xl md:text-4xl font-bold text-facebook-light dark:text-facebook mb-6 font-nunito"
+              className="text-3xl md:text-4xl font-bold text-blue-400 dark:text-cyan-300 mb-6 font-nunito"
             >
-              Founder, Instagrow Media
+              Instagrow Media: Your Growth Engine for 2024
             </motion.h2>
             
             <motion.p 
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.6 }}
-              className="text-2xl md:text-3xl text-facebook-dark dark:text-dark-text mb-12 font-nunito max-w-4xl mx-auto leading-relaxed"
+              className="text-2xl md:text-3xl text-facebook-dark dark:text-dark-text mb-12 font-nunito max-w-3xl mx-auto leading-relaxed"
             >
-              Transforming businesses with <span className="font-bold text-facebook dark:text-facebook">strategic</span> digital solutions that <span className="font-bold text-facebook dark:text-facebook">convert</span> and <span className="font-bold text-facebook dark:text-facebook">scale</span>.<br />
-              <span className="font-extrabold text-facebook dark:text-facebook">Results-Driven. Performance-Focused. Growth-Oriented.</span>
+              We build <span className='font-bold text-blue-600 dark:text-cyan-400'>high-converting websites</span>, <span className='font-bold text-blue-600 dark:text-cyan-400'>automated funnels</span>, and <span className='font-bold text-blue-600 dark:text-cyan-400'>magnetic brands</span> for ambitious businesses. <span className='font-extrabold text-blue-600 dark:text-cyan-400'>Book your free strategy call now—slots fill fast!</span>
             </motion.p>
 
             {/* Enhanced Achievement Stats with hover effects */}
@@ -269,29 +268,28 @@ export default function Hero() {
             <motion.a 
               href="#contact" 
               whileHover={{ 
-                scale: 1.05, 
-                boxShadow: "0 20px 40px rgba(24, 119, 242, 0.3)",
-                y: -5
+                scale: 1.08, 
+                boxShadow: "0 24px 48px rgba(0, 184, 255, 0.35)",
+                y: -7
               }}
-              whileTap={{ scale: 0.95 }}
-              className="px-12 py-5 bg-facebook dark:bg-facebook-darkest text-white font-black text-xl rounded-2xl shadow-2xl hover:shadow-3xl hover:bg-facebook-lighter dark:hover:bg-facebook-dark transition-all duration-300 relative overflow-hidden group"
+              whileTap={{ scale: 0.97 }}
+              className="px-14 py-6 bg-gradient-to-r from-blue-600 via-blue-400 to-cyan-400 text-white font-black text-2xl rounded-3xl shadow-2xl hover:shadow-3xl transition-all duration-300 relative overflow-hidden group border-4 border-white/20 focus:outline-none focus:ring-4 focus:ring-cyan-300"
             >
-              <span className="relative z-10">Request Consultation</span>
+              <span className="relative z-10">Claim My Free Strategy Call</span>
               <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-facebook-light to-facebook-lighter opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                 initial={{ x: '-100%' }}
                 whileHover={{ x: '100%' }}
                 transition={{ duration: 0.6 }}
               />
             </motion.a>
-            
             <motion.a 
               href="#services" 
               whileHover={{ scale: 1.05, y: -5 }}
               whileTap={{ scale: 0.95 }}
-              className="px-10 py-5 rounded-2xl bg-facebook/10 dark:bg-facebook-darkest/80 text-facebook dark:text-white font-bold text-lg backdrop-blur-sm border-2 border-facebook/30 dark:border-facebook-darkest/60 hover:bg-facebook-lighter/60 dark:hover:bg-facebook-dark hover:text-white transition-all duration-300 shadow-xl"
+              className="px-10 py-5 rounded-2xl bg-white/80 dark:bg-facebook-darkest/80 text-blue-600 dark:text-cyan-300 font-bold text-lg border-2 border-blue-200 dark:border-cyan-700 hover:bg-blue-50 dark:hover:bg-cyan-900 hover:text-blue-700 dark:hover:text-cyan-200 transition-all duration-300 shadow-xl"
             >
-              Explore Services
+              See How We Grow Brands
             </motion.a>
           </motion.div>
         </motion.div>
