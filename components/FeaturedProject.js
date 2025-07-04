@@ -129,22 +129,8 @@ export default function FeaturedProject() {
               </motion.div>
             </motion.div>
 
-            <motion.div 
-              className="relative"
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              viewport={{ once: true }}
-            >
-              <motion.div 
-                className="rounded-3xl overflow-hidden shadow-2xl bg-white dark:bg-dark-card border border-facebook/10 dark:border-dark-border"
-                whileHover={{ 
-                  scale: 1.02,
-                  rotateY: 5,
-                  rotateX: 2
-                }}
-                transition={{ duration: 0.3 }}
-              >
+            <div className="relative">
+              <div className="rounded-3xl overflow-hidden shadow-2xl bg-white dark:bg-dark-card border border-facebook/10 dark:border-dark-border">
                 <div className="bg-gradient-to-r from-facebook/10 to-facebook-light/10 dark:from-facebook/20 dark:to-facebook-light/20 px-6 py-4 border-b border-facebook/10 dark:border-dark-border">
                   <div className="flex items-center gap-3">
                     <div className="flex gap-2">
@@ -157,27 +143,14 @@ export default function FeaturedProject() {
                     </span>
                   </div>
                 </div>
-                
-                <div className="aspect-video w-full rounded-3xl overflow-hidden border border-facebook/10 dark:border-dark-border bg-white dark:bg-dark-card relative">
-                  <iframe
-                    src="https://jacksoninvestmentsolutions2.netlify.app/"
-                    title="Live Preview"
-                    className="w-full h-full min-h-[300px]"
-                    style={{ border: 'none' }}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    loading="lazy"
-                    onError={(e) => { e.target.style.display = 'none'; document.getElementById('preview-fallback').style.display = 'flex'; }}
-                  ></iframe>
-                  <div id="preview-fallback" style={{display:'none'}} className="absolute inset-0 flex flex-col items-center justify-center bg-white dark:bg-dark-card">
-                    <img src="/jackson-preview.png" alt="Preview Screenshot" className="w-full h-full object-cover rounded-3xl" />
-                    <div className="absolute bottom-6 left-0 right-0 flex flex-col items-center">
-                      <span className="text-facebook-dark dark:text-dark-text font-semibold mb-2">Live preview unavailable. Click below to view the site:</span>
-                      <a href="https://jacksoninvestmentsolutions2.netlify.app/" target="_blank" rel="noopener" className="px-6 py-3 bg-blue-600 text-white rounded-xl font-bold shadow-lg hover:bg-blue-700 transition">Open Site</a>
-                    </div>
+                <div className="aspect-video w-full rounded-3xl overflow-hidden border border-facebook/10 dark:border-dark-border bg-white dark:bg-dark-card relative flex flex-col items-center justify-center">
+                  <img src="/jackson-preview.png" alt="Preview Screenshot" className="w-full h-full object-cover rounded-3xl" />
+                  <div className="absolute bottom-6 left-0 right-0 flex flex-col items-center">
+                    <a href="https://jacksoninvestmentsolutions2.netlify.app/" target="_blank" rel="noopener" className="px-6 py-3 bg-blue-600 text-white rounded-xl font-bold shadow-lg hover:bg-blue-700 transition">Open Site</a>
                   </div>
                 </div>
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
           </div>
         </motion.div>
       </div>
