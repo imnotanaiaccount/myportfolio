@@ -70,10 +70,10 @@ export default function WhyChooseMe() {
       <div className="max-w-6xl mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-extrabold text-facebook dark:text-facebook mb-6 font-nunito">
-            Why Choose Elite Excellence?
+            Why Choose Instagrow Media?
           </h2>
           <p className="text-xl text-facebook-light dark:text-dark-muted max-w-3xl mx-auto leading-relaxed">
-            Beyond development - I'm your <span className="font-bold text-facebook dark:text-facebook">billion-dollar</span> strategic partner in <span className="font-bold text-facebook dark:text-facebook">digital dominance</span>
+            More than just a developer - I'm your strategic partner in <span className="font-bold text-facebook dark:text-facebook">digital success</span> and <span className="font-bold text-facebook dark:text-facebook">business growth</span>
           </p>
         </div>
 
@@ -112,20 +112,20 @@ export default function WhyChooseMe() {
         >
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div>
-              <div className="text-3xl font-bold text-facebook dark:text-facebook mb-2">500+</div>
-              <div className="text-facebook-light dark:text-dark-muted font-medium">Elite Projects</div>
+              <div className="text-3xl font-bold text-facebook dark:text-facebook mb-2">50+</div>
+              <div className="text-facebook-light dark:text-dark-muted font-medium">Projects Delivered</div>
             </div>
             <div>
-              <div className="text-3xl font-bold text-facebook dark:text-facebook mb-2">99.9%</div>
+              <div className="text-3xl font-bold text-facebook dark:text-facebook mb-2">100%</div>
               <div className="text-facebook-light dark:text-dark-muted font-medium">Client Satisfaction</div>
             </div>
             <div>
               <div className="text-3xl font-bold text-facebook dark:text-facebook mb-2">24/7</div>
-              <div className="text-facebook-light dark:text-dark-muted font-medium">Premium Support</div>
+              <div className="text-facebook-light dark:text-dark-muted font-medium">Support Available</div>
             </div>
             <div>
-              <div className="text-3xl font-bold text-facebook dark:text-facebook mb-2">15+</div>
-              <div className="text-facebook-light dark:text-dark-muted font-medium">Years Excellence</div>
+              <div className="text-3xl font-bold text-facebook dark:text-facebook mb-2">5+</div>
+              <div className="text-facebook-light dark:text-dark-muted font-medium">Years Experience</div>
             </div>
           </div>
         </motion.div>

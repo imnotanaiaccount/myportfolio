@@ -8,9 +8,9 @@ export default function Hero() {
   ];
 
   const achievements = [
-    { number: "500+", label: "Projects Delivered", icon: "🚀" },
-    { number: "98%", label: "Client Satisfaction", icon: "⭐" },
-    { number: "15+", label: "Years Experience", icon: "🏆" },
+    { number: "50+", label: "Projects Delivered", icon: "🚀" },
+    { number: "100%", label: "Client Satisfaction", icon: "⭐" },
+    { number: "5+", label: "Years Experience", icon: "🏆" },
     { number: "24/7", label: "Support Available", icon: "🛡️" }
   ];
 
@@ -222,8 +222,8 @@ export default function Hero() {
               transition={{ duration: 0.5, delay: 0.6 }}
               className="text-2xl md:text-3xl text-facebook-dark dark:text-dark-text mb-12 font-nunito max-w-4xl mx-auto leading-relaxed"
             >
-              Crafting <span className="font-bold text-facebook dark:text-facebook">billion-dollar</span> digital experiences with <span className="font-bold text-facebook dark:text-facebook">precision</span> and <span className="font-bold text-facebook dark:text-facebook">excellence</span>.<br />
-              <span className="font-extrabold text-facebook dark:text-facebook">Elite. Sophisticated. Unparalleled.</span>
+              Transforming businesses with <span className="font-bold text-facebook dark:text-facebook">strategic</span> digital solutions that <span className="font-bold text-facebook dark:text-facebook">convert</span> and <span className="font-bold text-facebook dark:text-facebook">scale</span>.<br />
+              <span className="font-extrabold text-facebook dark:text-facebook">Results-Driven. Performance-Focused. Growth-Oriented.</span>
             </motion.p>
 
             {/* Enhanced Achievement Stats with hover effects */}

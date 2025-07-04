@@ -77,8 +77,8 @@ export default function FeaturedProject() {
                   viewport={{ once: true }}
                   className="text-xl text-facebook-light dark:text-dark-muted leading-relaxed"
                 >
-                  A <span className="font-bold text-facebook dark:text-facebook">billion-dollar</span> real estate platform engineered for maximum conversion and trust. 
-                  Featuring <span className="font-bold text-facebook dark:text-facebook">elite</span> user experience, <span className="font-bold text-facebook dark:text-facebook">premium</span> performance, and <span className="font-bold text-facebook dark:text-facebook">sophisticated</span> design.
+                  A modern, conversion-focused real estate platform built for maximum trust and lead generation. 
+                  Designed and developed with seamless user experience, mobile-first performance, and business growth in mind.
                 </motion.p>
               </div>
 

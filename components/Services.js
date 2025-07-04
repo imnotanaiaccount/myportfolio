@@ -21,8 +21,8 @@ export default function Services() {
         "Analytics & Tracking Setup"
       ],
       pricing: {
-        basic: "$15,000",
-        pro: "$35,000",
+        basic: "$5,000",
+        pro: "$12,000",
         enterprise: "Custom"
       },
       technologies: ["React", "Next.js", "Node.js", "TypeScript", "PostgreSQL", "AWS"]
@@ -46,8 +46,8 @@ export default function Services() {
         "Performance Optimization"
       ],
       pricing: {
-        basic: "$25,000",
-        pro: "$50,000",
+        basic: "$8,000",
+        pro: "$20,000",
         enterprise: "Custom"
       },
       technologies: ["React Native", "Swift", "Kotlin", "Firebase", "AWS", "Flutter"]
@@ -71,8 +71,8 @@ export default function Services() {
         "Design-to-Development Handoff"
       ],
       pricing: {
-        basic: "$20,000",
-        pro: "$45,000",
+        basic: "$3,500",
+        pro: "$8,000",
         enterprise: "Custom"
       },
       technologies: ["Figma", "Sketch", "Adobe XD", "InVision", "Principle", "Framer"]
@@ -96,8 +96,8 @@ export default function Services() {
         "Brand Awareness Campaigns"
       ],
       pricing: {
-        basic: "$5,000/month",
-        pro: "$12,000/month",
+        basic: "$2,000/month",
+        pro: "$5,000/month",
         enterprise: "Custom"
       },
       technologies: ["Google Ads", "Facebook Ads", "Google Analytics", "Mailchimp", "HubSpot", "SEMrush"]
@@ -121,8 +121,8 @@ export default function Services() {
         "Disaster Recovery Planning"
       ],
       pricing: {
-        basic: "$8,000/month",
-        pro: "$20,000/month",
+        basic: "$3,000/month",
+        pro: "$8,000/month",
         enterprise: "Custom"
       },
       technologies: ["AWS", "Docker", "Kubernetes", "Terraform", "Jenkins", "Prometheus"]
@@ -146,8 +146,8 @@ export default function Services() {
         "Vendor Selection & Management"
       ],
       pricing: {
-        basic: "$500/hour",
-        pro: "$1,000/hour",
+        basic: "$150/hour",
+        pro: "$300/hour",
         enterprise: "Custom"
       },
       technologies: ["Architecture Design", "Project Management", "Agile Methodologies", "Risk Assessment"]
@@ -155,11 +155,11 @@ export default function Services() {
   ];
 
   const stats = [
-    { number: "500+", label: "Projects Completed", icon: "🚀" },
-    { number: "98%", label: "Client Satisfaction", icon: "⭐" },
-    { number: "15+", label: "Years Experience", icon: "🏆" },
+    { number: "50+", label: "Projects Completed", icon: "🚀" },
+    { number: "100%", label: "Client Satisfaction", icon: "⭐" },
+    { number: "5+", label: "Years Experience", icon: "🏆" },
     { number: "24/7", label: "Support Available", icon: "🛡️" },
-    { number: "50+", label: "Technologies Mastered", icon: "⚡" },
+    { number: "20+", label: "Technologies Mastered", icon: "⚡" },
     { number: "100%", label: "On-time Delivery", icon: "⏰" }
   ];
 
@@ -187,7 +187,7 @@ export default function Services() {
             transition={{ duration: 0.4, delay: 0.1 }}
             className="text-5xl md:text-6xl font-black text-facebook dark:text-facebook mb-6 font-nunito"
           >
-            Elite Services
+            Our Services
           </motion.h2>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
@@ -196,7 +196,7 @@ export default function Services() {
             transition={{ duration: 0.4, delay: 0.2 }}
             className="text-xl md:text-2xl text-facebook-dark dark:text-dark-text max-w-4xl mx-auto leading-relaxed"
           >
-            <span className="font-bold text-facebook dark:text-facebook">Billion-dollar</span> digital solutions crafted with <span className="font-bold text-facebook dark:text-facebook">precision</span> and <span className="font-bold text-facebook dark:text-facebook">excellence</span>. From concept to deployment, we deliver <span className="font-bold text-facebook dark:text-facebook">unparalleled</span> digital transformation.
+            Comprehensive digital solutions that drive <span className="font-bold text-facebook dark:text-facebook">measurable results</span> and <span className="font-bold text-facebook dark:text-facebook">business growth</span>. From concept to deployment, we handle every aspect of your digital transformation.
           </motion.p>
         </motion.div>
 
