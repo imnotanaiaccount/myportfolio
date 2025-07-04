@@ -64,6 +64,7 @@ exports.handler = async (event, context) => {
       projectType: formData.projectType || '',
       budget: formData.budget || '',
       description: formData.description || '',
+      businessType: formData.businessType || '',
       timestamp: new Date().toISOString(),
       source: 'Portfolio Contact Form'
     };
@@ -127,6 +128,10 @@ exports.handler = async (event, context) => {
                 <div class="field">
                   <div class="label">🏢 Company:</div>
                   <div class="value">${webhookData.company || 'Not provided'}</div>
+                </div>
+                <div class="field">
+                  <div class="label">🏷️ Business Type:</div>
+                  <div class="value">${webhookData.businessType || 'Not specified'}</div>
                 </div>
                 <div class="field">
                   <div class="label">🛠️ Project Type:</div>
