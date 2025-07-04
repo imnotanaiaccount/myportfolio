@@ -150,15 +150,15 @@ export default function Contact() {
         </motion.div>
 
         <div className="grid lg:grid-cols-3 gap-12 mb-20">
-          {/* Contact Form */}
+          {/* Contact Form - Centered */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="lg:col-span-2"
+            className="lg:col-span-2 flex justify-center items-center"
           >
-            <div className="bg-white/95 dark:bg-dark-card/95 rounded-3xl p-8 shadow-2xl backdrop-blur-md border border-white/30 dark:border-dark-border">
+            <div className="w-full max-w-xl bg-white/95 dark:bg-dark-card/95 rounded-3xl p-8 shadow-2xl backdrop-blur-md border border-white/30 dark:border-dark-border mx-auto">
               <h3 className="text-2xl font-bold text-blue-600 dark:text-cyan-400 mb-6">Start Your Project</h3>
               <div className="flex items-center gap-2 mb-4">
                 <svg className="w-6 h-6 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 00-1.414 0L9 11.586 6.707 9.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l7-7a1 1 0 000-1.414z"/></svg>
