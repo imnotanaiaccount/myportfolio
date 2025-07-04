@@ -178,17 +178,6 @@ export default function FeaturedProject() {
                     </div>
                   </div>
                   
-                  {/* Floating UI Elements */}
-                  <motion.div
-                    animate={{ y: [-10, 10, -10] }}
-                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                    className="absolute top-4 right-4 w-16 h-16 bg-white/20 rounded-lg backdrop-blur-sm border border-white/30"
-                  />
-                  <motion.div
-                    animate={{ y: [10, -10, 10] }}
-                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                    className="absolute bottom-4 left-4 w-12 h-12 bg-facebook/20 rounded-lg backdrop-blur-sm border border-facebook/30"
-                  />
                 </motion.div>
               </motion.div>
             </motion.div>
