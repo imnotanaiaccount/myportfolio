@@ -149,14 +149,14 @@ export default function Contact() {
           </motion.p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-3 gap-12 mb-20">
-          {/* Contact Form - Centered */}
+        <div className="flex flex-col items-center mb-20">
+          {/* Contact Form - Centered and Full Width */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="lg:col-span-2"
+            className="w-full max-w-3xl"
           >
             <div className="w-full bg-white/95 dark:bg-dark-card/95 rounded-3xl p-8 shadow-2xl backdrop-blur-md border border-white/30 dark:border-dark-border mx-auto">
               <h3 className="text-2xl font-bold text-blue-600 dark:text-cyan-400 mb-6">Start Your Project</h3>
@@ -305,13 +305,13 @@ export default function Contact() {
             </div>
           </motion.div>
 
-          {/* Contact Information */}
+          {/* Contact Information, Services, and Stats - Stacked Below */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="space-y-8"
+            className="w-full max-w-3xl flex flex-col gap-8 mt-12"
           >
             {/* Contact Details */}
             <div className="bg-white/95 dark:bg-dark-card/95 rounded-3xl p-8 shadow-2xl backdrop-blur-md border border-white/30 dark:border-dark-border">
@@ -341,7 +341,6 @@ export default function Contact() {
             {/* Services Offered */}
             <div className="bg-white/95 dark:bg-dark-card/95 rounded-3xl p-8 shadow-2xl backdrop-blur-md border border-white/30 dark:border-dark-border">
               <h3 className="text-2xl font-bold text-facebook-dark dark:text-dark-text mb-6">Services Offered</h3>
-              
               <div className="space-y-4">
                 {services.map((service, i) => (
                   <div key={i} className="flex items-center gap-3">
@@ -358,7 +357,6 @@ export default function Contact() {
             {/* Quick Stats */}
             <div className="bg-white/95 dark:bg-dark-card/95 rounded-3xl p-8 shadow-2xl backdrop-blur-md border border-white/30 dark:border-dark-border">
               <h3 className="text-2xl font-bold text-facebook-dark dark:text-dark-text mb-6">Why Choose Us</h3>
-              
               <div className="space-y-4">
                 <div className="text-center p-4 bg-facebook/10 dark:bg-facebook-darkest/30 rounded-xl">
                   <div className="text-2xl font-black text-facebook dark:text-facebook">500+</div>
