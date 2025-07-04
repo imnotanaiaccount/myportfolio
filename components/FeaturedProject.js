@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import React, { useState } from 'react';
 
 export default function FeaturedProject() {
   return (
@@ -157,7 +158,7 @@ export default function FeaturedProject() {
                   </div>
                 </div>
                 
-                <div className="aspect-video w-full rounded-3xl overflow-hidden border border-facebook/10 dark:border-dark-border bg-white dark:bg-dark-card">
+                <div className="aspect-video w-full rounded-3xl overflow-hidden border border-facebook/10 dark:border-dark-border bg-white dark:bg-dark-card relative">
                   <iframe
                     src="https://jacksoninvestmentsolutions2.netlify.app/"
                     title="Live Preview"
@@ -165,7 +166,15 @@ export default function FeaturedProject() {
                     style={{ border: 'none' }}
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     loading="lazy"
+                    onError={(e) => { e.target.style.display = 'none'; document.getElementById('preview-fallback').style.display = 'flex'; }}
                   ></iframe>
+                  <div id="preview-fallback" style={{display:'none'}} className="absolute inset-0 flex flex-col items-center justify-center bg-white dark:bg-dark-card">
+                    <img src="/jackson-preview.png" alt="Preview Screenshot" className="w-full h-full object-cover rounded-3xl" />
+                    <div className="absolute bottom-6 left-0 right-0 flex flex-col items-center">
+                      <span className="text-facebook-dark dark:text-dark-text font-semibold mb-2">Live preview unavailable. Click below to view the site:</span>
+                      <a href="https://jacksoninvestmentsolutions2.netlify.app/" target="_blank" rel="noopener" className="px-6 py-3 bg-blue-600 text-white rounded-xl font-bold shadow-lg hover:bg-blue-700 transition">Open Site</a>
+                    </div>
+                  </div>
                 </div>
               </motion.div>
             </motion.div>

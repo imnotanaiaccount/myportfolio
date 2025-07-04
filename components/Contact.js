@@ -16,6 +16,14 @@ export default function Contact() {
   const [submitStatus, setSubmitStatus] = React.useState(null);
   const [selectedServices, setSelectedServices] = React.useState([]);
   const [serviceError, setServiceError] = React.useState('');
+  const [businessType, setBusinessType] = React.useState('');
+  const [businessTypeSuggestions, setBusinessTypeSuggestions] = React.useState([]);
+  const [showSuggestions, setShowSuggestions] = React.useState(false);
+  const [highlightedIndex, setHighlightedIndex] = React.useState(-1);
+  const debounceTimeout = React.useRef();
+  const businessTypeOptions = [
+    'Real Estate', 'Ecommerce', 'Sales', 'Artist', 'Baker', 'Consultant', 'Coach', 'Restaurant', 'Healthcare', 'Education', 'Finance', 'Legal', 'Marketing', 'Nonprofit', 'Technology', 'Fitness', 'Construction', 'Retail', 'Entertainment', 'Accounting', 'Advertising', 'Agriculture', 'Apparel', 'Architecture', 'Automotive', 'Aviation', 'Beauty', 'Blogging', 'Catering', 'Cleaning', 'Communications', 'Computer', 'Crafts', 'Dance', 'Data Science', 'Dentistry', 'Design', 'Distribution', 'Dog Walking', 'Elder Care', 'Engineering', 'Event Planning', 'Fashion', 'Film', 'Florist', 'Food Truck', 'Freelance', 'Gaming', 'Gardening', 'Graphic Design', 'Handyman', 'Home Decor', 'HR', 'Import/Export', 'Influencer', 'Insurance', 'Interior Design', 'Investment', 'IT', 'Jewelry', 'Landscaping', 'Laundry', 'Logistics', 'Manufacturing', 'Media', 'Medical', 'Mental Health', 'Mobile Apps', 'Mortgage', 'Moving', 'Music', 'Nutrition', 'Online Courses', 'Optometry', 'Painting', 'Pest Control', 'Pet Care', 'Pharmacy', 'Photography', 'Plumbing', 'Podcasting', 'Printing', 'PR', 'Productivity', 'Property Management', 'Public Speaking', 'Publishing', 'Realty', 'Recruitment', 'Repair', 'Research', 'Reselling', 'Restaurant Supply', 'Retail Tech', 'Roofing', 'Security', 'SEO', 'Shipping', 'Skincare', 'Social Media', 'Software', 'Solar', 'Spa', 'Sports', 'Staffing', 'Startup', 'Storage', 'Subscription Box', 'Supply Chain', 'Tattoo', 'Tax', 'Therapy', 'Tourism', 'Translation', 'Transportation', 'Travel', 'Tutoring', 'UX/UI', 'Venture Capital', 'Veterinary', 'Video', 'Virtual Assistant', 'Voiceover', 'Web Design', 'Web Development', 'Wedding', 'Wellness', 'Wholesale', 'Writing', 'Yoga', 'Other',
+  ];
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -23,6 +31,56 @@ export default function Contact() {
       ...prev,
       [name]: value
     }));
+    if (name === 'businessType') {
+      setBusinessType(value);
+      if (value.length > 0) {
+        setBusinessTypeSuggestions(businessTypeOptions.filter(opt => opt.toLowerCase().includes(value.toLowerCase())));
+      } else {
+        setBusinessTypeSuggestions([]);
+      }
+    }
+  };
+
+  const filterBusinessTypes = (value) => {
+    if (!value) return businessTypeOptions.slice(0, 12);
+    const matches = businessTypeOptions.filter(opt => opt.toLowerCase().includes(value.toLowerCase()));
+    return matches.length > 0 ? matches.slice(0, 12) : [];
+  };
+
+  const handleBusinessTypeChange = (e) => {
+    const value = e.target.value;
+    setBusinessType(value);
+    setHighlightedIndex(-1);
+    clearTimeout(debounceTimeout.current);
+    debounceTimeout.current = setTimeout(() => {
+      setBusinessTypeSuggestions(filterBusinessTypes(value));
+      setShowSuggestions(true);
+    }, 120);
+  };
+
+  const handleBusinessTypeFocus = () => {
+    setBusinessTypeSuggestions(filterBusinessTypes(businessType));
+    setShowSuggestions(true);
+  };
+
+  const handleBusinessTypeBlur = () => {
+    setTimeout(() => setShowSuggestions(false), 100); // allow click
+  };
+
+  const handleBusinessTypeKeyDown = (e) => {
+    if (!showSuggestions) return;
+    if (e.key === 'ArrowDown') {
+      setHighlightedIndex(idx => Math.min(idx + 1, businessTypeSuggestions.length - 1));
+    } else if (e.key === 'ArrowUp') {
+      setHighlightedIndex(idx => Math.max(idx - 1, 0));
+    } else if (e.key === 'Enter') {
+      if (highlightedIndex >= 0 && businessTypeSuggestions[highlightedIndex]) {
+        setBusinessType(businessTypeSuggestions[highlightedIndex]);
+        setShowSuggestions(false);
+      }
+    } else if (e.key === 'Escape') {
+      setShowSuggestions(false);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -41,7 +99,7 @@ export default function Contact() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ ...formData, services: selectedServices })
+        body: JSON.stringify({ ...formData, services: selectedServices, businessType })
       });
 
       const result = await response.json();
@@ -315,6 +373,50 @@ export default function Contact() {
                         </span>
                       ))}
                     </div>
+                  )}
+                </div>
+                {/* Business Type Autofill/Autosuggest */}
+                <div className="relative">
+                  <label className="block text-sm font-semibold text-facebook-dark dark:text-dark-text mb-2">
+                    Your Business Type
+                  </label>
+                  <input
+                    type="text"
+                    name="businessType"
+                    autoComplete="off"
+                    value={businessType}
+                    onChange={handleBusinessTypeChange}
+                    onFocus={handleBusinessTypeFocus}
+                    onBlur={handleBusinessTypeBlur}
+                    onKeyDown={handleBusinessTypeKeyDown}
+                    className="w-full px-4 py-3 bg-white/90 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-300 text-blue-900 dark:text-blue-100 placeholder-gray-400 dark:placeholder-gray-500 transition-all duration-200"
+                    placeholder="e.g. Real Estate, Ecommerce, Artist, etc."
+                    aria-autocomplete="list"
+                    aria-expanded={showSuggestions}
+                    aria-activedescendant={highlightedIndex >= 0 ? `bt-suggestion-${highlightedIndex}` : undefined}
+                  />
+                  {showSuggestions && (
+                    <ul className="absolute z-10 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl mt-1 w-full shadow-lg max-h-60 overflow-y-auto">
+                      {businessTypeSuggestions.length > 0 ? (
+                        businessTypeSuggestions.map((suggestion, i) => (
+                          <li
+                            key={i}
+                            id={`bt-suggestion-${i}`}
+                            className={`px-4 py-2 cursor-pointer select-none ${highlightedIndex === i ? 'bg-blue-100 dark:bg-blue-900/30 font-bold' : ''}`}
+                            onMouseDown={() => {
+                              setBusinessType(suggestion);
+                              setShowSuggestions(false);
+                            }}
+                            onMouseEnter={() => setHighlightedIndex(i)}
+                            aria-selected={highlightedIndex === i}
+                          >
+                            {suggestion}
+                          </li>
+                        ))
+                      ) : (
+                        <li className="px-4 py-2 text-gray-500 select-none">No matches found</li>
+                      )}
+                    </ul>
                   )}
                 </div>
                 <div>
