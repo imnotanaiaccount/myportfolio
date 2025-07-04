@@ -191,35 +191,6 @@ export default function FeaturedProject() {
                   />
                 </motion.div>
               </motion.div>
-              
-              {/* Floating Performance Stats */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.8, y: 20 }}
-                whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                viewport={{ once: true }}
-                animate={{ y: [-5, 5, -5] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
-                className="absolute -top-6 -right-6 bg-white dark:bg-dark-card rounded-2xl p-6 shadow-2xl border border-facebook/10 dark:border-dark-border"
-              >
-                <div className="text-center space-y-2">
-                  <div className="text-xs text-facebook-light dark:text-dark-muted font-semibold">Performance</div>
-                  <div className="w-12 h-1 bg-gradient-to-r from-green-400 to-green-600 rounded-full mx-auto"></div>
-                </div>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, scale: 0.8, y: 20 }}
-                whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                viewport={{ once: true }}
-                animate={{ y: [5, -5, 5] }}
-                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1.7 }}
-                className="absolute -bottom-6 -left-6 bg-white dark:bg-dark-card rounded-2xl p-4 shadow-2xl border border-facebook/10 dark:border-dark-border"
-              >
-                <div className="text-center space-y-1">
-                  <div className="text-2xl font-black text-facebook dark:text-facebook">⚡</div>
-                  <div className="text-xs text-facebook-light dark:text-dark-muted font-semibold">Fast</div>
-                </div>
-              </motion.div>
             </motion.div>
           </div>
         </motion.div>
