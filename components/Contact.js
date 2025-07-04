@@ -28,12 +28,12 @@ export default function Contact() {
   const services = [
     { name: 'More Sales', icon: '💰' },
     { name: 'More Leads', icon: '📋' },
-    { name: 'Better Brand Awareness', icon: '🚀' },
+    { name: 'Improve Brand Awareness', icon: '🚀' },
     { name: 'Automate My Business', icon: '🤖' },
     { name: 'Improve Customer Experience', icon: '🤝' },
-    { name: 'Launch a New Product', icon: '🎉' },
+    { name: 'Launch a New Product or Service', icon: '🎉' },
     { name: 'Grow My Audience', icon: '📢' },
-    { name: 'Other (Describe Below)', icon: '📝' }
+    { name: 'Other (Describe Above)', icon: '📝' }
   ];
 
   // Validation patterns
@@ -572,7 +572,7 @@ export default function Contact() {
                   <div className="text-sm text-facebook-dark dark:text-dark-text">Support Available</div>
                 </div>
                 <div className="text-center p-4 bg-facebook/10 dark:bg-facebook-darkest/30 rounded-xl">
-                  <div className="text-2xl font-black text-facebook dark:text-facebook">10+</div>
+                  <div className="text-2xl font-black text-facebook dark:text-facebook">10+ Years</div>
                   <div className="text-sm text-facebook-dark dark:text-dark-text">Years of Experience</div>
                 </div>
               </div>
