@@ -9,12 +9,18 @@ export default function App({ Component, pageProps }) {
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         
         {/* Primary Meta Tags */}
-        <title>Joshua Hawley | Instagrow Media - Premium Digital Solutions</title>
-        <meta name="title" content="Joshua Hawley | Instagrow Media - Premium Digital Solutions" />
-        <meta name="description" content="Elevating businesses with elegant, modern digital solutions. 500+ projects delivered with 98% client satisfaction. Web development, mobile apps, digital marketing, cloud solutions, and UI/UX design." />
-        <meta name="keywords" content="web development, mobile apps, digital marketing, cloud solutions, UI/UX design, React, Next.js, AWS, Node.js, Joshua Hawley, Instagrow Media" />
-        <meta name="author" content="Joshua Hawley" />
-        <meta name="robots" content="index, follow" />
+        <title>Instagrow Media | Premium Digital Agency for Growth</title>
+        <meta name="description" content="High-converting websites, automation, and branding for ambitious businesses. Book your free strategy call with Instagrow Media." />
+        <meta property="og:title" content="Instagrow Media | Premium Digital Agency for Growth" />
+        <meta property="og:description" content="High-converting websites, automation, and branding for ambitious businesses. Book your free strategy call with Instagrow Media." />
+        <meta property="og:image" content="/og-image.png" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://instagrowmedia.netlify.app/" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Instagrow Media | Premium Digital Agency for Growth" />
+        <meta name="twitter:description" content="High-converting websites, automation, and branding for ambitious businesses. Book your free strategy call with Instagrow Media." />
+        <meta name="twitter:image" content="/og-image.png" />
+        <link rel="canonical" href="https://instagrowmedia.netlify.app/" />
         
         {/* Favicon */}
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
