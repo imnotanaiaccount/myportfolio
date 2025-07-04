@@ -14,6 +14,7 @@ export default function Contact() {
   });
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [submitStatus, setSubmitStatus] = React.useState(null);
+  const [selectedServices, setSelectedServices] = React.useState([]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -330,9 +331,9 @@ export default function Contact() {
                   </a>
                 </div>
                 <div>
-                  <p className="font-semibold text-facebook-dark dark:text-dark-text">LinkedIn</p>
-                  <a href="https://www.linkedin.com/company/instagrowmedia/" target="_blank" rel="noopener" className="text-blue-700 dark:text-blue-200 hover:text-blue-900 dark:hover:text-blue-300 font-medium transition-colors duration-150">
-                    @instagrowmedia
+                  <p className="font-semibold text-facebook-dark dark:text-dark-text">Text</p>
+                  <a href="sms:+16163031433" className="text-blue-700 dark:text-blue-200 hover:text-blue-900 dark:hover:text-blue-300 font-medium transition-colors duration-150">
+                    616-303-1433
                   </a>
                 </div>
               </div>
@@ -341,17 +342,36 @@ export default function Contact() {
             {/* Services Offered */}
             <div className="bg-white/95 dark:bg-dark-card/95 rounded-3xl p-8 shadow-2xl backdrop-blur-md border border-white/30 dark:border-dark-border">
               <h3 className="text-2xl font-bold text-facebook-dark dark:text-dark-text mb-6">Services Offered</h3>
-              <div className="space-y-4">
+              <div className="mb-4 text-facebook-dark dark:text-dark-text text-lg font-semibold">Pick as many as you want! <span className='text-blue-600 dark:text-cyan-400'>Tap to select your dream team of services:</span></div>
+              <div className="flex flex-wrap gap-3 mb-4">
                 {services.map((service, i) => (
-                  <div key={i} className="flex items-center gap-3">
-                    <div className="text-2xl">{service.icon}</div>
-                    <div>
-                      <div className="font-semibold text-facebook-dark dark:text-dark-text">{service.name}</div>
-                      <div className="text-sm text-facebook-dark dark:text-dark-muted">{service.description}</div>
-                    </div>
-                  </div>
+                  <button
+                    key={i}
+                    type="button"
+                    onClick={() => {
+                      setSelectedServices((prev) =>
+                        prev.includes(service.name)
+                          ? prev.filter((s) => s !== service.name)
+                          : [...prev, service.name]
+                      );
+                    }}
+                    className={`px-5 py-2 rounded-full font-semibold border transition-all duration-200 shadow-sm flex items-center gap-2 text-base
+                      ${selectedServices.includes(service.name)
+                        ? 'bg-blue-600 text-white border-blue-600 scale-105'
+                        : 'bg-white dark:bg-neutral-900 text-facebook-dark dark:text-dark-text border-facebook/20 dark:border-dark-border hover:bg-blue-50 dark:hover:bg-blue-900/30'}
+                    `}
+                  >
+                    <span className="text-xl">{service.icon}</span>
+                    {service.name}
+                  </button>
                 ))}
               </div>
+              {selectedServices.length > 0 && (
+                <div className="mt-2 text-green-600 dark:text-green-400 font-semibold flex items-center gap-2">
+                  <svg className="w-5 h-5 inline-block" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 00-1.414 0L9 11.586 6.707 9.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l7-7a1 1 0 000-1.414z"/></svg>
+                  Selected: {selectedServices.join(', ')}
+                </div>
+              )}
             </div>
 
             {/* Quick Stats */}
