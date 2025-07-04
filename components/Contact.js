@@ -240,40 +240,24 @@ export default function Contact() {
 
       <div className="relative z-10 max-w-full mx-auto px-4 md:px-8">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
+        <div
           className="text-center mb-20"
         >
-          <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+          <h2 
             className="text-5xl md:text-6xl font-black text-blue-600 dark:text-cyan-400 mb-6 font-nunito"
           >
             Get Your Free Growth Strategy Session
-          </motion.h2>
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.4 }}
+          </h2>
+          <p 
             className="text-xl md:text-2xl text-facebook-dark dark:text-dark-text max-w-3xl mx-auto leading-relaxed"
           >
             Share your vision and let our experts map out a custom plan to skyrocket your results. <span className='font-bold text-blue-600 dark:text-cyan-400'>No obligation. 100% confidential. Limited spots available.</span>
-          </motion.p>
-        </motion.div>
+          </p>
+        </div>
 
         <div className="flex flex-col items-center mb-20">
           {/* Contact Form - Centered and Full Width */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+          <div
             className="w-full max-w-3xl"
           >
             <div className="w-full bg-white/95 dark:bg-dark-card/95 rounded-3xl p-8 shadow-2xl backdrop-blur-md border border-white/30 dark:border-dark-border mx-auto">
@@ -532,11 +516,9 @@ export default function Contact() {
                     {submitStatus.message}
                   </div>
                 )}
-                <motion.button 
+                <button 
                   type="submit" 
                   disabled={isSubmitting || isValidating}
-                  whileHover={{ scale: isSubmitting ? 1 : 1.03, y: isSubmitting ? 0 : -2 }}
-                  whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
                   className={`w-full font-semibold text-base sm:text-lg py-4 rounded-xl shadow-md transition-all duration-200 ${
                     isSubmitting || isValidating
                       ? 'bg-gray-300 dark:bg-neutral-800 text-gray-500 cursor-not-allowed' 
@@ -544,17 +526,13 @@ export default function Contact() {
                   }`}
                 >
                   {isSubmitting ? 'Sending...' : isValidating ? 'Validating...' : 'Get My Free Strategy Session'}
-                </motion.button>
+                </button>
               </form>
             </div>
-          </motion.div>
+          </div>
 
           {/* Contact Information and Stats - Adjusted Row (removed Services Offered) */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.4 }}
+          <div
             className="w-full max-w-4xl flex flex-col md:flex-row gap-8 mt-12"
           >
             {/* Contact Details */}
@@ -593,17 +571,17 @@ export default function Contact() {
                   <div className="text-2xl font-black text-facebook dark:text-facebook">24/7</div>
                   <div className="text-sm text-facebook-dark dark:text-dark-text">Support Available</div>
                 </div>
+                <div className="text-center p-4 bg-facebook/10 dark:bg-facebook-darkest/30 rounded-xl">
+                  <div className="text-2xl font-black text-facebook dark:text-facebook">10+</div>
+                  <div className="text-sm text-facebook-dark dark:text-dark-text">Years of Experience</div>
+                </div>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
 
         {/* Value-Driven Sections: Give, Give, Give */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.3 }}
+        <div
           className="mb-20"
         >
           {/* 1. What You Get With Instagrow Media */}
@@ -752,19 +730,15 @@ export default function Contact() {
             <h3 className="text-3xl font-bold text-facebook-dark dark:text-dark-text mb-4">Still Have Questions?</h3>
             <p className="text-lg text-facebook-dark dark:text-dark-muted mb-6">Not ready to start? Book a free call or chat with our team—no pressure, just value.</p>
             <div className="flex flex-col md:flex-row justify-center gap-4">
-              <a href="#" className="px-8 py-4 rounded-xl bg-blue-600 text-white font-bold shadow-lg hover:bg-blue-700 transition-all text-lg">Book a Free Strategy Call</a>
+              <a href="#" className="px-8 py-4 rounded-xl bg-blue-600 text-white font-bold shadow-lg hover:bg-blue-700 hover:text-white transition-all text-lg">Book a Free Strategy Call</a>
               <a href="#" className="px-8 py-4 rounded-xl bg-white dark:bg-neutral-900 text-blue-700 dark:text-blue-200 border border-blue-600 dark:border-blue-400 font-bold shadow-lg hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-all text-lg">Live Chat</a>
               <a href="#faq" className="px-8 py-4 rounded-xl bg-white dark:bg-neutral-900 text-blue-700 dark:text-blue-200 border border-blue-600 dark:border-blue-400 font-bold shadow-lg hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-all text-lg">See FAQ</a>
             </div>
           </div>
-        </motion.div>
+        </div>
 
         {/* FAQ Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.6 }}
+        <div
           className="mb-20"
         >
           <div className="text-center mb-12">
@@ -774,39 +748,27 @@ export default function Contact() {
           
           <div className="grid md:grid-cols-2 gap-6">
             {faqs.map((faq, i) => (
-              <motion.div
+              <div
                 key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.8 + i * 0.1 }}
                 className="bg-white/95 dark:bg-dark-card/95 rounded-2xl p-6 shadow-xl backdrop-blur-md border border-white/30 dark:border-dark-border"
               >
                 <h4 className="text-lg font-semibold text-facebook dark:text-facebook mb-3">{faq.question}</h4>
                 <p className="text-facebook-dark dark:text-dark-muted leading-relaxed">{faq.answer}</p>
-              </motion.div>
+              </div>
             ))}
           </div>
-        </motion.div>
+        </div>
 
         {/* Testimonials */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.8 }}
+        <div
           className="text-center"
         >
           <h3 className="text-3xl font-bold text-facebook-dark dark:text-dark-text mb-12">What Our Clients Say</h3>
           
           <div className="grid md:grid-cols-2 gap-8">
             {testimonials.map((testimonial, i) => (
-              <motion.div
+              <div
                 key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 1 + i * 0.2 }}
                 className="bg-white/95 dark:bg-dark-card/95 rounded-2xl p-6 shadow-xl backdrop-blur-md border border-white/30 dark:border-dark-border"
               >
                 <div className="flex items-center mb-4">
@@ -821,10 +783,10 @@ export default function Contact() {
                   <div className="font-bold text-facebook dark:text-facebook">{testimonial.name}</div>
                   <div className="text-sm text-facebook-dark dark:text-dark-muted">{testimonial.role}</div>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
