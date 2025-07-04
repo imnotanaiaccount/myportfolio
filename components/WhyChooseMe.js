@@ -70,10 +70,10 @@ export default function WhyChooseMe() {
       <div className="max-w-6xl mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-extrabold text-facebook dark:text-facebook mb-6 font-nunito">
-            Why Choose Instagrow Media?
+            Why Choose Elite Excellence?
           </h2>
           <p className="text-xl text-facebook-light dark:text-dark-muted max-w-3xl mx-auto leading-relaxed">
-            More than just a developer - I'm your strategic partner in digital success
+            Beyond development - I'm your <span className="font-bold text-facebook dark:text-facebook">billion-dollar</span> strategic partner in <span className="font-bold text-facebook dark:text-facebook">digital dominance</span>
           </p>
         </div>
 
@@ -83,7 +83,7 @@ export default function WhyChooseMe() {
               key={reason.title}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: i * 0.1 }}
+              transition={{ duration: 0.4, delay: i * 0.05 }}
               viewport={{ once: true }}
               className="bg-white/95 dark:bg-dark-card/95 rounded-3xl p-8 shadow-2xl backdrop-blur-md border border-white/30 dark:border-dark-border hover:shadow-3xl hover:-translate-y-2 transition-all duration-300 group"
             >
@@ -106,26 +106,26 @@ export default function WhyChooseMe() {
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
           viewport={{ once: true }}
           className="mt-20 bg-white/95 dark:bg-dark-card/95 rounded-3xl p-12 shadow-2xl backdrop-blur-md border border-white/30 dark:border-dark-border"
         >
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div>
-              <div className="text-3xl font-bold text-facebook dark:text-facebook mb-2">50+</div>
-              <div className="text-facebook-light dark:text-dark-muted font-medium">Projects Delivered</div>
+              <div className="text-3xl font-bold text-facebook dark:text-facebook mb-2">500+</div>
+              <div className="text-facebook-light dark:text-dark-muted font-medium">Elite Projects</div>
             </div>
             <div>
-              <div className="text-3xl font-bold text-facebook dark:text-facebook mb-2">100%</div>
+              <div className="text-3xl font-bold text-facebook dark:text-facebook mb-2">99.9%</div>
               <div className="text-facebook-light dark:text-dark-muted font-medium">Client Satisfaction</div>
             </div>
             <div>
               <div className="text-3xl font-bold text-facebook dark:text-facebook mb-2">24/7</div>
-              <div className="text-facebook-light dark:text-dark-muted font-medium">Support Available</div>
+              <div className="text-facebook-light dark:text-dark-muted font-medium">Premium Support</div>
             </div>
             <div>
-              <div className="text-3xl font-bold text-facebook dark:text-facebook mb-2">5+</div>
-              <div className="text-facebook-light dark:text-dark-muted font-medium">Years Experience</div>
+              <div className="text-3xl font-bold text-facebook dark:text-facebook mb-2">15+</div>
+              <div className="text-facebook-light dark:text-dark-muted font-medium">Years Excellence</div>
             </div>
           </div>
         </motion.div>

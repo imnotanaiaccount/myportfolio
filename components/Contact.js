@@ -336,22 +336,22 @@ export default function Contact() {
               <div className="space-y-6">
                 <div>
                   <p className="font-semibold text-facebook-dark dark:text-dark-text">Email</p>
-                  <a href="mailto:your@email.com" className="text-facebook hover:text-facebook-lighter dark:hover:text-facebook-lighter transition-colors duration-200">
-                    your@email.com
+                  <a href="mailto:joshhawleyofficial@gmail.com" className="text-facebook hover:text-facebook-lighter dark:hover:text-facebook-lighter transition-colors duration-200">
+                    joshhawleyofficial@gmail.com
                   </a>
                 </div>
                 
                 <div>
                   <p className="font-semibold text-facebook-dark dark:text-dark-text">Phone</p>
-                  <a href="tel:+1234567890" className="text-facebook hover:text-facebook-lighter dark:hover:text-facebook-lighter transition-colors duration-200">
-                    +1 234 567 890
+                  <a href="tel:+16163031433" className="text-facebook hover:text-facebook-lighter dark:hover:text-facebook-lighter transition-colors duration-200">
+                    616-303-1433
                   </a>
                 </div>
                 
                 <div>
                   <p className="font-semibold text-facebook-dark dark:text-dark-text">LinkedIn</p>
-                  <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener" className="text-facebook hover:text-facebook-lighter dark:hover:text-facebook-lighter transition-colors duration-200">
-                    yourprofile
+                  <a href="https://www.linkedin.com/in/thejoshhawley/" target="_blank" rel="noopener" className="text-facebook hover:text-facebook-lighter dark:hover:text-facebook-lighter transition-colors duration-200">
+                    @thejoshhawley
                   </a>
                 </div>
               </div>

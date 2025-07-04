@@ -6,7 +6,7 @@ export default function Examples() {
     {
       title: "TechFlow E-commerce Platform",
       category: "E-commerce",
-      description: "A comprehensive e-commerce solution that increased conversion rates by 340% and reduced cart abandonment by 60%.",
+      description: "A <span className='font-bold text-facebook dark:text-facebook'>billion-dollar</span> e-commerce platform that achieved <span className='font-bold text-facebook dark:text-facebook'>340%</span> conversion increase and <span className='font-bold text-facebook dark:text-facebook'>60%</span> cart abandonment reduction.",
       image: "/api/placeholder/600/400",
       technologies: ["Next.js", "TypeScript", "Stripe", "PostgreSQL", "AWS", "Tailwind CSS"],
       metrics: {
@@ -30,7 +30,7 @@ export default function Examples() {
     {
       title: "HealthTech Patient Portal",
       category: "Healthcare",
-      description: "HIPAA-compliant patient portal serving 100+ healthcare providers with real-time appointment scheduling and medical record access.",
+      description: "<span className='font-bold text-facebook dark:text-facebook'>Elite</span> HIPAA-compliant patient portal serving <span className='font-bold text-facebook dark:text-facebook'>100+</span> healthcare providers with <span className='font-bold text-facebook dark:text-facebook'>premium</span> real-time scheduling.",
       image: "/api/placeholder/600/400",
       technologies: ["React", "Node.js", "MongoDB", "AWS", "Docker", "HIPAA"],
       metrics: {
@@ -54,7 +54,7 @@ export default function Examples() {
     {
       title: "GreenEats Food Delivery App",
       category: "Mobile App",
-      description: "Cross-platform food delivery app with 50K+ active users, featuring real-time tracking and sustainable packaging options.",
+      description: "<span className='font-bold text-facebook dark:text-facebook'>Sophisticated</span> cross-platform food delivery app with <span className='font-bold text-facebook dark:text-facebook'>50K+</span> active users, featuring <span className='font-bold text-facebook dark:text-facebook'>elite</span> real-time tracking.",
       image: "/api/placeholder/600/400",
       technologies: ["React Native", "Firebase", "Google Maps", "Stripe", "AWS", "Redux"],
       metrics: {
@@ -78,7 +78,7 @@ export default function Examples() {
     {
       title: "FinTech Investment Dashboard",
       category: "Finance",
-      description: "Real-time investment portfolio management platform with AI-powered insights and automated trading capabilities.",
+      description: "<span className='font-bold text-facebook dark:text-facebook'>Billion-dollar</span> investment portfolio management platform with <span className='font-bold text-facebook dark:text-facebook'>AI-powered</span> insights and <span className='font-bold text-facebook dark:text-facebook'>elite</span> automated trading.",
       image: "/api/placeholder/600/400",
       technologies: ["Vue.js", "Python", "PostgreSQL", "Redis", "AWS", "Machine Learning"],
       metrics: {
@@ -102,7 +102,7 @@ export default function Examples() {
     {
       title: "EduTech Learning Platform",
       category: "Education",
-      description: "Comprehensive online learning platform with 100K+ students, featuring interactive courses and AI-powered tutoring.",
+      description: "<span className='font-bold text-facebook dark:text-facebook'>Premium</span> online learning platform with <span className='font-bold text-facebook dark:text-facebook'>100K+</span> students, featuring <span className='font-bold text-facebook dark:text-facebook'>elite</span> interactive courses and <span className='font-bold text-facebook dark:text-facebook'>AI-powered</span> tutoring.",
       image: "/api/placeholder/600/400",
       technologies: ["Angular", "Django", "PostgreSQL", "Redis", "AWS", "TensorFlow"],
       metrics: {
@@ -126,7 +126,7 @@ export default function Examples() {
     {
       title: "RealEstate Property Management",
       category: "Real Estate",
-      description: "Comprehensive property management system handling 1,000+ properties with automated rent collection and maintenance tracking.",
+      description: "<span className='font-bold text-facebook dark:text-facebook'>Elite</span> property management system handling <span className='font-bold text-facebook dark:text-facebook'>1,000+</span> properties with <span className='font-bold text-facebook dark:text-facebook'>sophisticated</span> automated rent collection.",
       image: "/api/placeholder/600/400",
       technologies: ["React", "Node.js", "MongoDB", "Stripe", "AWS", "IoT"],
       metrics: {
@@ -170,26 +170,26 @@ export default function Examples() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.4, delay: 0.1 }}
             className="text-5xl md:text-6xl font-black text-facebook dark:text-facebook mb-6 font-nunito"
           >
-            Featured Projects
+            Elite Portfolio
           </motion.h2>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.4 }}
+            transition={{ duration: 0.4, delay: 0.2 }}
             className="text-xl md:text-2xl text-facebook-dark dark:text-dark-text max-w-4xl mx-auto leading-relaxed"
           >
-            Explore our portfolio of successful projects across various industries. Each project demonstrates our commitment to innovation, quality, and measurable results.
+            Discover our <span className="font-bold text-facebook dark:text-facebook">billion-dollar</span> portfolio of <span className="font-bold text-facebook dark:text-facebook">elite</span> projects. Each masterpiece demonstrates our <span className="font-bold text-facebook dark:text-facebook">unparalleled</span> commitment to innovation, excellence, and measurable success.
           </motion.p>
         </motion.div>
 

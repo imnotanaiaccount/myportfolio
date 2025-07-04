@@ -35,7 +35,7 @@ export default function FeaturedProject() {
         <motion.div
           initial={{ opacity: 0, y: 60 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
+          transition={{ duration: 0.6 }}
           viewport={{ once: true }}
           className="card p-16 perspective-3d"
         >
@@ -44,14 +44,14 @@ export default function FeaturedProject() {
               className="space-y-8"
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
               viewport={{ once: true }}
             >
               <div className="space-y-6">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.4 }}
+                  transition={{ duration: 0.4, delay: 0.2 }}
                   viewport={{ once: true }}
                 >
                   <h2 className="text-5xl md:text-6xl font-black text-facebook dark:text-facebook font-nunito mb-4">
@@ -63,7 +63,7 @@ export default function FeaturedProject() {
                 <motion.h3 
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.6 }}
+                  transition={{ duration: 0.4, delay: 0.3 }}
                   viewport={{ once: true }}
                   className="text-3xl font-bold text-facebook-dark dark:text-dark-text"
                 >
@@ -73,12 +73,12 @@ export default function FeaturedProject() {
                 <motion.p 
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.8 }}
+                  transition={{ duration: 0.4, delay: 0.4 }}
                   viewport={{ once: true }}
                   className="text-xl text-facebook-light dark:text-dark-muted leading-relaxed"
                 >
-                  A modern, conversion-focused real estate platform built for maximum trust and lead generation. 
-                  Designed and developed with seamless user experience, mobile-first performance, and business growth in mind.
+                  A <span className="font-bold text-facebook dark:text-facebook">billion-dollar</span> real estate platform engineered for maximum conversion and trust. 
+                  Featuring <span className="font-bold text-facebook dark:text-facebook">elite</span> user experience, <span className="font-bold text-facebook dark:text-facebook">premium</span> performance, and <span className="font-bold text-facebook dark:text-facebook">sophisticated</span> design.
                 </motion.p>
               </div>
 

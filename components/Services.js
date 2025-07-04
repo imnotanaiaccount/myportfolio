@@ -21,8 +21,8 @@ export default function Services() {
         "Analytics & Tracking Setup"
       ],
       pricing: {
-        basic: "$2,500",
-        pro: "$5,000",
+        basic: "$15,000",
+        pro: "$35,000",
         enterprise: "Custom"
       },
       technologies: ["React", "Next.js", "Node.js", "TypeScript", "PostgreSQL", "AWS"]
@@ -46,8 +46,8 @@ export default function Services() {
         "Performance Optimization"
       ],
       pricing: {
-        basic: "$8,000",
-        pro: "$15,000",
+        basic: "$25,000",
+        pro: "$50,000",
         enterprise: "Custom"
       },
       technologies: ["React Native", "Swift", "Kotlin", "Firebase", "AWS", "Flutter"]
@@ -71,8 +71,8 @@ export default function Services() {
         "Design-to-Development Handoff"
       ],
       pricing: {
-        basic: "$3,500",
-        pro: "$7,000",
+        basic: "$20,000",
+        pro: "$45,000",
         enterprise: "Custom"
       },
       technologies: ["Figma", "Sketch", "Adobe XD", "InVision", "Principle", "Framer"]
@@ -96,8 +96,8 @@ export default function Services() {
         "Brand Awareness Campaigns"
       ],
       pricing: {
-        basic: "$1,500/month",
-        pro: "$3,000/month",
+        basic: "$5,000/month",
+        pro: "$12,000/month",
         enterprise: "Custom"
       },
       technologies: ["Google Ads", "Facebook Ads", "Google Analytics", "Mailchimp", "HubSpot", "SEMrush"]
@@ -121,8 +121,8 @@ export default function Services() {
         "Disaster Recovery Planning"
       ],
       pricing: {
-        basic: "$2,000/month",
-        pro: "$5,000/month",
+        basic: "$8,000/month",
+        pro: "$20,000/month",
         enterprise: "Custom"
       },
       technologies: ["AWS", "Docker", "Kubernetes", "Terraform", "Jenkins", "Prometheus"]
@@ -146,8 +146,8 @@ export default function Services() {
         "Vendor Selection & Management"
       ],
       pricing: {
-        basic: "$200/hour",
-        pro: "$350/hour",
+        basic: "$500/hour",
+        pro: "$1,000/hour",
         enterprise: "Custom"
       },
       technologies: ["Architecture Design", "Project Management", "Agile Methodologies", "Risk Assessment"]
@@ -177,26 +177,26 @@ export default function Services() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.5 }}
           className="text-center mb-20"
         >
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.4, delay: 0.1 }}
             className="text-5xl md:text-6xl font-black text-facebook dark:text-facebook mb-6 font-nunito"
           >
-            Our Services
+            Elite Services
           </motion.h2>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.4 }}
+            transition={{ duration: 0.4, delay: 0.2 }}
             className="text-xl md:text-2xl text-facebook-dark dark:text-dark-text max-w-4xl mx-auto leading-relaxed"
           >
-            Comprehensive digital solutions tailored to your business needs. From concept to deployment, we handle every aspect of your digital transformation.
+            <span className="font-bold text-facebook dark:text-facebook">Billion-dollar</span> digital solutions crafted with <span className="font-bold text-facebook dark:text-facebook">precision</span> and <span className="font-bold text-facebook dark:text-facebook">excellence</span>. From concept to deployment, we deliver <span className="font-bold text-facebook dark:text-facebook">unparalleled</span> digital transformation.
           </motion.p>
         </motion.div>
 

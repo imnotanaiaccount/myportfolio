@@ -156,14 +156,14 @@ export default function Hero() {
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
+        transition={{ duration: 0.6 }}
         className="relative z-10 max-w-7xl mx-auto px-6 py-20"
       >
         {/* Enhanced Main Content with glassmorphism */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9, rotateY: -15 }}
           animate={{ opacity: 1, scale: 1, rotateY: 0 }}
-          transition={{ duration: 1, delay: 0.3 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
           className="bg-white/95 dark:bg-dark-card/95 rounded-3xl p-16 mb-12 shadow-2xl backdrop-blur-md border border-white/30 dark:border-dark-border relative overflow-hidden"
         >
           {/* Subtle animated background pattern */}
@@ -179,13 +179,13 @@ export default function Hero() {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
             className="relative z-10 mb-10"
           >
             <motion.h1 
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.7 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
               className="text-6xl md:text-8xl font-black tracking-tight text-facebook dark:text-facebook mb-8 font-nunito drop-shadow-lg relative"
             >
               <span className="relative">
@@ -210,7 +210,7 @@ export default function Hero() {
             <motion.h2 
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.9 }}
+              transition={{ duration: 0.5, delay: 0.5 }}
               className="text-3xl md:text-4xl font-bold text-facebook-light dark:text-facebook mb-6 font-nunito"
             >
               Founder, Instagrow Media
@@ -219,18 +219,18 @@ export default function Hero() {
             <motion.p 
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 1.1 }}
+              transition={{ duration: 0.5, delay: 0.6 }}
               className="text-2xl md:text-3xl text-facebook-dark dark:text-dark-text mb-12 font-nunito max-w-4xl mx-auto leading-relaxed"
             >
-              Elevating businesses with <span className="font-bold text-facebook dark:text-facebook">elegant</span>, <span className="font-bold text-facebook dark:text-facebook">modern</span> digital solutions.<br />
-              <span className="font-extrabold text-facebook dark:text-facebook">Minimal. Powerful. Unforgettable.</span>
+              Crafting <span className="font-bold text-facebook dark:text-facebook">billion-dollar</span> digital experiences with <span className="font-bold text-facebook dark:text-facebook">precision</span> and <span className="font-bold text-facebook dark:text-facebook">excellence</span>.<br />
+              <span className="font-extrabold text-facebook dark:text-facebook">Elite. Sophisticated. Unparalleled.</span>
             </motion.p>
 
             {/* Enhanced Achievement Stats with hover effects */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 1.3 }}
+              transition={{ duration: 0.5, delay: 0.7 }}
               className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12"
             >
               {achievements.map((achievement, i) => (
@@ -238,7 +238,7 @@ export default function Hero() {
                   key={achievement.label}
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.6, delay: 1.5 + i * 0.1 }}
+                  transition={{ duration: 0.4, delay: 0.8 + i * 0.05 }}
                   whileHover={{ 
                     scale: 1.05, 
                     y: -5,
@@ -263,7 +263,7 @@ export default function Hero() {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1.3 }}
+            transition={{ duration: 0.5, delay: 0.9 }}
             className="flex flex-col sm:flex-row gap-6 justify-center items-center relative z-10"
           >
             <motion.a 
@@ -300,13 +300,13 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.5 }}
+          transition={{ duration: 0.5, delay: 1.0 }}
           className="bg-white/95 dark:bg-dark-card/95 rounded-2xl p-8 shadow-2xl backdrop-blur-md border border-white/30 dark:border-dark-border mb-8"
         >
           <motion.h3 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 1.7 }}
+            transition={{ delay: 1.1 }}
             className="text-2xl font-bold text-facebook-dark dark:text-dark-text mb-8 text-center"
           >
             What Our Clients Say
@@ -318,7 +318,7 @@ export default function Hero() {
                 key={testimonial.name}
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 1.9 + i * 0.2 }}
+                transition={{ duration: 0.4, delay: 1.2 + i * 0.1 }}
                 whileHover={{ 
                   scale: 1.02, 
                   y: -5,
@@ -332,7 +332,7 @@ export default function Hero() {
                       key={i}
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
-                      transition={{ delay: 2.1 + i * 0.1 }}
+                      transition={{ delay: 1.3 + i * 0.05 }}
                       className="w-5 h-5 text-yellow-400 fill-current" 
                       viewBox="0 0 20 20"
                     >
@@ -354,7 +354,7 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 2.1 }}
+          transition={{ duration: 0.5, delay: 1.4 }}
           className="text-center"
         >
           <motion.div
