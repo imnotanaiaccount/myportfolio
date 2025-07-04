@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
     <footer className="w-full bg-white/95 dark:bg-dark-card/95 rounded-t-3xl shadow-2xl border-t border-facebook/10 dark:border-dark-border mt-16 backdrop-blur-md">
-      <div className="max-w-7xl mx-auto px-8 py-12">
+      <div className="max-w-full mx-auto px-4 md:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           <div className="space-y-4">
             <div className="text-facebook dark:text-facebook text-2xl font-extrabold tracking-tight font-nunito">

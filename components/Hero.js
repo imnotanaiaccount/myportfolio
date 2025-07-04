@@ -29,7 +29,7 @@ export default function Hero() {
   }));
 
   return (
-    <section className="min-h-screen bg-gradient-to-br from-facebook via-facebook-light to-facebook-lighter dark:from-facebook-darkest dark:via-facebook-dark dark:to-facebook relative overflow-hidden">
+    <section className="min-h-screen bg-gradient-to-br from-facebook via-facebook-light to-facebook-lighter dark:from-facebook-darkest dark:via-facebook dark:to-facebook relative overflow-hidden">
       {/* Enhanced Background Effects */}
       <div className="absolute inset-0">
         <div className="absolute top-20 left-20 w-96 h-96 bg-white/5 rounded-full blur-3xl animate-pulse" />
@@ -210,10 +210,10 @@ export default function Hero() {
             <motion.h2 
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.5 }}
-              className="text-3xl md:text-4xl font-bold text-blue-400 dark:text-cyan-300 mb-6 font-nunito"
+              transition={{ duration: 0.7, delay: 0.6 }}
+              className="text-2xl md:text-4xl font-semibold text-neutral-700 dark:text-neutral-200 mb-8 max-w-4xl mx-auto"
             >
-              Instagrow Media: Your Growth Engine for 2024
+              Instagrow Media: Your Growth Engine for 2025
             </motion.h2>
             
             <motion.p 

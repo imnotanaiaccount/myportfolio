@@ -67,7 +67,7 @@ const reasons = [
 export default function WhyChooseMe() {
   return (
     <section id="why" className="py-24 bg-facebook-bg dark:bg-dark-bg">
-      <div className="max-w-6xl mx-auto px-6">
+      <div className="max-w-full mx-auto px-4 md:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-extrabold text-facebook dark:text-facebook mb-6 font-nunito">
             Why Choose Instagrow Media?
