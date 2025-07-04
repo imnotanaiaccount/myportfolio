@@ -283,97 +283,7 @@ export default function Contact() {
                 <span className="text-green-600 font-semibold text-sm">100% Privacy & No Spam</span>
               </div>
               <form className="space-y-6" onSubmit={handleSubmit}>
-                {/* Service Selection - Integrated into the form */}
-                <div>
-                  <label className="block text-sm font-semibold text-facebook-dark dark:text-dark-text mb-2">
-                    Which services do you need? <span className="text-red-500">*</span>
-                  </label>
-                  <div className="flex flex-wrap gap-2 sm:gap-3 mb-2">
-                    {services.map((service, i) => (
-                      <button
-                        key={i}
-                        type="button"
-                        onClick={() => {
-                          setSelectedServices((prev) =>
-                            prev.includes(service.name)
-                              ? prev.filter((s) => s !== service.name)
-                              : [...prev, service.name]
-                          );
-                          setServiceError('');
-                          if (validationErrors.services) {
-                            setValidationErrors(prev => ({ ...prev, services: '' }));
-                          }
-                        }}
-                        className={`px-3 sm:px-5 py-2 rounded-full font-semibold border transition-all duration-200 shadow-sm flex items-center gap-1 sm:gap-2 text-sm sm:text-base
-                          ${selectedServices.includes(service.name)
-                            ? 'bg-blue-600 text-white border-blue-600 scale-105'
-                            : 'bg-white dark:bg-neutral-900 text-facebook-dark dark:text-dark-text border-facebook/20 dark:border-dark-border hover:bg-blue-50 dark:hover:bg-blue-900/30'}
-                        `}
-                        aria-pressed={selectedServices.includes(service.name)}
-                        aria-label={service.name}
-                      >
-                        <span className="text-lg sm:text-xl">{service.icon}</span>
-                        {service.name}
-                      </button>
-                    ))}
-                  </div>
-                  {(serviceError || validationErrors.services) && (
-                    <div className="text-red-600 text-sm font-semibold mb-2">{serviceError || validationErrors.services}</div>
-                  )}
-                  {selectedServices.length > 0 && (
-                    <div className="flex flex-wrap gap-1 sm:gap-2 mt-1">
-                      {selectedServices.map((service, i) => (
-                        <span key={i} className="px-2 sm:px-3 py-1 rounded-full bg-blue-600 text-white text-xs sm:text-sm font-semibold">
-                          {service}
-                        </span>
-                      ))}
-                    </div>
-                  )}
-                </div>
-                {/* Business Type Autofill/Autosuggest */}
-                <div className="relative z-20">
-                  <label className="block text-sm font-semibold text-facebook-dark dark:text-dark-text mb-2">
-                    Your Business Type
-                  </label>
-                  <input
-                    type="text"
-                    name="businessType"
-                    autoComplete="off"
-                    value={businessType}
-                    onChange={handleBusinessTypeChange}
-                    onFocus={handleBusinessTypeFocus}
-                    onBlur={handleBusinessTypeBlur}
-                    onKeyDown={handleBusinessTypeKeyDown}
-                    className="w-full px-4 py-3 bg-white/90 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-300 text-blue-900 dark:text-blue-100 placeholder-gray-400 dark:placeholder-gray-500 transition-all duration-200 text-base"
-                    placeholder="e.g. Real Estate, Ecommerce, Artist, etc."
-                    aria-autocomplete="list"
-                    aria-expanded={showSuggestions}
-                    aria-activedescendant={highlightedIndex >= 0 ? `bt-suggestion-${highlightedIndex}` : undefined}
-                  />
-                  {showSuggestions && (
-                    <ul className="absolute z-30 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl mt-1 w-full shadow-lg max-h-60 overflow-y-auto">
-                      {businessTypeSuggestions.length > 0 ? (
-                        businessTypeSuggestions.map((suggestion, i) => (
-                          <li
-                            key={i}
-                            id={`bt-suggestion-${i}`}
-                            className={`px-4 py-3 cursor-pointer select-none text-base ${highlightedIndex === i ? 'bg-blue-100 dark:bg-blue-900/30 font-bold' : ''}`}
-                            onMouseDown={() => {
-                              setBusinessType(suggestion);
-                              setShowSuggestions(false);
-                            }}
-                            onMouseEnter={() => setHighlightedIndex(i)}
-                            aria-selected={highlightedIndex === i}
-                          >
-                            {suggestion}
-                          </li>
-                        ))
-                      ) : (
-                        <li className="px-4 py-3 text-gray-500 select-none text-base">No matches found</li>
-                      )}
-                    </ul>
-                  )}
-                </div>
+                {/* All other fields first */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                   <div>
                     <label className="block text-sm font-semibold text-facebook-dark dark:text-dark-text mb-2">
@@ -520,6 +430,98 @@ export default function Contact() {
                   <div className="text-xs text-gray-500 mt-1 text-right">
                     {formData.description.length}/1000 characters
                   </div>
+                </div>
+                {/* Move Service Selection and Business Type to the bottom */}
+                {/* Service Selection - Integrated into the form */}
+                <div>
+                  <label className="block text-sm font-semibold text-facebook-dark dark:text-dark-text mb-2">
+                    Which services do you need? <span className="text-red-500">*</span>
+                  </label>
+                  <div className="flex flex-wrap gap-2 sm:gap-3 mb-2">
+                    {services.map((service, i) => (
+                      <button
+                        key={i}
+                        type="button"
+                        onClick={() => {
+                          setSelectedServices((prev) =>
+                            prev.includes(service.name)
+                              ? prev.filter((s) => s !== service.name)
+                              : [...prev, service.name]
+                          );
+                          setServiceError('');
+                          if (validationErrors.services) {
+                            setValidationErrors(prev => ({ ...prev, services: '' }));
+                          }
+                        }}
+                        className={`px-3 sm:px-5 py-2 rounded-full font-semibold border transition-all duration-200 shadow-sm flex items-center gap-1 sm:gap-2 text-sm sm:text-base
+                          ${selectedServices.includes(service.name)
+                            ? 'bg-blue-600 text-white border-blue-600 scale-105'
+                            : 'bg-white dark:bg-neutral-900 text-facebook-dark dark:text-dark-text border-facebook/20 dark:border-dark-border hover:bg-blue-50 dark:hover:bg-blue-900/30'}
+                        `}
+                        aria-pressed={selectedServices.includes(service.name)}
+                        aria-label={service.name}
+                      >
+                        <span className="text-lg sm:text-xl">{service.icon}</span>
+                        {service.name}
+                      </button>
+                    ))}
+                  </div>
+                  {(serviceError || validationErrors.services) && (
+                    <div className="text-red-600 text-sm font-semibold mb-2">{serviceError || validationErrors.services}</div>
+                  )}
+                  {selectedServices.length > 0 && (
+                    <div className="flex flex-wrap gap-1 sm:gap-2 mt-1">
+                      {selectedServices.map((service, i) => (
+                        <span key={i} className="px-2 sm:px-3 py-1 rounded-full bg-blue-600 text-white text-xs sm:text-sm font-semibold">
+                          {service}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+                {/* Business Type Autofill/Autosuggest */}
+                <div className="relative z-20">
+                  <label className="block text-sm font-semibold text-facebook-dark dark:text-dark-text mb-2">
+                    Your Business Type
+                  </label>
+                  <input
+                    type="text"
+                    name="businessType"
+                    autoComplete="off"
+                    value={businessType}
+                    onChange={handleBusinessTypeChange}
+                    onFocus={handleBusinessTypeFocus}
+                    onBlur={handleBusinessTypeBlur}
+                    onKeyDown={handleBusinessTypeKeyDown}
+                    className="w-full px-4 py-3 bg-white/90 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-300 text-blue-900 dark:text-blue-100 placeholder-gray-400 dark:placeholder-gray-500 transition-all duration-200 text-base"
+                    placeholder="e.g. Real Estate, Ecommerce, Artist, etc."
+                    aria-autocomplete="list"
+                    aria-expanded={showSuggestions}
+                    aria-activedescendant={highlightedIndex >= 0 ? `bt-suggestion-${highlightedIndex}` : undefined}
+                  />
+                  {showSuggestions && (
+                    <ul className="absolute z-30 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl mt-1 w-full shadow-lg max-h-60 overflow-y-auto">
+                      {businessTypeSuggestions.length > 0 ? (
+                        businessTypeSuggestions.map((suggestion, i) => (
+                          <li
+                            key={i}
+                            id={`bt-suggestion-${i}`}
+                            className={`px-4 py-3 cursor-pointer select-none text-base ${highlightedIndex === i ? 'bg-blue-100 dark:bg-blue-900/30 font-bold' : ''}`}
+                            onMouseDown={() => {
+                              setBusinessType(suggestion);
+                              setShowSuggestions(false);
+                            }}
+                            onMouseEnter={() => setHighlightedIndex(i)}
+                            aria-selected={highlightedIndex === i}
+                          >
+                            {suggestion}
+                          </li>
+                        ))
+                      ) : (
+                        <li className="px-4 py-3 text-gray-500 select-none text-base">No matches found</li>
+                      )}
+                    </ul>
+                  )}
                 </div>
                 {submitStatus && (
                   <div className={`p-4 rounded-xl text-center ${
