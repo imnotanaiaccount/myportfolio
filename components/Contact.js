@@ -279,6 +279,20 @@ export default function Contact() {
                     className="w-full px-4 py-3 bg-white/90 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-300 text-blue-900 dark:text-blue-100 placeholder-gray-400 dark:placeholder-gray-500 transition-all duration-200 resize-none"
                     placeholder="Tell us about your project goals, requirements, and timeline..."
                   ></textarea>
+                  {selectedServices.length > 0 && (
+                    <div className="mt-4">
+                      <label className="block text-sm font-semibold text-facebook-dark dark:text-dark-text mb-2">
+                        Selected Services
+                      </label>
+                      <div className="flex flex-wrap gap-2">
+                        {selectedServices.map((service, i) => (
+                          <span key={i} className="px-3 py-1 rounded-full bg-blue-600 text-white text-sm font-semibold">
+                            {service}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
                 {submitStatus && (
                   <div className={`p-4 rounded-xl text-center ${
@@ -312,12 +326,12 @@ export default function Contact() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="w-full max-w-3xl flex flex-col gap-8 mt-12"
+            className="w-full max-w-7xl flex flex-col md:flex-row gap-8 mt-12"
           >
             {/* Contact Details */}
-            <div className="bg-white/95 dark:bg-dark-card/95 rounded-3xl p-8 shadow-2xl backdrop-blur-md border border-white/30 dark:border-dark-border">
+            <div className="flex-1 min-w-0 bg-white/95 dark:bg-dark-card/95 rounded-3xl p-8 shadow-2xl backdrop-blur-md border border-white/30 dark:border-dark-border flex flex-col items-center justify-center">
               <h3 className="text-2xl font-bold text-facebook-dark dark:text-dark-text mb-6">Get In Touch</h3>
-              <div className="space-y-6">
+              <div className="space-y-6 w-full">
                 <div>
                   <p className="font-semibold text-facebook-dark dark:text-dark-text">Email</p>
                   <a href="mailto:hello@instagrowmedia.com" className="text-blue-700 dark:text-blue-200 hover:text-blue-900 dark:hover:text-blue-300 font-medium transition-colors duration-150">
@@ -340,10 +354,10 @@ export default function Contact() {
             </div>
 
             {/* Services Offered */}
-            <div className="bg-white/95 dark:bg-dark-card/95 rounded-3xl p-8 shadow-2xl backdrop-blur-md border border-white/30 dark:border-dark-border">
+            <div className="flex-1 min-w-0 bg-white/95 dark:bg-dark-card/95 rounded-3xl p-8 shadow-2xl backdrop-blur-md border border-white/30 dark:border-dark-border flex flex-col items-center justify-center">
               <h3 className="text-2xl font-bold text-facebook-dark dark:text-dark-text mb-6">Services Offered</h3>
-              <div className="mb-4 text-facebook-dark dark:text-dark-text text-lg font-semibold">Pick as many as you want! <span className='text-blue-600 dark:text-cyan-400'>Tap to select your dream team of services:</span></div>
-              <div className="flex flex-wrap gap-3 mb-4">
+              <div className="mb-4 text-facebook-dark dark:text-dark-text text-lg font-semibold text-center">Pick as many as you want! <span className='text-blue-600 dark:text-cyan-400'>Tap to select your dream team of services:</span></div>
+              <div className="flex flex-wrap gap-3 mb-4 justify-center">
                 {services.map((service, i) => (
                   <button
                     key={i}
@@ -367,7 +381,7 @@ export default function Contact() {
                 ))}
               </div>
               {selectedServices.length > 0 && (
-                <div className="mt-2 text-green-600 dark:text-green-400 font-semibold flex items-center gap-2">
+                <div className="mt-2 text-green-600 dark:text-green-400 font-semibold flex items-center gap-2 justify-center">
                   <svg className="w-5 h-5 inline-block" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 00-1.414 0L9 11.586 6.707 9.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l7-7a1 1 0 000-1.414z"/></svg>
                   Selected: {selectedServices.join(', ')}
                 </div>
@@ -375,9 +389,9 @@ export default function Contact() {
             </div>
 
             {/* Quick Stats */}
-            <div className="bg-white/95 dark:bg-dark-card/95 rounded-3xl p-8 shadow-2xl backdrop-blur-md border border-white/30 dark:border-dark-border">
+            <div className="flex-1 min-w-0 bg-white/95 dark:bg-dark-card/95 rounded-3xl p-8 shadow-2xl backdrop-blur-md border border-white/30 dark:border-dark-border flex flex-col items-center justify-center">
               <h3 className="text-2xl font-bold text-facebook-dark dark:text-dark-text mb-6">Why Choose Us</h3>
-              <div className="space-y-4">
+              <div className="space-y-4 w-full">
                 <div className="text-center p-4 bg-facebook/10 dark:bg-facebook-darkest/30 rounded-xl">
                   <div className="text-2xl font-black text-facebook dark:text-facebook">500+</div>
                   <div className="text-sm text-facebook-dark dark:text-dark-text">Projects Completed</div>
