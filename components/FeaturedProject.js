@@ -202,7 +202,6 @@ export default function FeaturedProject() {
                 className="absolute -top-6 -right-6 bg-white dark:bg-dark-card rounded-2xl p-6 shadow-2xl border border-facebook/10 dark:border-dark-border"
               >
                 <div className="text-center space-y-2">
-                  <div className="text-3xl font-black text-facebook dark:text-facebook">98%</div>
                   <div className="text-xs text-facebook-light dark:text-dark-muted font-semibold">Performance</div>
                   <div className="w-12 h-1 bg-gradient-to-r from-green-400 to-green-600 rounded-full mx-auto"></div>
                 </div>

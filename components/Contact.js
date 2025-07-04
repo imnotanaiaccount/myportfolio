@@ -365,10 +365,6 @@ export default function Contact() {
                   <div className="text-sm text-facebook-dark dark:text-dark-text">Projects Completed</div>
                 </div>
                 <div className="text-center p-4 bg-facebook/10 dark:bg-facebook-darkest/30 rounded-xl">
-                  <div className="text-2xl font-black text-facebook dark:text-facebook">98%</div>
-                  <div className="text-sm text-facebook-dark dark:text-dark-text">Client Satisfaction</div>
-                </div>
-                <div className="text-center p-4 bg-facebook/10 dark:bg-facebook-darkest/30 rounded-xl">
                   <div className="text-2xl font-black text-facebook dark:text-facebook">24/7</div>
                   <div className="text-sm text-facebook-dark dark:text-dark-text">Support Available</div>
                 </div>
