@@ -790,6 +790,16 @@ export default function Contact() {
             ))}
           </div>
         </div>
+
+        {/* Meet Your Expert (Personal Trust Section) */}
+        <div className="mb-20 max-w-3xl mx-auto flex flex-col md:flex-row items-center gap-8 bg-white/95 dark:bg-dark-card/95 rounded-3xl p-8 shadow-2xl border border-white/30 dark:border-dark-border">
+          <img src="/joshua-h.jpg" alt="Joshua H" className="w-40 h-40 rounded-full object-cover shadow-lg border-4 border-blue-600 dark:border-cyan-400" />
+          <div>
+            <h3 className="text-2xl font-bold text-facebook-dark dark:text-dark-text mb-2">Meet Your Expert</h3>
+            <p className="text-lg text-facebook-dark dark:text-dark-muted mb-2">Hi, I'm Joshua H. With 10+ years of experience building high-converting digital solutions, I personally oversee every project to ensure you get real results—no outsourcing, no surprises.</p>
+            <p className="text-base text-facebook-light dark:text-dark-muted">My mission: to help you grow with honesty, transparency, and world-class execution. Let's build something amazing together.</p>
+          </div>
+        </div>
       </div>
     </section>
   );

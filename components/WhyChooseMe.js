@@ -124,7 +124,7 @@ export default function WhyChooseMe() {
               <div className="text-facebook-light dark:text-dark-muted font-medium">Support Available</div>
             </div>
             <div>
-              <div className="text-3xl font-bold text-facebook dark:text-facebook mb-2">5+</div>
+              <div className="text-3xl font-bold text-facebook dark:text-facebook mb-2">10+</div>
               <div className="text-facebook-light dark:text-dark-muted font-medium">Years Experience</div>
             </div>
           </div>

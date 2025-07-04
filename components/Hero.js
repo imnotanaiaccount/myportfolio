@@ -10,7 +10,7 @@ export default function Hero() {
   const achievements = [
     { number: "50+", label: "Projects Delivered", icon: "🚀" },
     { number: "100%", label: "Client Satisfaction", icon: "⭐" },
-    { number: "5+", label: "Years Experience", icon: "🏆" },
+    { number: "10+", label: "Years Experience", icon: "🏆" },
     { number: "24/7", label: "Support Available", icon: "🛡️" }
   ];
 
