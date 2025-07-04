@@ -1,6 +1,7 @@
 {
-  "name": "instagrow-portfolio",
+  "name": "riva-portfolio",
   "version": "1.0.0",
+  "description": "Riva - Modern Digital Solutions for Business Growth",
   "private": true,
   "author": "Joshua Hawley",
   "scripts": {

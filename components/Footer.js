@@ -4,11 +4,11 @@ export default function Footer() {
       <div className="max-w-full mx-auto px-4 md:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           <div className="space-y-4">
-            <div className="text-facebook dark:text-facebook text-2xl font-extrabold tracking-tight font-nunito">
-              Instagrow Media
+            <div className="text-riva-blue text-2xl font-extrabold tracking-tight font-sans">
+              Riva
             </div>
-            <p className="text-facebook-light dark:text-dark-muted text-sm leading-relaxed">
-              Elevating businesses with elegant, modern digital solutions. Minimal. Powerful. Unforgettable.
+            <p className="text-riva-blue text-sm leading-relaxed">
+              Elevating businesses with modern, high-conversion digital solutions. Minimal. Powerful. Unforgettable.
             </p>
           </div>
           
@@ -41,8 +41,8 @@ export default function Footer() {
         </div>
         
         <div className="border-t border-facebook/10 dark:border-dark-border pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="text-facebook-light dark:text-dark-muted text-sm">
-            &copy; {new Date().getFullYear()} Joshua Hawley · Instagrow Media. All rights reserved.
+          <div className="text-riva-blue text-sm">
+            &copy; {new Date().getFullYear()} Joshua Hawley · Riva. All rights reserved.
           </div>
           <div className="flex gap-4">
             <a href="#" className="text-facebook-light dark:text-dark-muted hover:text-facebook dark:hover:text-facebook transition-colors duration-200">

@@ -164,11 +164,11 @@ export default function Services() {
   ];
 
   return (
-    <section id="services" className="py-24 bg-facebook-bg dark:bg-dark-bg relative overflow-hidden">
+    <section id="services" className="py-24 bg-riva-blue-light dark:bg-riva-dark-bg relative overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0">
-        <div className="absolute top-10 right-10 w-64 h-64 bg-facebook/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-10 left-10 w-48 h-48 bg-facebook-light/5 rounded-full blur-3xl" />
+        <div className="absolute top-10 right-10 w-64 h-64 bg-riva-blue/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-10 left-10 w-48 h-48 bg-riva-blue-light/10 rounded-full blur-3xl" />
       </div>
 
       <div className="relative z-10 max-w-full mx-auto px-4 md:px-8">
@@ -185,18 +185,18 @@ export default function Services() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.4, delay: 0.1 }}
-            className="text-5xl md:text-6xl font-black text-facebook dark:text-facebook mb-6 font-nunito"
+            className="text-4xl md:text-5xl font-extrabold text-riva-blue mb-6 font-sans"
           >
-            Our Services
+            What Riva Delivers
           </motion.h2>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.4, delay: 0.2 }}
-            className="text-xl md:text-2xl text-facebook-dark dark:text-dark-text max-w-4xl mx-auto leading-relaxed"
+            className="text-xl text-riva-blue max-w-3xl mx-auto leading-relaxed"
           >
-            Comprehensive digital solutions that drive <span className="font-bold text-facebook dark:text-facebook">measurable results</span> and <span className="font-bold text-facebook dark:text-facebook">business growth</span>. From concept to deployment, we handle every aspect of your digital transformation.
+            We don't just build websites - we build <span className="font-bold text-riva-blue">growth engines</span> that drive real business results
           </motion.p>
         </motion.div>
 
@@ -215,11 +215,11 @@ export default function Services() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.8 + i * 0.1 }}
-              className="text-center p-6 bg-white/80 dark:bg-dark-card/80 rounded-2xl backdrop-blur-sm border border-white/30 dark:border-dark-border shadow-xl"
+              className="text-center p-6 bg-white/80 dark:bg-riva-dark-card/80 rounded-2xl backdrop-blur-sm border border-riva-blue/30 dark:border-riva-dark-border shadow-xl"
             >
               <div className="text-3xl mb-3">{stat.icon}</div>
-              <div className="text-2xl font-black text-facebook dark:text-facebook">{stat.number}</div>
-              <div className="text-sm font-semibold text-facebook-dark dark:text-dark-text">{stat.label}</div>
+              <div className="text-2xl font-black text-riva-blue dark:text-riva-blue">{stat.number}</div>
+              <div className="text-sm font-semibold text-riva-blue dark:text-riva-dark-text">{stat.label}</div>
             </motion.div>
           ))}
         </motion.div>
@@ -233,27 +233,27 @@ export default function Services() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: i * 0.1 }}
-              className="bg-white/90 dark:bg-dark-card/90 rounded-3xl p-8 shadow-2xl backdrop-blur-md border border-white/30 dark:border-dark-border hover:shadow-3xl transition-all duration-300"
+              className="bg-white/90 dark:bg-riva-dark-card/90 rounded-3xl p-8 shadow-2xl backdrop-blur-md border border-riva-blue/30 dark:border-riva-dark-border hover:shadow-3xl transition-all duration-300"
             >
               {/* Service Header */}
               <div className="flex items-start gap-6 mb-8">
-                <div className="p-4 bg-facebook/10 dark:bg-facebook-darkest/30 rounded-2xl text-facebook dark:text-facebook">
+                <div className="p-4 bg-riva-blue/10 dark:bg-riva-darkest/30 rounded-2xl text-riva-blue dark:text-riva-blue">
                   {service.icon}
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-2xl font-bold text-facebook-dark dark:text-dark-text mb-3">{service.title}</h3>
-                  <p className="text-facebook-dark dark:text-dark-muted leading-relaxed">{service.description}</p>
+                  <h3 className="text-2xl font-bold text-riva-blue dark:text-riva-dark-text mb-3">{service.title}</h3>
+                  <p className="text-riva-blue dark:text-riva-dark-muted leading-relaxed">{service.description}</p>
                 </div>
               </div>
 
               {/* Features */}
               <div className="mb-8">
-                <h4 className="text-lg font-semibold text-facebook dark:text-facebook mb-4">What's Included:</h4>
+                <h4 className="text-lg font-semibold text-riva-blue dark:text-riva-blue mb-4">What's Included:</h4>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   {service.features.map((feature, j) => (
                     <div key={j} className="flex items-center gap-3">
-                      <div className="w-2 h-2 bg-facebook dark:bg-facebook rounded-full"></div>
-                      <span className="text-sm text-facebook-dark dark:text-dark-text">{feature}</span>
+                      <div className="w-2 h-2 bg-riva-blue dark:bg-riva-blue rounded-full"></div>
+                      <span className="text-sm text-riva-blue dark:text-riva-dark-text">{feature}</span>
                     </div>
                   ))}
                 </div>
@@ -261,10 +261,10 @@ export default function Services() {
 
               {/* Technologies */}
               <div className="mb-8">
-                <h4 className="text-lg font-semibold text-facebook dark:text-facebook mb-4">Technologies:</h4>
+                <h4 className="text-lg font-semibold text-riva-blue dark:text-riva-blue mb-4">Technologies:</h4>
                 <div className="flex flex-wrap gap-2">
                   {service.technologies.map((tech, j) => (
-                    <span key={j} className="px-3 py-1 bg-facebook/10 dark:bg-facebook-darkest/30 text-facebook dark:text-facebook rounded-full text-sm font-medium">
+                    <span key={j} className="px-3 py-1 bg-riva-blue/10 dark:bg-riva-darkest/30 text-riva-blue dark:text-riva-blue rounded-full text-sm font-medium">
                       {tech}
                     </span>
                   ))}
@@ -272,20 +272,20 @@ export default function Services() {
               </div>
 
               {/* Pricing */}
-              <div className="border-t border-facebook/20 dark:border-dark-border pt-6">
-                <h4 className="text-lg font-semibold text-facebook dark:text-facebook mb-4">Pricing:</h4>
+              <div className="border-t border-riva-blue/20 dark:border-riva-dark-border pt-6">
+                <h4 className="text-lg font-semibold text-riva-blue dark:text-riva-blue mb-4">Pricing:</h4>
                 <div className="grid grid-cols-3 gap-4">
-                  <div className="text-center p-3 bg-facebook/5 dark:bg-facebook-darkest/20 rounded-xl">
-                    <div className="text-sm font-medium text-facebook-dark dark:text-dark-text">Basic</div>
-                    <div className="text-lg font-bold text-facebook dark:text-facebook">{service.pricing.basic}</div>
+                  <div className="text-center p-3 bg-riva-blue/5 dark:bg-riva-darkest/20 rounded-xl">
+                    <div className="text-sm font-medium text-riva-blue dark:text-riva-dark-text">Basic</div>
+                    <div className="text-lg font-bold text-riva-blue dark:text-riva-blue">{service.pricing.basic}</div>
                   </div>
-                  <div className="text-center p-3 bg-facebook/10 dark:bg-facebook-darkest/40 rounded-xl">
-                    <div className="text-sm font-medium text-facebook-dark dark:text-dark-text">Pro</div>
-                    <div className="text-lg font-bold text-facebook dark:text-facebook">{service.pricing.pro}</div>
+                  <div className="text-center p-3 bg-riva-blue/10 dark:bg-riva-darkest/40 rounded-xl">
+                    <div className="text-sm font-medium text-riva-blue dark:text-riva-dark-text">Pro</div>
+                    <div className="text-lg font-bold text-riva-blue dark:text-riva-blue">{service.pricing.pro}</div>
                   </div>
-                  <div className="text-center p-3 bg-facebook/15 dark:bg-facebook-darkest/60 rounded-xl">
-                    <div className="text-sm font-medium text-facebook-dark dark:text-dark-text">Enterprise</div>
-                    <div className="text-lg font-bold text-facebook dark:text-facebook">{service.pricing.enterprise}</div>
+                  <div className="text-center p-3 bg-riva-blue/15 dark:bg-riva-darkest/60 rounded-xl">
+                    <div className="text-sm font-medium text-riva-blue dark:text-riva-dark-text">Enterprise</div>
+                    <div className="text-lg font-bold text-riva-blue dark:text-riva-blue">{service.pricing.enterprise}</div>
                   </div>
                 </div>
               </div>
@@ -306,7 +306,7 @@ export default function Services() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-3xl font-bold text-facebook-dark dark:text-dark-text mb-6"
+            className="text-3xl font-bold text-riva-blue dark:text-riva-dark-text mb-6"
           >
             Ready to Transform Your Business?
           </motion.h3>
@@ -315,7 +315,7 @@ export default function Services() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-lg text-facebook-dark dark:text-dark-muted mb-8 max-w-2xl mx-auto"
+            className="text-lg text-riva-blue dark:text-riva-dark-muted mb-8 max-w-2xl mx-auto"
           >
             Let's discuss your project requirements and create a custom solution that drives results.
           </motion.p>
@@ -323,7 +323,7 @@ export default function Services() {
             href="#contact"
             whileHover={{ scale: 1.03, y: -2 }}
             whileTap={{ scale: 0.98 }}
-            className="inline-block px-8 py-4 bg-white/90 dark:bg-neutral-900 text-blue-700 dark:text-blue-200 font-semibold text-lg rounded-xl shadow-md border border-neutral-200 dark:border-neutral-800 hover:shadow-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-300"
+            className="inline-block px-8 py-4 bg-white/90 dark:bg-riva-darkest text-riva-blue dark:text-riva-blue-light font-semibold text-lg rounded-xl shadow-md border border-riva-blue/30 dark:border-riva-dark-border hover:shadow-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-riva-blue/30"
           >
             Start Your Project
           </motion.a>

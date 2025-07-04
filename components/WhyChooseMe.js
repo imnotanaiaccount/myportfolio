@@ -70,11 +70,11 @@ export default function WhyChooseMe() {
     <section id="why" className="py-24 bg-facebook-bg dark:bg-dark-bg">
       <div className="max-w-full mx-auto px-4 md:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-extrabold text-facebook dark:text-facebook mb-6 font-nunito">
-            Why Choose Instagrow Media?
+          <h2 className="text-4xl md:text-5xl font-extrabold text-riva-blue mb-6 font-sans">
+            Why Choose Riva?
           </h2>
-          <p className="text-xl text-facebook-light dark:text-dark-muted max-w-3xl mx-auto leading-relaxed">
-            More than just a developer - I'm your strategic partner in <span className="font-bold text-facebook dark:text-facebook">digital success</span> and <span className="font-bold text-facebook dark:text-facebook">business growth</span>
+          <p className="text-xl text-riva-blue max-w-3xl mx-auto leading-relaxed">
+            More than just a developer - I'm your strategic partner in <span className="font-bold text-riva-blue">digital success</span> and <span className="font-bold text-riva-blue">business growth</span>
           </p>
         </div>
 

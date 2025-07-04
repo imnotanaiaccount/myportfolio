@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 
 export default function FeaturedProject() {
   return (
-    <section className="py-32 bg-facebook-bg dark:bg-dark-bg relative overflow-hidden">
+    <section className="py-32 bg-riva-bg dark:bg-dark-bg relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0">
         <motion.div
@@ -16,7 +16,7 @@ export default function FeaturedProject() {
             repeat: Infinity, 
             ease: "linear" 
           }}
-          className="absolute top-10 right-10 w-64 h-64 bg-facebook/5 rounded-full blur-3xl"
+          className="absolute top-10 right-10 w-64 h-64 bg-riva/5 rounded-full blur-3xl"
         />
         <motion.div
           animate={{ 
@@ -28,7 +28,7 @@ export default function FeaturedProject() {
             repeat: Infinity, 
             ease: "linear" 
           }}
-          className="absolute bottom-10 left-10 w-48 h-48 bg-facebook-light/5 rounded-full blur-3xl"
+          className="absolute bottom-10 left-10 w-48 h-48 bg-riva-light/5 rounded-full blur-3xl"
         />
       </div>
 
@@ -55,10 +55,13 @@ export default function FeaturedProject() {
                   transition={{ duration: 0.4, delay: 0.2 }}
                   viewport={{ once: true }}
                 >
-                  <h2 className="text-5xl md:text-6xl font-black text-facebook dark:text-facebook font-nunito mb-4">
+                  <h2 className="text-4xl md:text-5xl font-extrabold text-riva-blue mb-6 font-sans">
                     Featured Project
                   </h2>
-                  <div className="w-20 h-1 bg-gradient-to-r from-facebook to-facebook-light rounded-full"></div>
+                  <p className="text-xl text-riva-blue max-w-3xl mx-auto leading-relaxed">
+                    See how Riva transforms businesses with <span className="font-bold text-riva-blue">strategic design</span> and <span className="font-bold text-riva-blue">proven results</span>
+                  </p>
+                  <div className="w-20 h-1 bg-riva-blue rounded-full"></div>
                 </motion.div>
 
                 <motion.h3 
@@ -66,7 +69,7 @@ export default function FeaturedProject() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: 0.3 }}
                   viewport={{ once: true }}
-                  className="text-3xl font-bold text-facebook-dark dark:text-dark-text"
+                  className="text-3xl font-bold text-riva-dark dark:text-dark-text"
                 >
                   Jackson Investment Solutions
                 </motion.h3>
@@ -76,7 +79,7 @@ export default function FeaturedProject() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: 0.4 }}
                   viewport={{ once: true }}
-                  className="text-xl text-facebook-light dark:text-dark-muted leading-relaxed"
+                  className="text-xl text-riva-light dark:text-dark-muted leading-relaxed"
                 >
                   A modern, conversion-focused real estate platform built for maximum trust and lead generation. 
                   Designed and developed with seamless user experience, mobile-first performance, and business growth in mind.
@@ -99,7 +102,7 @@ export default function FeaturedProject() {
                       transition={{ duration: 0.4, delay: 1.2 + index * 0.1 }}
                       viewport={{ once: true }}
                       whileHover={{ scale: 1.05, y: -2 }}
-                      className="px-4 py-2 bg-facebook/10 dark:bg-facebook-darkest/60 text-facebook dark:text-white rounded-full text-sm font-semibold hover:bg-facebook-lighter/40 dark:hover:bg-facebook-dark hover:text-white transition-all duration-300"
+                      className="px-4 py-2 bg-riva/10 dark:bg-riva-darkest/60 text-riva dark:text-white rounded-full text-sm font-semibold hover:bg-riva-lighter/40 dark:hover:bg-riva-dark hover:text-white transition-all duration-300"
                     >
                       {tech}
                     </motion.span>
@@ -113,7 +116,7 @@ export default function FeaturedProject() {
                     rel="noopener"
                     whileHover={{ scale: 1.03, y: -2 }}
                     whileTap={{ scale: 0.98 }}
-                    className="inline-block px-7 py-3 bg-white/90 dark:bg-neutral-900 text-blue-700 dark:text-blue-200 font-semibold text-base rounded-xl shadow-md border border-neutral-200 dark:border-neutral-800 hover:shadow-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-300"
+                    className="inline-block px-7 py-3 bg-white/90 dark:bg-neutral-900 text-riva-700 dark:text-riva-200 font-semibold text-base rounded-xl shadow-md border border-neutral-200 dark:border-neutral-800 hover:shadow-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-riva-300"
                   >
                     View Project
                   </motion.a>
@@ -121,7 +124,7 @@ export default function FeaturedProject() {
                     href="#contact" 
                     whileHover={{ scale: 1.05, y: -5 }}
                     whileTap={{ scale: 0.95 }}
-                    className="px-8 py-4 rounded-xl bg-facebook/10 dark:bg-facebook-darkest/70 text-facebook dark:text-white font-semibold text-center hover:bg-facebook-lighter/50 dark:hover:bg-facebook-dark hover:text-white transition-all duration-300 border border-facebook/20"
+                    className="px-8 py-4 rounded-xl bg-riva/10 dark:bg-riva-darkest/70 text-riva dark:text-white font-semibold text-center hover:bg-riva-lighter/50 dark:hover:bg-riva-dark hover:text-white transition-all duration-300 border border-riva/20"
                   >
                     Similar Project
                   </motion.a>
@@ -130,23 +133,23 @@ export default function FeaturedProject() {
             </motion.div>
 
             <div className="relative">
-              <div className="rounded-3xl overflow-hidden shadow-2xl bg-white dark:bg-dark-card border border-facebook/10 dark:border-dark-border">
-                <div className="bg-gradient-to-r from-facebook/10 to-facebook-light/10 dark:from-facebook/20 dark:to-facebook-light/20 px-6 py-4 border-b border-facebook/10 dark:border-dark-border">
+              <div className="rounded-3xl overflow-hidden shadow-2xl bg-white dark:bg-dark-card border border-riva/10 dark:border-dark-border">
+                <div className="bg-gradient-to-r from-riva/10 to-riva-light/10 dark:from-riva/20 dark:to-riva-light/20 px-6 py-4 border-b border-riva/10 dark:border-dark-border">
                   <div className="flex items-center gap-3">
                     <div className="flex gap-2">
                       <div className="w-4 h-4 rounded-full bg-red-500"></div>
                       <div className="w-4 h-4 rounded-full bg-yellow-500"></div>
                       <div className="w-4 h-4 rounded-full bg-green-500"></div>
                     </div>
-                    <span className="text-sm text-facebook-light dark:text-dark-muted font-medium ml-4">
+                    <span className="text-sm text-riva-light dark:text-dark-muted font-medium ml-4">
                       jacksoninvestmentsolutions.com
                     </span>
                   </div>
                 </div>
-                <div className="aspect-video w-full rounded-3xl overflow-hidden border border-facebook/10 dark:border-dark-border bg-white dark:bg-dark-card relative flex flex-col items-center justify-center">
+                <div className="aspect-video w-full rounded-3xl overflow-hidden border border-riva/10 dark:border-dark-border bg-white dark:bg-dark-card relative flex flex-col items-center justify-center">
                   <img src="/jackson-preview.png" alt="Preview Screenshot" className="w-full h-full object-cover rounded-3xl" />
                   <div className="absolute bottom-6 left-0 right-0 flex flex-col items-center">
-                    <a href="https://jacksoninvestmentsolutions2.netlify.app/" target="_blank" rel="noopener" className="px-6 py-3 bg-blue-600 text-white rounded-xl font-bold shadow-lg hover:bg-blue-700 transition">Open Site</a>
+                    <a href="https://jacksoninvestmentsolutions2.netlify.app/" target="_blank" rel="noopener" className="px-6 py-3 bg-riva-600 text-white rounded-xl font-bold shadow-lg hover:bg-riva-700 transition">Open Site</a>
                   </div>
                 </div>
               </div>

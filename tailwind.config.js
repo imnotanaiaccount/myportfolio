@@ -8,23 +8,26 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter', 'ui-sans-serif', 'system-ui'],
+        sans: ['Sora', 'Inter', 'ui-sans-serif', 'system-ui'],
         nunito: ['Nunito', 'Inter', 'ui-sans-serif', 'system-ui'],
       },
       colors: {
-        facebook: {
-          DEFAULT: '#1877F2',
-          light: '#64b5f6',
-          lighter: '#90caf9',
-          dark: '#1565c0',
-          darker: '#0d47a1',
-          darkest: '#002171',
-          bg: '#f0f2f5',
+        riva: {
+          blue: '#3B82F6', // Electric Blue
+          violet: '#8B5CF6', // Violet
+          teal: '#06B6D4', // Teal
+          gray: '#F3F4F6', // Light Gray
+          dark: '#18181B', // Deep Black
+          white: '#FFFFFF',
+        },
+        background: {
+          DEFAULT: '#FFFFFF',
+          light: '#F9FAFB',
         },
         accent: {
-          DEFAULT: '#1877F2',
-          light: '#64b5f6',
-          dark: '#1565c0',
+          blue: '#3B82F6',
+          violet: '#8B5CF6',
+          teal: '#06B6D4',
         },
         dark: {
           bg: '#0a0a0a',
@@ -70,6 +73,10 @@ module.exports = {
       boxShadow: {
         '3xl': '0 35px 60px -12px rgba(0, 0, 0, 0.25)',
         'professional': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+        'riva-glow': '0 4px 32px 0 rgba(59, 130, 246, 0.25)',
+      },
+      backgroundImage: {
+        'riva-gradient': 'linear-gradient(90deg, #3B82F6 0%, #8B5CF6 100%)',
       },
     },
   },

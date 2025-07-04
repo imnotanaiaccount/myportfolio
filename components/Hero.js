@@ -29,11 +29,11 @@ export default function Hero() {
   }));
 
   return (
-    <section className="min-h-screen bg-gradient-to-br from-facebook via-facebook-light to-facebook-lighter dark:from-facebook-darkest dark:via-facebook dark:to-facebook relative overflow-hidden">
+    <section className="min-h-screen bg-gradient-to-br from-riva-lighter via-riva-light to-riva-lighter dark:from-riva-darkest dark:via-riva dark:to-riva relative overflow-hidden">
       {/* Enhanced Background Effects */}
       <div className="absolute inset-0">
         <div className="absolute top-20 left-20 w-96 h-96 bg-white/5 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-20 right-20 w-80 h-80 bg-facebook-lighter/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+        <div className="absolute bottom-20 right-20 w-80 h-80 bg-riva-lighter/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-white/3 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '2s' }} />
         
         {/* Animated gradient orbs */}
@@ -48,7 +48,7 @@ export default function Hero() {
             repeat: Infinity,
             ease: "easeInOut"
           }}
-          className="absolute top-1/4 right-1/4 w-32 h-32 bg-gradient-to-r from-facebook-lighter to-facebook-light rounded-full blur-xl"
+          className="absolute top-1/4 right-1/4 w-32 h-32 bg-gradient-to-r from-riva-lighter to-riva-light rounded-full blur-xl"
         />
         
         <motion.div
@@ -63,7 +63,7 @@ export default function Hero() {
             ease: "easeInOut",
             delay: 2
           }}
-          className="absolute bottom-1/4 left-1/4 w-24 h-24 bg-gradient-to-r from-facebook to-facebook-light rounded-full blur-lg"
+          className="absolute bottom-1/4 left-1/4 w-24 h-24 bg-gradient-to-r from-riva to-riva-light rounded-full blur-lg"
         />
       </div>
 
@@ -186,7 +186,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="text-6xl md:text-8xl font-black tracking-tight text-facebook dark:text-facebook mb-8 font-nunito drop-shadow-lg relative"
+              className="text-6xl md:text-8xl font-black tracking-tight text-riva dark:text-riva mb-8 font-nunito drop-shadow-lg relative"
             >
               <span className="relative">
                 Ready to Dominate Your Market?
@@ -211,16 +211,16 @@ export default function Hero() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.6 }}
-              className="text-2xl md:text-4xl font-semibold text-neutral-700 dark:text-neutral-200 mb-8 max-w-4xl mx-auto"
+              className="text-2xl md:text-4xl font-semibold text-riva-blue mb-8 max-w-4xl mx-auto"
             >
-              Instagrow Media: Your Growth Engine for 2025
+              Riva: Your Growth Engine for the Future
             </motion.h2>
             
             <motion.p 
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.6 }}
-              className="text-2xl md:text-3xl text-facebook-dark dark:text-dark-text mb-12 font-nunito max-w-3xl mx-auto leading-relaxed"
+              className="text-2xl md:text-3xl text-riva-dark dark:text-dark-text mb-12 font-nunito max-w-3xl mx-auto leading-relaxed"
             >
               We build <span className='font-bold text-blue-600 dark:text-cyan-400'>high-converting websites</span>, <span className='font-bold text-blue-600 dark:text-cyan-400'>automated funnels</span>, and <span className='font-bold text-blue-600 dark:text-cyan-400'>magnetic brands</span> for ambitious businesses. <span className='font-extrabold text-blue-600 dark:text-cyan-400'>Book your free strategy call now—slots fill fast!</span>
             </motion.p>
@@ -243,7 +243,7 @@ export default function Hero() {
                     y: -5,
                     boxShadow: "0 20px 40px rgba(24, 119, 242, 0.2)"
                   }}
-                  className="text-center p-4 bg-facebook/10 dark:bg-facebook-darkest/30 rounded-2xl backdrop-blur-sm border border-facebook/20 hover:border-facebook/40 transition-all duration-300 cursor-pointer"
+                  className="text-center p-4 bg-riva/10 dark:bg-riva-darkest/30 rounded-2xl backdrop-blur-sm border border-riva/20 hover:border-riva/40 transition-all duration-300 cursor-pointer"
                 >
                   <motion.div 
                     className="text-3xl mb-2"
@@ -252,8 +252,8 @@ export default function Hero() {
                   >
                     {achievement.icon}
                   </motion.div>
-                  <div className="text-2xl font-black text-facebook dark:text-facebook">{achievement.number}</div>
-                  <div className="text-sm font-semibold text-facebook-dark dark:text-dark-text">{achievement.label}</div>
+                  <div className="text-2xl font-black text-riva dark:text-riva">{achievement.number}</div>
+                  <div className="text-sm font-semibold text-riva-dark dark:text-dark-text">{achievement.label}</div>
                 </motion.div>
               ))}
             </motion.div>
@@ -281,7 +281,7 @@ export default function Hero() {
               href="#services" 
               whileHover={{ scale: 1.05, y: -5 }}
               whileTap={{ scale: 0.95 }}
-              className="px-10 py-5 rounded-2xl bg-white/80 dark:bg-facebook-darkest/80 text-blue-600 dark:text-cyan-300 font-bold text-lg border-2 border-blue-200 dark:border-cyan-700 hover:bg-blue-50 dark:hover:bg-cyan-900 hover:text-blue-700 dark:hover:text-cyan-200 transition-all duration-300 shadow-xl"
+              className="px-10 py-5 rounded-2xl bg-white/80 dark:bg-riva-darkest/80 text-blue-600 dark:text-cyan-300 font-bold text-lg border-2 border-blue-200 dark:border-cyan-700 hover:bg-blue-50 dark:hover:bg-cyan-900 hover:text-blue-700 dark:hover:text-cyan-200 transition-all duration-300 shadow-xl"
             >
               See How We Grow Brands
             </motion.a>
@@ -299,7 +299,7 @@ export default function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.1 }}
-            className="text-2xl font-bold text-facebook-dark dark:text-dark-text mb-8 text-center"
+            className="text-2xl font-bold text-riva-dark dark:text-dark-text mb-8 text-center"
           >
             What Our Clients Say
           </motion.h3>
@@ -316,7 +316,7 @@ export default function Hero() {
                   y: -5,
                   boxShadow: "0 10px 30px rgba(24, 119, 242, 0.15)"
                 }}
-                className="bg-facebook/5 dark:bg-facebook-darkest/20 p-6 rounded-2xl border border-facebook/10 hover:border-facebook/30 transition-all duration-300 cursor-pointer"
+                className="bg-riva/5 dark:bg-riva-darkest/20 p-6 rounded-2xl border border-riva/10 hover:border-riva/30 transition-all duration-300 cursor-pointer"
               >
                 <div className="flex items-center mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
@@ -332,10 +332,10 @@ export default function Hero() {
                     </motion.svg>
                   ))}
                 </div>
-                <p className="text-facebook-dark dark:text-dark-text mb-4 italic">"{testimonial.content}"</p>
+                <p className="text-riva-dark dark:text-dark-text mb-4 italic">"{testimonial.content}"</p>
                 <div>
-                  <div className="font-bold text-facebook dark:text-facebook">{testimonial.name}</div>
-                  <div className="text-sm text-facebook-dark dark:text-dark-muted">{testimonial.role}</div>
+                  <div className="font-bold text-riva dark:text-riva">{testimonial.name}</div>
+                  <div className="text-sm text-riva-dark dark:text-dark-muted">{testimonial.role}</div>
                 </div>
               </motion.div>
             ))}

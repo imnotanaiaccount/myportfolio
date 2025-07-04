@@ -9,18 +9,18 @@ export default function App({ Component, pageProps }) {
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         
         {/* Primary Meta Tags */}
-        <title>Instagrow Media | Premium Digital Agency for Growth</title>
-        <meta name="description" content="High-converting websites, automation, and branding for ambitious businesses. Book your free strategy call with Instagrow Media." />
-        <meta property="og:title" content="Instagrow Media | Premium Digital Agency for Growth" />
-        <meta property="og:description" content="High-converting websites, automation, and branding for ambitious businesses. Book your free strategy call with Instagrow Media." />
+        <title>Riva - Modern Digital Solutions for Business Growth</title>
+        <meta name="description" content="Riva delivers high-converting websites and digital solutions that drive real business results. Get more leads, increase sales, and grow your brand with our proven approach." />
+        <meta property="og:title" content="Riva - Modern Digital Solutions for Business Growth" />
+        <meta property="og:description" content="Riva delivers high-converting websites and digital solutions that drive real business results. Get more leads, increase sales, and grow your brand." />
         <meta property="og:image" content="/og-image.png" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://instagrowmedia.netlify.app/" />
+        <meta property="og:url" content="https://riva.com/" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Instagrow Media | Premium Digital Agency for Growth" />
-        <meta name="twitter:description" content="High-converting websites, automation, and branding for ambitious businesses. Book your free strategy call with Instagrow Media." />
+        <meta name="twitter:title" content="Riva - Modern Digital Solutions for Business Growth" />
+        <meta name="twitter:description" content="Riva delivers high-converting websites and digital solutions that drive real business results. Get more leads, increase sales, and grow your brand." />
         <meta name="twitter:image" content="/og-image.png" />
-        <link rel="canonical" href="https://instagrowmedia.netlify.app/" />
+        <link rel="canonical" href="https://riva.com/" />
         
         {/* Favicon */}
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -32,25 +32,25 @@ export default function App({ Component, pageProps }) {
         
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://instagrowmedia.netlify.app/" />
-        <meta property="og:title" content="Joshua Hawley | Instagrow Media - Premium Digital Solutions" />
-        <meta property="og:description" content="Elevating businesses with elegant, modern digital solutions. 500+ projects delivered with 98% client satisfaction." />
-        <meta property="og:image" content="https://instagrowmedia.netlify.app/og-image.svg" />
+        <meta property="og:url" content="https://riva.com/" />
+        <meta property="og:title" content="Riva - Modern Digital Solutions for Business Growth" />
+        <meta property="og:description" content="Riva delivers high-converting websites and digital solutions that drive real business results. Get more leads, increase sales, and grow your brand." />
+        <meta property="og:image" content="https://riva.com/og-image.png" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
-        <meta property="og:site_name" content="Instagrow Media" />
+        <meta property="og:site_name" content="Riva" />
         <meta property="og:locale" content="en_US" />
         
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://instagrowmedia.netlify.app/" />
-        <meta property="twitter:title" content="Joshua Hawley | Instagrow Media - Premium Digital Solutions" />
-        <meta property="twitter:description" content="Elevating businesses with elegant, modern digital solutions. 500+ projects delivered with 98% client satisfaction." />
-        <meta property="twitter:image" content="https://instagrowmedia.netlify.app/og-image.svg" />
+        <meta property="twitter:url" content="https://riva.com/" />
+        <meta property="twitter:title" content="Riva - Modern Digital Solutions for Business Growth" />
+        <meta property="twitter:description" content="Riva delivers high-converting websites and digital solutions that drive real business results. Get more leads, increase sales, and grow your brand." />
+        <meta property="twitter:image" content="https://riva.com/og-image.png" />
         
         {/* Additional Meta Tags */}
-        <meta name="theme-color" content="#1877f2" />
-        <meta name="msapplication-TileColor" content="#1877f2" />
+        <meta name="theme-color" content="#3B82F6" />
+        <meta name="msapplication-TileColor" content="#3B82F6" />
         <meta name="msapplication-config" content="/browserconfig.xml" />
         
         {/* Preconnect for performance */}
@@ -68,10 +68,10 @@ export default function App({ Component, pageProps }) {
               "jobTitle": "Founder",
               "worksFor": {
                 "@type": "Organization",
-                "name": "Instagrow Media"
+                "name": "Riva"
               },
-              "description": "Elevating businesses with elegant, modern digital solutions",
-              "url": "https://instagrowmedia.netlify.app",
+              "description": "Elevating businesses with modern, high-conversion digital solutions",
+              "url": "https://riva.com",
               "sameAs": [
                 "https://linkedin.com/in/joshua-hawley",
                 "https://github.com/joshua-hawley"

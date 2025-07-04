@@ -17,9 +17,9 @@ export default function Layout({ children }) {
     <div className="min-h-screen bg-facebook-bg dark:bg-dark-bg transition-colors duration-300">
       <header className="sticky top-0 z-30 w-full bg-white/95 dark:bg-dark-card/95 backdrop-blur-md border-b border-facebook/10 dark:border-dark-border shadow-lg">
         <nav className="max-w-full mx-auto flex items-center justify-between px-4 md:px-8 py-6">
-          <Link href="/" className="flex items-center gap-3 text-2xl font-extrabold tracking-tight text-facebook dark:text-facebook font-nunito">
-            <span className="rounded-xl bg-facebook/10 dark:bg-facebook/20 px-3 py-2 text-facebook font-extrabold shadow-md">IM</span>
-            <span className="hidden sm:inline font-bold text-facebook-light dark:text-facebook">Instagrow Media</span>
+          <Link href="/" className="flex items-center gap-3 text-2xl font-extrabold tracking-tight text-riva-blue font-sans">
+            <span className="rounded-xl bg-riva-blue/10 px-3 py-2 text-riva-blue font-extrabold shadow-md">R</span>
+            <span className="hidden sm:inline font-bold text-riva-blue">Riva</span>
           </Link>
           
           <div className="flex items-center gap-8">
