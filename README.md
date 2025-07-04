@@ -1,30 +1,41 @@
-# Joshua Hawley - Portfolio Website
+# 🚀 Professional Portfolio Website
 
-A modern, responsive portfolio website built with Next.js, Tailwind CSS, and Framer Motion. Features a comprehensive showcase of services, projects, and contact form integration with n8n automation.
+A modern, responsive portfolio website built with Next.js, Tailwind CSS, and Facebook-inspired design. Features contact form automation with Brevo and n8n integration.
 
-## 🚀 Features
+## ✨ Features
 
-- **Modern Design**: Facebook-inspired color palette with dark mode support
-- **Responsive Layout**: Optimized for all devices and screen sizes
-- **Interactive Animations**: Smooth scroll-triggered animations with Framer Motion
-- **Contact Form**: Integrated with Netlify Functions and n8n automation
+- **Modern Design**: Facebook-inspired color palette with professional animations
+- **Responsive**: Mobile-first design that works on all devices
+- **Dark Mode**: Automatic dark/light mode support
+- **Contact Form**: Automated with Brevo email service and n8n workflows
 - **SEO Optimized**: Built with Next.js for optimal performance
-- **Professional Content**: Comprehensive service offerings and case studies
+- **Deploy Ready**: Configured for Netlify deployment
 
 ## 🛠️ Tech Stack
 
-- **Frontend**: Next.js 14, React 18, Tailwind CSS
+- **Frontend**: Next.js 14, React, Tailwind CSS
+- **Styling**: Custom Facebook-inspired design system
 - **Animations**: Framer Motion
+- **Email Service**: Brevo (formerly Sendinblue)
+- **Automation**: n8n workflows
 - **Deployment**: Netlify
-- **Automation**: n8n
-- **Email**: SendGrid (optional)
+- **Hosting**: GitHub
 
-## 📦 Installation
+## 🚀 Quick Start
+
+### Prerequisites
+- Node.js 18+ 
+- npm or yarn
+- GitHub account
+- Netlify account
+- Brevo account (free tier available)
+
+### Local Development
 
 1. **Clone the repository**
    ```bash
-   git clone <your-repo-url>
-   cd portfolio
+   git clone https://github.com/imnotanaiaccount/myportfolio.git
+   cd myportfolio
    ```
 
 2. **Install dependencies**
@@ -38,263 +49,287 @@ A modern, responsive portfolio website built with Next.js, Tailwind CSS, and Fra
    ```
 
 4. **Open your browser**
-   Navigate to `http://localhost:3000`
+   Navigate to [http://localhost:3000](http://localhost:3000)
 
-## 🌐 Netlify Deployment
+## 📧 Email Setup with Brevo
 
-### Step 1: Prepare for Deployment
+### 1. Create Brevo Account
+1. Go to [brevo.com](https://brevo.com) and sign up
+2. Verify your email address
+3. Add your domain in Senders & IP → Senders
 
-1. **Install Netlify CLI** (optional but recommended)
-   ```bash
-   npm install -g netlify-cli
-   ```
+### 2. Get API Key
+1. Navigate to Settings → API Keys
+2. Create new API key with "Email Campaigns" permission
+3. Copy the API key
 
-2. **Build the project locally**
-   ```bash
-   npm run build
-   ```
+### 3. Create Email Template
+1. Go to Email → Templates
+2. Create new template with this HTML:
 
-### Step 2: Deploy to Netlify
-
-#### Option A: Deploy via Netlify UI (Recommended)
-
-1. **Push your code to GitHub**
-   ```bash
-   git add .
-   git commit -m "Initial portfolio setup"
-   git push origin main
-   ```
-
-2. **Connect to Netlify**
-   - Go to [netlify.com](https://netlify.com)
-   - Sign up/Login with your GitHub account
-   - Click "New site from Git"
-   - Select your repository
-   - Configure build settings:
-     - **Build command**: `npm run build`
-     - **Publish directory**: `.next`
-   - Click "Deploy site"
-
-#### Option B: Deploy via Netlify CLI
-
-1. **Login to Netlify**
-   ```bash
-   netlify login
-   ```
-
-2. **Initialize and deploy**
-   ```bash
-   netlify init
-   netlify deploy --prod
-   ```
-
-### Step 3: Configure Environment Variables
-
-In your Netlify dashboard, go to **Site settings > Environment variables** and add:
-
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>New Contact Form Submission</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+        .header { background: #1877f2; color: white; padding: 20px; text-align: center; }
+        .content { padding: 20px; background: #f9f9f9; }
+        .field { margin-bottom: 15px; }
+        .label { font-weight: bold; color: #1877f2; }
+        .value { background: white; padding: 10px; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎉 New Contact Form Submission</h1>
+        </div>
+        <div class="content">
+            <div class="field">
+                <div class="label">👤 Name:</div>
+                <div class="value">{{ params.firstName }} {{ params.lastName }}</div>
+            </div>
+            <div class="field">
+                <div class="label">📧 Email:</div>
+                <div class="value">{{ params.email }}</div>
+            </div>
+            <div class="field">
+                <div class="label">📞 Phone:</div>
+                <div class="value">{{ params.phone }}</div>
+            </div>
+            <div class="field">
+                <div class="label">🛠️ Service:</div>
+                <div class="value">{{ params.projectType }}</div>
+            </div>
+            <div class="field">
+                <div class="label">💬 Message:</div>
+                <div class="value">{{ params.message }}</div>
+            </div>
+            <div class="field">
+                <div class="label">⏰ Submitted:</div>
+                <div class="value">{{ params.timestamp }}</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
 ```
-N8N_WEBHOOK_URL=https://your-n8n-instance.com/webhook/portfolio-contact
-SENDGRID_API_KEY=your_sendgrid_api_key (optional)
-NOTIFICATION_EMAIL=your@email.com (optional)
-```
 
-## 🔧 n8n Setup
+3. Save and note the template ID
 
-### Step 1: Install n8n
+## ⚙️ n8n Workflow Setup
 
-#### Option A: Docker (Recommended)
+### 1. Install n8n
 ```bash
-docker run -it --rm \
-  --name n8n \
-  -p 5678:5678 \
-  -v ~/.n8n:/home/node/.n8n \
-  n8nio/n8n
-```
-
-#### Option B: npm
-```bash
-npm install n8n -g
+npm install -g n8n
 n8n start
 ```
 
-### Step 2: Create Contact Form Workflow
+### 2. Create Workflow
+1. Go to `http://localhost:5678`
+2. Create new workflow: "Portfolio Contact Form"
+3. Add nodes in this order:
 
-1. **Access n8n**
-   - Open `http://localhost:5678` in your browser
-   - Create an account or login
-
-2. **Create New Workflow**
-   - Click "New Workflow"
-   - Name it "Portfolio Contact Form"
-
-3. **Add Webhook Trigger**
-   - Add "Webhook" node
-   - Set HTTP method to "POST"
-   - Copy the webhook URL (e.g., `https://your-n8n-instance.com/webhook/portfolio-contact`)
-
-4. **Add Email Node** (Optional)
-   - Add "SendGrid" or "Gmail" node
-   - Configure your email settings
-   - Connect to webhook node
-
-5. **Add CRM Integration** (Optional)
-   - Add nodes for your preferred CRM (HubSpot, Salesforce, etc.)
-   - Configure lead creation
-
-6. **Add Slack/Discord Notification** (Optional)
-   - Add "Slack" or "Discord" node
-   - Configure notification settings
-
-### Step 3: Example Workflow
-
-Here's a basic workflow structure:
-
-```
-Webhook → Email Notification → CRM Lead Creation → Slack Alert
-```
-
-**Webhook Configuration:**
+**Step 1: Webhook Trigger**
+- Add "Webhook" node
 - Method: POST
-- Path: `/portfolio-contact`
-- Authentication: None (or add if needed)
+- Copy webhook URL
 
-**Email Node Configuration:**
-- Service: SendGrid
-- To: Your email
-- Subject: `New Portfolio Contact: {{$json.contact.firstName}} {{$json.contact.lastName}}`
-- Body: HTML with contact details
-
-## 📧 Email Setup (Optional)
-
-### SendGrid Configuration
-
-1. **Create SendGrid Account**
-   - Sign up at [sendgrid.com](https://sendgrid.com)
-   - Verify your domain or use single sender verification
-
-2. **Get API Key**
-   - Go to Settings > API Keys
-   - Create a new API key with "Mail Send" permissions
-
-3. **Add to Netlify Environment Variables**
-   ```
-   SENDGRID_API_KEY=your_api_key_here
-   NOTIFICATION_EMAIL=your@email.com
-   ```
-
-## 🔒 Security Considerations
-
-1. **Rate Limiting**: Consider adding rate limiting to your contact form
-2. **Spam Protection**: Implement reCAPTCHA or similar protection
-3. **Input Validation**: The Netlify function includes basic validation
-4. **HTTPS**: Netlify provides SSL certificates automatically
-
-## 📱 Customization
-
-### Update Content
-
-1. **Personal Information**: Update contact details in `components/Contact.js`
-2. **Services**: Modify services in `components/Services.js`
-3. **Projects**: Update portfolio projects in `components/Examples.js`
-4. **Styling**: Customize colors in `tailwind.config.js`
-
-### Add New Features
-
-1. **Blog Section**: Add a blog using MDX
-2. **Resume Download**: Add downloadable resume
-3. **Social Links**: Add more social media links
-4. **Analytics**: Add Google Analytics or Plausible
-
-## 🚀 Performance Optimization
-
-1. **Image Optimization**: Use Next.js Image component
-2. **Code Splitting**: Automatic with Next.js
-3. **Caching**: Netlify provides CDN caching
-4. **Compression**: Automatic with Netlify
-
-## 📊 Analytics Setup
-
-### Google Analytics
-
-1. **Create GA4 Property**
-2. **Add tracking code to `pages/_app.js`**:
-
-```javascript
-import Script from 'next/script'
-
-export default function App({ Component, pageProps }) {
-  return (
-    <>
-      <Script
-        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
-        strategy="afterInteractive"
-      />
-      <Script id="google-analytics" strategy="afterInteractive">
-        {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}');
-        `}
-      </Script>
-      <Component {...pageProps} />
-    </>
-  )
+**Step 2: Data Processing**
+- Add "Set" node
+- Map fields:
+```json
+{
+  "firstName": "{{ $json.firstName }}",
+  "lastName": "{{ $json.lastName }}",
+  "email": "{{ $json.email }}",
+  "phone": "{{ $json.phone }}",
+  "projectType": "{{ $json.projectType }}",
+  "message": "{{ $json.description }}",
+  "timestamp": "{{ new Date().toISOString() }}"
 }
 ```
 
-3. **Add environment variable**:
-   ```
-   NEXT_PUBLIC_GA_ID=your_ga_id_here
-   ```
+**Step 3: Brevo Email**
+- Add "Brevo" node
+- Configure with your API key
+- Use your template ID
+- Map all parameters
 
-## 🐛 Troubleshooting
+**Step 4: Google Sheets (Optional)**
+- Add "Google Sheets" node
+- Create spreadsheet to log contacts
+
+**Step 5: Slack/Discord (Optional)**
+- Add notification node for instant alerts
+
+### 3. Activate Workflow
+- Save and activate the workflow
+- Test with sample data
+
+## 🌐 Netlify Deployment
+
+### 1. Connect to GitHub
+1. Go to [netlify.com](https://netlify.com)
+2. Click "Add new site" → "Import an existing project"
+3. Choose GitHub and select your repository
+
+### 2. Configure Build Settings
+- **Build command**: `npm run build`
+- **Publish directory**: `.next`
+- **Node version**: `18`
+
+### 3. Set Environment Variables
+Go to Site settings → Environment variables and add:
+
+```
+BREVO_API_KEY=your_brevo_api_key
+BREVO_TEMPLATE_ID=your_template_id
+BREVO_SENDER_EMAIL=noreply@yourdomain.com
+NOTIFICATION_EMAIL=your-email@example.com
+N8N_WEBHOOK_URL=your_n8n_webhook_url
+```
+
+### 4. Deploy
+Click "Deploy site" and wait for build to complete.
+
+## 🔧 Configuration
+
+### Environment Variables
+
+| Variable | Description | Required |
+|----------|-------------|----------|
+| `BREVO_API_KEY` | Your Brevo API key | Yes |
+| `BREVO_TEMPLATE_ID` | Email template ID | Yes |
+| `BREVO_SENDER_EMAIL` | Sender email address | Yes |
+| `NOTIFICATION_EMAIL` | Where to send notifications | Yes |
+| `N8N_WEBHOOK_URL` | n8n webhook URL | Optional |
+
+### Customization
+
+#### Colors
+Edit `tailwind.config.js` to customize the Facebook-inspired color palette:
+
+```javascript
+colors: {
+  facebook: '#1877f2',
+  'facebook-light': '#42a5f5',
+  'facebook-dark': '#0d47a1',
+  // ... more colors
+}
+```
+
+#### Content
+Update the following files to customize your content:
+- `components/Hero.js` - Main hero section
+- `components/Services.js` - Your services
+- `components/Examples.js` - Project examples
+- `components/Contact.js` - Contact form fields
+
+## 📊 Analytics & Monitoring
+
+### Google Analytics
+1. Create Google Analytics 4 property
+2. Add tracking code to `pages/_app.js`
+3. Set up goals for contact form submissions
+
+### Netlify Analytics
+- Enable in site settings
+- Monitor form submissions and page views
+
+### n8n Monitoring
+- Set up webhook monitoring
+- Create alerts for failed executions
+- Monitor workflow performance
+
+## 🛡️ Security & Spam Protection
+
+### Rate Limiting
+The contact form includes basic rate limiting and validation.
+
+### Email Validation
+- Server-side email format validation
+- Required field validation
+- CORS protection
+
+### Additional Protection (Optional)
+- Add reCAPTCHA to contact form
+- Implement IP-based rate limiting
+- Set up email blacklist checking
+
+## 🚨 Troubleshooting
 
 ### Common Issues
 
-1. **Build Fails**
-   - Check Node.js version (use 18+)
-   - Clear `.next` folder and rebuild
-   - Check for missing dependencies
+**Build Failures**
+- Check Node.js version (requires 18+)
+- Verify all dependencies are installed
+- Check Netlify build logs
 
-2. **Contact Form Not Working**
-   - Verify Netlify function is deployed
-   - Check environment variables
-   - Test webhook URL in n8n
+**Email Not Sending**
+- Verify Brevo API key is correct
+- Check template ID exists
+- Ensure sender email is verified
 
-3. **Styling Issues**
-   - Clear browser cache
-   - Check Tailwind CSS compilation
-   - Verify dark mode toggle
+**n8n Webhook Issues**
+- Verify webhook URL is accessible
+- Check n8n workflow is active
+- Test webhook with sample data
 
-### Debug Commands
+**Contact Form Not Working**
+- Check Netlify function logs
+- Verify environment variables
+- Test form submission locally
 
-```bash
-# Clear Next.js cache
-rm -rf .next
+### Debug Mode
+Set `NODE_ENV=development` to see detailed error messages.
 
-# Reinstall dependencies
-rm -rf node_modules package-lock.json
-npm install
+## 📈 Performance Optimization
 
-# Test build locally
-npm run build
+### Build Optimization
+- Images are optimized with Next.js Image component
+- CSS is purged with Tailwind
+- JavaScript is minified and bundled
 
-# Check Netlify function locally
-netlify dev
-```
+### Loading Performance
+- Lazy loading for components
+- Optimized fonts with `next/font`
+- Efficient animations with Framer Motion
 
-## 📞 Support
+## 🤝 Contributing
 
-For issues or questions:
-- Check the troubleshooting section above
-- Review Netlify and n8n documentation
-- Open an issue in the repository
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
 
 ## 📄 License
 
-This project is open source and available under the [MIT License](LICENSE).
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🆘 Support
+
+If you need help:
+1. Check the troubleshooting section
+2. Review Netlify function logs
+3. Test n8n workflow execution
+4. Verify all environment variables
+
+## 🎉 What's Next?
+
+After deployment, consider:
+- Setting up a custom domain
+- Adding Google Analytics
+- Creating email marketing campaigns
+- Setting up CRM integration
+- Adding blog functionality
+- Implementing A/B testing
 
 ---
 
-**Built with ❤️ by Joshua Hawley** 
+**Built with ❤️ using Next.js, Tailwind CSS, and modern web technologies.** 

@@ -1,124 +1,145 @@
-const fetch = require('node-fetch');
-
 exports.handler = async (event, context) => {
+  // Enable CORS
+  const headers = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS'
+  };
+
+  // Handle preflight requests
+  if (event.httpMethod === 'OPTIONS') {
+    return {
+      statusCode: 200,
+      headers,
+      body: ''
+    };
+  }
+
   // Only allow POST requests
   if (event.httpMethod !== 'POST') {
     return {
       statusCode: 405,
-      body: JSON.stringify({ error: 'Method not allowed' })
+      headers,
+      body: JSON.stringify({ message: 'Method not allowed' })
     };
   }
 
   try {
-    // Parse the form data
+    // Parse the request body
     const formData = JSON.parse(event.body);
-    
+
     // Validate required fields
-    const requiredFields = ['firstName', 'lastName', 'email', 'projectType', 'budget', 'description'];
-    const missingFields = requiredFields.filter(field => !formData[field]);
-    
-    if (missingFields.length > 0) {
+    const requiredFields = ['firstName', 'lastName', 'email'];
+    for (const field of requiredFields) {
+      if (!formData[field] || !formData[field].trim()) {
+        return {
+          statusCode: 400,
+          headers,
+          body: JSON.stringify({ 
+            message: `Missing required field: ${field}` 
+          })
+        };
+      }
+    }
+
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
       return {
         statusCode: 400,
+        headers,
         body: JSON.stringify({ 
-          error: 'Missing required fields', 
-          missingFields 
+          message: 'Invalid email format' 
         })
       };
     }
 
     // Prepare data for n8n webhook
     const webhookData = {
+      firstName: formData.firstName.trim(),
+      lastName: formData.lastName.trim(),
+      email: formData.email.trim(),
+      phone: formData.phone || '',
+      company: formData.company || '',
+      projectType: formData.projectType || '',
+      budget: formData.budget || '',
+      description: formData.description || '',
       timestamp: new Date().toISOString(),
-      source: 'portfolio-contact-form',
-      contact: {
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        email: formData.email,
-        phone: formData.phone || '',
-        company: formData.company || '',
-        projectType: formData.projectType,
-        budget: formData.budget,
-        description: formData.description
-      },
-      metadata: {
-        userAgent: event.headers['user-agent'],
-        ip: event.headers['client-ip'] || event.headers['x-forwarded-for'],
-        referer: event.headers.referer
-      }
+      source: 'Portfolio Contact Form'
     };
 
-    // Send to n8n webhook (you'll need to replace this URL with your actual n8n webhook URL)
-    const n8nWebhookUrl = process.env.N8N_WEBHOOK_URL;
-    
-    if (n8nWebhookUrl) {
+    // Send to n8n webhook if configured
+    let n8nResponse = null;
+    if (process.env.N8N_WEBHOOK_URL) {
       try {
-        const n8nResponse = await fetch(n8nWebhookUrl, {
+        n8nResponse = await fetch(process.env.N8N_WEBHOOK_URL, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(webhookData)
         });
-
-        if (!n8nResponse.ok) {
-          console.error('n8n webhook failed:', n8nResponse.status, n8nResponse.statusText);
-        }
-      } catch (n8nError) {
-        console.error('Error sending to n8n:', n8nError);
-        // Don't fail the request if n8n is down
+      } catch (error) {
+        console.error('n8n webhook error:', error);
+        // Don't fail the entire request if n8n is down
       }
     }
 
-    // Send email notification (optional - you can use a service like SendGrid)
-    if (process.env.SENDGRID_API_KEY && process.env.NOTIFICATION_EMAIL) {
+    // Send email via Brevo if configured
+    let brevoResponse = null;
+    if (process.env.BREVO_API_KEY) {
       try {
-        const emailData = {
-          personalizations: [{
-            to: [{ email: process.env.NOTIFICATION_EMAIL }],
-            subject: `New Portfolio Contact: ${formData.firstName} ${formData.lastName}`
+        const brevoEmailData = {
+          sender: {
+            name: 'Portfolio Contact Form',
+            email: process.env.BREVO_SENDER_EMAIL || 'noreply@yourdomain.com'
+          },
+          to: [{
+            email: process.env.NOTIFICATION_EMAIL || 'your-email@example.com',
+            name: 'Portfolio Contact'
           }],
-          from: { email: 'noreply@yourdomain.com' },
-          content: [{
-            type: 'text/html',
-            value: `
-              <h2>New Contact Form Submission</h2>
-              <p><strong>Name:</strong> ${formData.firstName} ${formData.lastName}</p>
-              <p><strong>Email:</strong> ${formData.email}</p>
-              <p><strong>Phone:</strong> ${formData.phone || 'Not provided'}</p>
-              <p><strong>Company:</strong> ${formData.company || 'Not provided'}</p>
-              <p><strong>Project Type:</strong> ${formData.projectType}</p>
-              <p><strong>Budget:</strong> ${formData.budget}</p>
-              <p><strong>Description:</strong></p>
-              <p>${formData.description}</p>
-            `
-          }]
+          templateId: parseInt(process.env.BREVO_TEMPLATE_ID || '1'),
+          params: {
+            firstName: webhookData.firstName,
+            lastName: webhookData.lastName,
+            email: webhookData.email,
+            phone: webhookData.phone,
+            company: webhookData.company,
+            projectType: webhookData.projectType,
+            budget: webhookData.budget,
+            message: webhookData.description,
+            timestamp: webhookData.timestamp
+          }
         };
 
-        await fetch('https://api.sendgrid.com/v3/mail/send', {
+        brevoResponse = await fetch('https://api.brevo.com/v3/smtp/email', {
           method: 'POST',
           headers: {
-            'Authorization': `Bearer ${process.env.SENDGRID_API_KEY}`,
+            'Accept': 'application/json',
             'Content-Type': 'application/json',
+            'api-key': process.env.BREVO_API_KEY
           },
-          body: JSON.stringify(emailData)
+          body: JSON.stringify(brevoEmailData)
         });
-      } catch (emailError) {
-        console.error('Error sending email:', emailError);
+
+        if (!brevoResponse.ok) {
+          throw new Error(`Brevo API error: ${brevoResponse.status}`);
+        }
+      } catch (error) {
+        console.error('Brevo email error:', error);
+        // Don't fail the entire request if Brevo is down
       }
     }
 
+    // Return success response
     return {
       statusCode: 200,
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Headers': 'Content-Type',
-        'Access-Control-Allow-Methods': 'POST, OPTIONS'
-      },
-      body: JSON.stringify({ 
-        success: true, 
-        message: 'Thank you for your message! We\'ll get back to you soon.' 
+      headers,
+      body: JSON.stringify({
+        message: 'Thank you for your message! We\'ll get back to you soon.',
+        success: true,
+        n8nStatus: n8nResponse?.status,
+        brevoStatus: brevoResponse?.ok ? 'sent' : 'not_configured'
       })
     };
 
@@ -127,15 +148,10 @@ exports.handler = async (event, context) => {
     
     return {
       statusCode: 500,
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Headers': 'Content-Type',
-        'Access-Control-Allow-Methods': 'POST, OPTIONS'
-      },
-      body: JSON.stringify({ 
-        error: 'Internal server error',
-        message: 'Something went wrong. Please try again later.'
+      headers,
+      body: JSON.stringify({
+        message: 'An error occurred while processing your request. Please try again later.',
+        error: process.env.NODE_ENV === 'development' ? error.message : 'Internal server error'
       })
     };
   }
