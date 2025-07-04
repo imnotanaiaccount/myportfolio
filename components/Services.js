@@ -164,31 +164,54 @@ export default function Services() {
   ];
 
   return (
-    <section id="services" className="py-20 px-4 sm:px-6 lg:px-8">
+    <section id="services" className="py-32 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold mb-6">
+        <div className="text-center mb-20">
+          <h2 className="text-4xl md:text-6xl font-black mb-8">
             The <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">AI core</span> behind scalable growth
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <p className="text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto font-light leading-relaxed">
             Digital solutions aren't here to overwhelm you—they're here to work for you. Effortlessly integrate the right tools into your process, supercharging productivity and growth.
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => (
-            <div key={index} className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/10 hover:border-purple-400/50 transition-all duration-300 group hover:scale-105">
-              <div className="mb-4 group-hover:scale-110 transition-transform text-blue-400">
-                {service.icon}
-              </div>
-              <h3 className="text-xl font-semibold mb-4 text-white">{service.title}</h3>
-              <p className="text-gray-300 mb-6">{service.description}</p>
-              <div className="space-y-2">
-                {service.features.map((feature, featureIndex) => (
-                  <div key={featureIndex} className="flex items-center">
-                    <span className="w-2 h-2 rounded-full bg-cyan-400 mr-2 inline-block"></span>
-                    <span className="text-sm text-gray-300">{feature}</span>
+            <div key={index} className="group relative bg-white/10 backdrop-blur-sm rounded-3xl p-8 border border-white/10 hover:border-purple-400/50 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/10">
+              {/* Hover Effect Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              
+              <div className="relative z-10">
+                <div className="mb-6 group-hover:scale-110 transition-transform duration-500 text-blue-400">
+                  {service.icon}
+                </div>
+                <h3 className="text-2xl font-bold mb-4 text-white">{service.title}</h3>
+                <p className="text-gray-300 mb-8 leading-relaxed">{service.description}</p>
+                <div className="space-y-3">
+                  {service.features.map((feature, featureIndex) => (
+                    <div key={featureIndex} className="flex items-center">
+                      <span className="w-2 h-2 rounded-full bg-cyan-400 mr-3 inline-block"></span>
+                      <span className="text-sm text-gray-300 font-medium">{feature}</span>
+                    </div>
+                  ))}
+                </div>
+                
+                {/* Pricing Section */}
+                <div className="mt-8 pt-6 border-t border-white/10">
+                  <div className="grid grid-cols-3 gap-3">
+                    <div className="text-center p-3 bg-white/5 rounded-xl">
+                      <div className="text-xs font-medium text-gray-400 mb-1">Basic</div>
+                      <div className="text-lg font-bold text-blue-400">{service.pricing.basic}</div>
+                    </div>
+                    <div className="text-center p-3 bg-white/10 rounded-xl">
+                      <div className="text-xs font-medium text-gray-400 mb-1">Pro</div>
+                      <div className="text-lg font-bold text-purple-400">{service.pricing.pro}</div>
+                    </div>
+                    <div className="text-center p-3 bg-white/5 rounded-xl">
+                      <div className="text-xs font-medium text-gray-400 mb-1">Enterprise</div>
+                      <div className="text-lg font-bold text-cyan-400">{service.pricing.enterprise}</div>
+                    </div>
                   </div>
-                ))}
+                </div>
               </div>
             </div>
           ))}
