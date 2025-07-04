@@ -21,9 +21,57 @@ export default function Contact() {
   const [showSuggestions, setShowSuggestions] = React.useState(false);
   const [highlightedIndex, setHighlightedIndex] = React.useState(-1);
   const debounceTimeout = React.useRef();
+  const [validationErrors, setValidationErrors] = React.useState({});
+  const [isValidating, setIsValidating] = React.useState(false);
+
   const businessTypeOptions = [
     'Real Estate', 'Ecommerce', 'Sales', 'Artist', 'Baker', 'Consultant', 'Coach', 'Restaurant', 'Healthcare', 'Education', 'Finance', 'Legal', 'Marketing', 'Nonprofit', 'Technology', 'Fitness', 'Construction', 'Retail', 'Entertainment', 'Accounting', 'Advertising', 'Agriculture', 'Apparel', 'Architecture', 'Automotive', 'Aviation', 'Beauty', 'Blogging', 'Catering', 'Cleaning', 'Communications', 'Computer', 'Crafts', 'Dance', 'Data Science', 'Dentistry', 'Design', 'Distribution', 'Dog Walking', 'Elder Care', 'Engineering', 'Event Planning', 'Fashion', 'Film', 'Florist', 'Food Truck', 'Freelance', 'Gaming', 'Gardening', 'Graphic Design', 'Handyman', 'Home Decor', 'HR', 'Import/Export', 'Influencer', 'Insurance', 'Interior Design', 'Investment', 'IT', 'Jewelry', 'Landscaping', 'Laundry', 'Logistics', 'Manufacturing', 'Media', 'Medical', 'Mental Health', 'Mobile Apps', 'Mortgage', 'Moving', 'Music', 'Nutrition', 'Online Courses', 'Optometry', 'Painting', 'Pest Control', 'Pet Care', 'Pharmacy', 'Photography', 'Plumbing', 'Podcasting', 'Printing', 'PR', 'Productivity', 'Property Management', 'Public Speaking', 'Publishing', 'Realty', 'Recruitment', 'Repair', 'Research', 'Reselling', 'Restaurant Supply', 'Retail Tech', 'Roofing', 'Security', 'SEO', 'Shipping', 'Skincare', 'Social Media', 'Software', 'Solar', 'Spa', 'Sports', 'Staffing', 'Startup', 'Storage', 'Subscription Box', 'Supply Chain', 'Tattoo', 'Tax', 'Therapy', 'Tourism', 'Translation', 'Transportation', 'Travel', 'Tutoring', 'UX/UI', 'Venture Capital', 'Veterinary', 'Video', 'Virtual Assistant', 'Voiceover', 'Web Design', 'Web Development', 'Wedding', 'Wellness', 'Wholesale', 'Writing', 'Yoga', 'Other',
   ];
+
+  // Validation patterns
+  const validationPatterns = {
+    firstName: { pattern: /^[a-zA-Z\s'-]{2,30}$/, message: 'First name must be 2-30 characters, letters only' },
+    lastName: { pattern: /^[a-zA-Z\s'-]{2,30}$/, message: 'Last name must be 2-30 characters, letters only' },
+    email: { pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: 'Please enter a valid email address' },
+    phone: { pattern: /^[\+]?[1-9][\d]{0,15}$/, message: 'Please enter a valid phone number' },
+    company: { pattern: /^[a-zA-Z0-9\s&'-]{0,50}$/, message: 'Company name must be 50 characters or less' },
+    description: { pattern: /^[\s\S]{10,1000}$/, message: 'Project description must be 10-1000 characters' }
+  };
+
+  const validateField = (name, value) => {
+    if (!validationPatterns[name]) return '';
+    
+    if (name === 'phone' && !value) return ''; // Phone is optional
+    if (name === 'company' && !value) return ''; // Company is optional
+    
+    if (!validationPatterns[name].pattern.test(value)) {
+      return validationPatterns[name].message;
+    }
+    return '';
+  };
+
+  const validateForm = () => {
+    const errors = {};
+    let isValid = true;
+
+    // Validate required fields
+    Object.keys(validationPatterns).forEach(field => {
+      const error = validateField(field, formData[field]);
+      if (error) {
+        errors[field] = error;
+        isValid = false;
+      }
+    });
+
+    // Validate services
+    if (selectedServices.length === 0) {
+      errors.services = 'Please select at least one service';
+      isValid = false;
+    }
+
+    setValidationErrors(errors);
+    return isValid;
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -31,6 +79,12 @@ export default function Contact() {
       ...prev,
       [name]: value
     }));
+    
+    // Clear validation error when user starts typing
+    if (validationErrors[name]) {
+      setValidationErrors(prev => ({ ...prev, [name]: '' }));
+    }
+    
     if (name === 'businessType') {
       setBusinessType(value);
       if (value.length > 0) {
@@ -85,14 +139,16 @@ export default function Contact() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsValidating(true);
+    
+    if (!validateForm()) {
+      setIsValidating(false);
+      return;
+    }
+    
     setIsSubmitting(true);
     setSubmitStatus(null);
     setServiceError('');
-    if (selectedServices.length === 0) {
-      setServiceError('Please select at least one service.');
-      setIsSubmitting(false);
-      return;
-    }
     try {
       const response = await fetch('/.netlify/functions/contact', {
         method: 'POST',
@@ -117,6 +173,8 @@ export default function Contact() {
           description: ''
         });
         setSelectedServices([]); // Clear selected services on successful submission
+        setBusinessType('');
+        setValidationErrors({});
       } else {
         setSubmitStatus({ type: 'error', message: result.message || 'Something went wrong. Please try again.' });
       }
@@ -124,6 +182,7 @@ export default function Contact() {
       setSubmitStatus({ type: 'error', message: 'Network error. Please check your connection and try again.' });
     } finally {
       setIsSubmitting(false);
+      setIsValidating(false);
     }
   };
 
@@ -231,10 +290,101 @@ export default function Contact() {
                 <span className="text-green-600 font-semibold text-sm">100% Privacy & No Spam</span>
               </div>
               <form className="space-y-6" onSubmit={handleSubmit}>
-                <div className="grid md:grid-cols-2 gap-6">
+                {/* Service Selection - Integrated into the form */}
+                <div>
+                  <label className="block text-sm font-semibold text-facebook-dark dark:text-dark-text mb-2">
+                    Which services do you need? <span className="text-red-500">*</span>
+                  </label>
+                  <div className="flex flex-wrap gap-2 sm:gap-3 mb-2">
+                    {services.map((service, i) => (
+                      <button
+                        key={i}
+                        type="button"
+                        onClick={() => {
+                          setSelectedServices((prev) =>
+                            prev.includes(service.name)
+                              ? prev.filter((s) => s !== service.name)
+                              : [...prev, service.name]
+                          );
+                          setServiceError('');
+                          if (validationErrors.services) {
+                            setValidationErrors(prev => ({ ...prev, services: '' }));
+                          }
+                        }}
+                        className={`px-3 sm:px-5 py-2 rounded-full font-semibold border transition-all duration-200 shadow-sm flex items-center gap-1 sm:gap-2 text-sm sm:text-base
+                          ${selectedServices.includes(service.name)
+                            ? 'bg-blue-600 text-white border-blue-600 scale-105'
+                            : 'bg-white dark:bg-neutral-900 text-facebook-dark dark:text-dark-text border-facebook/20 dark:border-dark-border hover:bg-blue-50 dark:hover:bg-blue-900/30'}
+                        `}
+                        aria-pressed={selectedServices.includes(service.name)}
+                        aria-label={service.name}
+                      >
+                        <span className="text-lg sm:text-xl">{service.icon}</span>
+                        {service.name}
+                      </button>
+                    ))}
+                  </div>
+                  {(serviceError || validationErrors.services) && (
+                    <div className="text-red-600 text-sm font-semibold mb-2">{serviceError || validationErrors.services}</div>
+                  )}
+                  {selectedServices.length > 0 && (
+                    <div className="flex flex-wrap gap-1 sm:gap-2 mt-1">
+                      {selectedServices.map((service, i) => (
+                        <span key={i} className="px-2 sm:px-3 py-1 rounded-full bg-blue-600 text-white text-xs sm:text-sm font-semibold">
+                          {service}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+                {/* Business Type Autofill/Autosuggest */}
+                <div className="relative z-20">
+                  <label className="block text-sm font-semibold text-facebook-dark dark:text-dark-text mb-2">
+                    Your Business Type
+                  </label>
+                  <input
+                    type="text"
+                    name="businessType"
+                    autoComplete="off"
+                    value={businessType}
+                    onChange={handleBusinessTypeChange}
+                    onFocus={handleBusinessTypeFocus}
+                    onBlur={handleBusinessTypeBlur}
+                    onKeyDown={handleBusinessTypeKeyDown}
+                    className="w-full px-4 py-3 bg-white/90 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-300 text-blue-900 dark:text-blue-100 placeholder-gray-400 dark:placeholder-gray-500 transition-all duration-200 text-base"
+                    placeholder="e.g. Real Estate, Ecommerce, Artist, etc."
+                    aria-autocomplete="list"
+                    aria-expanded={showSuggestions}
+                    aria-activedescendant={highlightedIndex >= 0 ? `bt-suggestion-${highlightedIndex}` : undefined}
+                  />
+                  {showSuggestions && (
+                    <ul className="absolute z-30 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl mt-1 w-full shadow-lg max-h-60 overflow-y-auto">
+                      {businessTypeSuggestions.length > 0 ? (
+                        businessTypeSuggestions.map((suggestion, i) => (
+                          <li
+                            key={i}
+                            id={`bt-suggestion-${i}`}
+                            className={`px-4 py-3 cursor-pointer select-none text-base ${highlightedIndex === i ? 'bg-blue-100 dark:bg-blue-900/30 font-bold' : ''}`}
+                            onMouseDown={() => {
+                              setBusinessType(suggestion);
+                              setShowSuggestions(false);
+                            }}
+                            onMouseEnter={() => setHighlightedIndex(i)}
+                            aria-selected={highlightedIndex === i}
+                          >
+                            {suggestion}
+                          </li>
+                        ))
+                      ) : (
+                        <li className="px-4 py-3 text-gray-500 select-none text-base">No matches found</li>
+                      )}
+                    </ul>
+                  )}
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                   <div>
                     <label className="block text-sm font-semibold text-facebook-dark dark:text-dark-text mb-2">
-                      First Name *
+                      First Name <span className="text-red-500">*</span>
                     </label>
                     <input
                       type="text"
@@ -242,13 +392,19 @@ export default function Contact() {
                       value={formData.firstName}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-4 py-3 bg-white/90 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-300 text-blue-900 dark:text-blue-100 placeholder-gray-400 dark:placeholder-gray-500 transition-all duration-200"
+                      className={`w-full px-4 py-3 bg-white/90 dark:bg-neutral-900 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-300 text-blue-900 dark:text-blue-100 placeholder-gray-400 dark:placeholder-gray-500 transition-all duration-200 text-base ${
+                        validationErrors.firstName ? 'border-red-300 dark:border-red-600' : 'border-neutral-200 dark:border-neutral-800'
+                      }`}
                       placeholder="Your first name"
+                      maxLength={30}
                     />
+                    {validationErrors.firstName && (
+                      <div className="text-red-600 text-sm mt-1">{validationErrors.firstName}</div>
+                    )}
                   </div>
                   <div>
                     <label className="block text-sm font-semibold text-facebook-dark dark:text-dark-text mb-2">
-                      Email *
+                      Email <span className="text-red-500">*</span>
                     </label>
                     <input
                       type="email"
@@ -256,12 +412,18 @@ export default function Contact() {
                       value={formData.email}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-4 py-3 bg-white/90 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-300 text-blue-900 dark:text-blue-100 placeholder-gray-400 dark:placeholder-gray-500 transition-all duration-200"
+                      className={`w-full px-4 py-3 bg-white/90 dark:bg-neutral-900 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-300 text-blue-900 dark:text-blue-100 placeholder-gray-400 dark:placeholder-gray-500 transition-all duration-200 text-base ${
+                        validationErrors.email ? 'border-red-300 dark:border-red-600' : 'border-neutral-200 dark:border-neutral-800'
+                      }`}
                       placeholder="your@email.com"
+                      maxLength={100}
                     />
+                    {validationErrors.email && (
+                      <div className="text-red-600 text-sm mt-1">{validationErrors.email}</div>
+                    )}
                   </div>
                 </div>
-                <div className="grid md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                   <div>
                     <label className="block text-sm font-semibold text-facebook-dark dark:text-dark-text mb-2">
                       Phone
@@ -271,9 +433,15 @@ export default function Contact() {
                       name="phone"
                       value={formData.phone}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 bg-white/90 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-300 text-blue-900 dark:text-blue-100 placeholder-gray-400 dark:placeholder-gray-500 transition-all duration-200"
+                      className={`w-full px-4 py-3 bg-white/90 dark:bg-neutral-900 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-300 text-blue-900 dark:text-blue-100 placeholder-gray-400 dark:placeholder-gray-500 transition-all duration-200 text-base ${
+                        validationErrors.phone ? 'border-red-300 dark:border-red-600' : 'border-neutral-200 dark:border-neutral-800'
+                      }`}
                       placeholder="+1 (555) 123-4567"
+                      maxLength={20}
                     />
+                    {validationErrors.phone && (
+                      <div className="text-red-600 text-sm mt-1">{validationErrors.phone}</div>
+                    )}
                   </div>
                   <div>
                     <label className="block text-sm font-semibold text-facebook-dark dark:text-dark-text mb-2">
@@ -284,22 +452,28 @@ export default function Contact() {
                       name="company"
                       value={formData.company}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 bg-white/90 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-300 text-blue-900 dark:text-blue-100 placeholder-gray-400 dark:placeholder-gray-500 transition-all duration-200"
+                      className={`w-full px-4 py-3 bg-white/90 dark:bg-neutral-900 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-300 text-blue-900 dark:text-blue-100 placeholder-gray-400 dark:placeholder-gray-500 transition-all duration-200 text-base ${
+                        validationErrors.company ? 'border-red-300 dark:border-red-600' : 'border-neutral-200 dark:border-neutral-800'
+                      }`}
                       placeholder="Your company name"
+                      maxLength={50}
                     />
+                    {validationErrors.company && (
+                      <div className="text-red-600 text-sm mt-1">{validationErrors.company}</div>
+                    )}
                   </div>
                 </div>
-                <div className="grid md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                   <div>
                     <label className="block text-sm font-semibold text-facebook-dark dark:text-dark-text mb-2">
-                      Project Type *
+                      Project Type <span className="text-red-500">*</span>
                     </label>
                     <select
                       name="projectType"
                       value={formData.projectType}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-4 py-3 bg-white/90 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-300 text-blue-900 dark:text-blue-100 transition-all duration-200"
+                      className="w-full px-4 py-3 bg-white/90 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-300 text-blue-900 dark:text-blue-100 transition-all duration-200 text-base"
                     >
                       <option value="">Select a project type</option>
                       <option value="web-development">Web Development</option>
@@ -313,14 +487,14 @@ export default function Contact() {
                   </div>
                   <div>
                     <label className="block text-sm font-semibold text-facebook-dark dark:text-dark-text mb-2">
-                      Project Budget *
+                      Project Budget <span className="text-red-500">*</span>
                     </label>
                     <select
                       name="budget"
                       value={formData.budget}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-4 py-3 bg-white/90 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-300 text-blue-900 dark:text-blue-100 transition-all duration-200"
+                      className="w-full px-4 py-3 bg-white/90 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-300 text-blue-900 dark:text-blue-100 transition-all duration-200 text-base"
                     >
                       <option value="">Select budget range</option>
                       <option value="5k-10k">$5,000 - $10,000</option>
@@ -331,97 +505,9 @@ export default function Contact() {
                     </select>
                   </div>
                 </div>
-                {/* Service Selection - Integrated into the form */}
                 <div>
                   <label className="block text-sm font-semibold text-facebook-dark dark:text-dark-text mb-2">
-                    Which services do you need? <span className="text-red-500">*</span>
-                  </label>
-                  <div className="flex flex-wrap gap-3 mb-2">
-                    {services.map((service, i) => (
-                      <button
-                        key={i}
-                        type="button"
-                        onClick={() => {
-                          setSelectedServices((prev) =>
-                            prev.includes(service.name)
-                              ? prev.filter((s) => s !== service.name)
-                              : [...prev, service.name]
-                          );
-                          setServiceError('');
-                        }}
-                        className={`px-5 py-2 rounded-full font-semibold border transition-all duration-200 shadow-sm flex items-center gap-2 text-base
-                          ${selectedServices.includes(service.name)
-                            ? 'bg-blue-600 text-white border-blue-600 scale-105'
-                            : 'bg-white dark:bg-neutral-900 text-facebook-dark dark:text-dark-text border-facebook/20 dark:border-dark-border hover:bg-blue-50 dark:hover:bg-blue-900/30'}
-                        `}
-                        aria-pressed={selectedServices.includes(service.name)}
-                        aria-label={service.name}
-                      >
-                        <span className="text-xl">{service.icon}</span>
-                        {service.name}
-                      </button>
-                    ))}
-                  </div>
-                  {serviceError && (
-                    <div className="text-red-600 text-sm font-semibold mb-2">{serviceError}</div>
-                  )}
-                  {selectedServices.length > 0 && (
-                    <div className="flex flex-wrap gap-2 mt-1">
-                      {selectedServices.map((service, i) => (
-                        <span key={i} className="px-3 py-1 rounded-full bg-blue-600 text-white text-sm font-semibold">
-                          {service}
-                        </span>
-                      ))}
-                    </div>
-                  )}
-                </div>
-                {/* Business Type Autofill/Autosuggest */}
-                <div className="relative">
-                  <label className="block text-sm font-semibold text-facebook-dark dark:text-dark-text mb-2">
-                    Your Business Type
-                  </label>
-                  <input
-                    type="text"
-                    name="businessType"
-                    autoComplete="off"
-                    value={businessType}
-                    onChange={handleBusinessTypeChange}
-                    onFocus={handleBusinessTypeFocus}
-                    onBlur={handleBusinessTypeBlur}
-                    onKeyDown={handleBusinessTypeKeyDown}
-                    className="w-full px-4 py-3 bg-white/90 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-300 text-blue-900 dark:text-blue-100 placeholder-gray-400 dark:placeholder-gray-500 transition-all duration-200"
-                    placeholder="e.g. Real Estate, Ecommerce, Artist, etc."
-                    aria-autocomplete="list"
-                    aria-expanded={showSuggestions}
-                    aria-activedescendant={highlightedIndex >= 0 ? `bt-suggestion-${highlightedIndex}` : undefined}
-                  />
-                  {showSuggestions && (
-                    <ul className="absolute z-10 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl mt-1 w-full shadow-lg max-h-60 overflow-y-auto">
-                      {businessTypeSuggestions.length > 0 ? (
-                        businessTypeSuggestions.map((suggestion, i) => (
-                          <li
-                            key={i}
-                            id={`bt-suggestion-${i}`}
-                            className={`px-4 py-2 cursor-pointer select-none ${highlightedIndex === i ? 'bg-blue-100 dark:bg-blue-900/30 font-bold' : ''}`}
-                            onMouseDown={() => {
-                              setBusinessType(suggestion);
-                              setShowSuggestions(false);
-                            }}
-                            onMouseEnter={() => setHighlightedIndex(i)}
-                            aria-selected={highlightedIndex === i}
-                          >
-                            {suggestion}
-                          </li>
-                        ))
-                      ) : (
-                        <li className="px-4 py-2 text-gray-500 select-none">No matches found</li>
-                      )}
-                    </ul>
-                  )}
-                </div>
-                <div>
-                  <label className="block text-sm font-semibold text-facebook-dark dark:text-dark-text mb-2">
-                    Project Description *
+                    Project Description <span className="text-red-500">*</span>
                   </label>
                   <textarea
                     name="description"
@@ -429,9 +515,18 @@ export default function Contact() {
                     onChange={handleInputChange}
                     required
                     rows={6}
-                    className="w-full px-4 py-3 bg-white/90 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-300 text-blue-900 dark:text-blue-100 placeholder-gray-400 dark:placeholder-gray-500 transition-all duration-200 resize-none"
+                    className={`w-full px-4 py-3 bg-white/90 dark:bg-neutral-900 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-300 text-blue-900 dark:text-blue-100 placeholder-gray-400 dark:placeholder-gray-500 transition-all duration-200 resize-none text-base ${
+                      validationErrors.description ? 'border-red-300 dark:border-red-600' : 'border-neutral-200 dark:border-neutral-800'
+                    }`}
                     placeholder="Tell us about your project goals, requirements, and timeline..."
+                    maxLength={1000}
                   ></textarea>
+                  {validationErrors.description && (
+                    <div className="text-red-600 text-sm mt-1">{validationErrors.description}</div>
+                  )}
+                  <div className="text-xs text-gray-500 mt-1 text-right">
+                    {formData.description.length}/1000 characters
+                  </div>
                 </div>
                 {submitStatus && (
                   <div className={`p-4 rounded-xl text-center ${
@@ -444,16 +539,16 @@ export default function Contact() {
                 )}
                 <motion.button 
                   type="submit" 
-                  disabled={isSubmitting}
+                  disabled={isSubmitting || isValidating}
                   whileHover={{ scale: isSubmitting ? 1 : 1.03, y: isSubmitting ? 0 : -2 }}
                   whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
-                  className={`w-full font-semibold text-lg py-4 rounded-xl shadow-md transition-all duration-200 ${
-                    isSubmitting 
+                  className={`w-full font-semibold text-base sm:text-lg py-4 rounded-xl shadow-md transition-all duration-200 ${
+                    isSubmitting || isValidating
                       ? 'bg-gray-300 dark:bg-neutral-800 text-gray-500 cursor-not-allowed' 
                       : 'bg-white/90 dark:bg-neutral-900 text-blue-700 dark:text-blue-200 border border-neutral-200 dark:border-neutral-800 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-300'
                   }`}
                 >
-                  {isSubmitting ? 'Sending...' : 'Get My Free Strategy Session'}
+                  {isSubmitting ? 'Sending...' : isValidating ? 'Validating...' : 'Get My Free Strategy Session'}
                 </motion.button>
               </form>
             </div>
