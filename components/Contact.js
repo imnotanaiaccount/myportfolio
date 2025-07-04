@@ -1,6 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { businessTypes, filterBusinessTypes } from '../data/businessTypes';
+// 1. Import Heroicons at the top
+import { CheckCircleIcon, ChartBarIcon, RocketLaunchIcon, UserGroupIcon, LockClosedIcon, MagnifyingGlassIcon, PaintBrushIcon, ComputerDesktopIcon, ArrowTrendingUpIcon, StarIcon, ShieldCheckIcon, CurrencyDollarIcon, ShoppingCartIcon, ArrowUpOnSquareIcon, InboxIcon } from '@heroicons/react/24/solid';
 
 export default function Contact() {
   const [formData, setFormData] = React.useState({
@@ -25,15 +27,16 @@ export default function Contact() {
   const [validationErrors, setValidationErrors] = React.useState({});
   const [isValidating, setIsValidating] = React.useState(false);
 
+  // 2. Update the services array to use Heroicons instead of emoji
   const services = [
-    { name: 'More Sales', icon: '💰' },
-    { name: 'More Leads', icon: '📋' },
-    { name: 'Improve Brand Awareness', icon: '🚀' },
-    { name: 'Automate My Business', icon: '🤖' },
-    { name: 'Improve Customer Experience', icon: '🤝' },
-    { name: 'Launch a New Product or Service', icon: '🎉' },
-    { name: 'Grow My Audience', icon: '📢' },
-    { name: 'Other (Describe Above)', icon: '📝' }
+    { name: 'More Sales', icon: <CurrencyDollarIcon className="w-5 h-5" /> },
+    { name: 'More Leads', icon: <UserGroupIcon className="w-5 h-5" /> },
+    { name: 'Improve Brand Awareness', icon: <ArrowTrendingUpIcon className="w-5 h-5" /> },
+    { name: 'Automate My Business', icon: <RocketLaunchIcon className="w-5 h-5" /> },
+    { name: 'Improve Customer Experience', icon: <CheckCircleIcon className="w-5 h-5" /> },
+    { name: 'Launch a New Product or Service', icon: <PaintBrushIcon className="w-5 h-5" /> },
+    { name: 'Grow My Audience', icon: <ChartBarIcon className="w-5 h-5" /> },
+    { name: 'Other (Describe Above)', icon: <MagnifyingGlassIcon className="w-5 h-5" /> }
   ];
 
   // Validation patterns
@@ -589,32 +592,32 @@ export default function Contact() {
             <h3 className="text-3xl font-bold text-facebook-dark dark:text-dark-text mb-8 text-center">What You Get With Instagrow Media</h3>
             <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
               <div className="bg-white/95 dark:bg-dark-card/95 rounded-2xl p-6 shadow-xl border border-white/30 dark:border-dark-border flex flex-col items-center">
-                <span className="text-4xl mb-3">🎯</span>
+                <ChartBarIcon className="w-10 h-10 text-blue-600 mb-3" />
                 <div className="font-bold mb-1">Conversion-Optimized Website</div>
                 <div className="text-facebook-dark dark:text-dark-muted text-center">Custom design focused on turning visitors into leads and sales.</div>
               </div>
               <div className="bg-white/95 dark:bg-dark-card/95 rounded-2xl p-6 shadow-xl border border-white/30 dark:border-dark-border flex flex-col items-center">
-                <span className="text-4xl mb-3">📈</span>
+                <ChartBarIcon className="w-10 h-10 text-blue-600 mb-3" />
                 <div className="font-bold mb-1">Ongoing Analytics & Reports</div>
                 <div className="text-facebook-dark dark:text-dark-muted text-center">Track growth, performance, and ROI with clear, actionable insights.</div>
               </div>
               <div className="bg-white/95 dark:bg-dark-card/95 rounded-2xl p-6 shadow-xl border border-white/30 dark:border-dark-border flex flex-col items-center">
-                <span className="text-4xl mb-3">🤝</span>
+                <UserGroupIcon className="w-10 h-10 text-blue-600 mb-3" />
                 <div className="font-bold mb-1">Dedicated Support & Strategy</div>
                 <div className="text-facebook-dark dark:text-dark-muted text-center">Personalized guidance and support from our expert team, every step.</div>
               </div>
               <div className="bg-white/95 dark:bg-dark-card/95 rounded-2xl p-6 shadow-xl border border-white/30 dark:border-dark-border flex flex-col items-center">
-                <span className="text-4xl mb-3">🚀</span>
+                <RocketLaunchIcon className="w-10 h-10 text-blue-600 mb-3" />
                 <div className="font-bold mb-1">SEO, Speed & Mobile Optimization</div>
                 <div className="text-facebook-dark dark:text-dark-muted text-center">Your site loads fast, ranks high, and looks perfect on every device.</div>
               </div>
               <div className="bg-white/95 dark:bg-dark-card/95 rounded-2xl p-6 shadow-xl border border-white/30 dark:border-dark-border flex flex-col items-center">
-                <span className="text-4xl mb-3">🗺️</span>
+                <ChartBarIcon className="w-10 h-10 text-blue-600 mb-3" />
                 <div className="font-bold mb-1">Launch & Growth Roadmap</div>
                 <div className="text-facebook-dark dark:text-dark-muted text-center">Clear plan for launch, growth, and ongoing success—no guesswork.</div>
               </div>
               <div className="bg-white/95 dark:bg-dark-card/95 rounded-2xl p-6 shadow-xl border border-white/30 dark:border-dark-border flex flex-col items-center">
-                <span className="text-4xl mb-3">🔒</span>
+                <ShieldCheckIcon className="w-10 h-10 text-blue-600 mb-3" />
                 <div className="font-bold mb-1">100% Privacy & Security</div>
                 <div className="text-facebook-dark dark:text-dark-muted text-center">Your data and ideas are protected—always confidential, always secure.</div>
               </div>
@@ -626,25 +629,25 @@ export default function Contact() {
             <h3 className="text-3xl font-bold text-facebook-dark dark:text-dark-text mb-8 text-center">Our Proven Process</h3>
             <div className="flex flex-col md:flex-row justify-center items-center gap-8 max-w-5xl mx-auto">
               <div className="flex flex-col items-center">
-                <span className="text-4xl mb-2">🔍</span>
+                <MagnifyingGlassIcon className="w-10 h-10 text-blue-600 mb-2" />
                 <div className="font-bold">1. Discovery & Strategy</div>
                 <div className="text-facebook-dark dark:text-dark-muted text-center text-sm">We learn your goals, market, and vision to craft a winning plan.</div>
               </div>
               <div className="w-8 h-1 bg-blue-200 dark:bg-blue-900/30 md:rotate-0 rotate-90" />
               <div className="flex flex-col items-center">
-                <span className="text-4xl mb-2">🎨</span>
+                <PaintBrushIcon className="w-10 h-10 text-blue-600 mb-2" />
                 <div className="font-bold">2. Design & Prototyping</div>
                 <div className="text-facebook-dark dark:text-dark-muted text-center text-sm">Modern, user-focused design—see your vision before we build.</div>
               </div>
               <div className="w-8 h-1 bg-blue-200 dark:bg-blue-900/30 md:rotate-0 rotate-90" />
               <div className="flex flex-col items-center">
-                <span className="text-4xl mb-2">💻</span>
+                <ComputerDesktopIcon className="w-10 h-10 text-blue-600 mb-2" />
                 <div className="font-bold">3. Development & Launch</div>
                 <div className="text-facebook-dark dark:text-dark-muted text-center text-sm">Fast, secure, scalable builds—launched with zero stress.</div>
               </div>
               <div className="w-8 h-1 bg-blue-200 dark:bg-blue-900/30 md:rotate-0 rotate-90" />
               <div className="flex flex-col items-center">
-                <span className="text-4xl mb-2">📈</span>
+                <ChartBarIcon className="w-10 h-10 text-blue-600 mb-2" />
                 <div className="font-bold">4. Ongoing Growth & Support</div>
                 <div className="text-facebook-dark dark:text-dark-muted text-center text-sm">We’re with you for the long haul—support, updates, and growth.</div>
               </div>
@@ -656,17 +659,17 @@ export default function Contact() {
             <h3 className="text-3xl font-bold text-facebook-dark dark:text-dark-text mb-8 text-center">Real Results for Real Businesses</h3>
             <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
               <div className="bg-white/95 dark:bg-dark-card/95 rounded-2xl p-6 shadow-xl border border-white/30 dark:border-dark-border flex flex-col items-center">
-                <span className="text-4xl mb-3">📊</span>
+                <ChartBarIcon className="w-10 h-10 text-blue-600 mb-3" />
                 <div className="font-bold mb-1">+312% More Leads</div>
                 <div className="text-facebook-dark dark:text-dark-muted text-center">In just 60 days for a real estate firm—measurable, rapid growth.</div>
               </div>
               <div className="bg-white/95 dark:bg-dark-card/95 rounded-2xl p-6 shadow-xl border border-white/30 dark:border-dark-border flex flex-col items-center">
-                <span className="text-4xl mb-3">🛒</span>
+                <ShoppingCartIcon className="w-10 h-10 text-blue-600 mb-3" />
                 <div className="font-bold mb-1">2x Online Sales</div>
                 <div className="text-facebook-dark dark:text-dark-muted text-center">Doubled sales for a local retailer with a new digital strategy.</div>
               </div>
               <div className="bg-white/95 dark:bg-dark-card/95 rounded-2xl p-6 shadow-xl border border-white/30 dark:border-dark-border flex flex-col items-center">
-                <span className="text-4xl mb-3">🔝</span>
+                <ArrowTrendingUpIcon className="w-10 h-10 text-blue-600 mb-3" />
                 <div className="font-bold mb-1">#1 on Google</div>
                 <div className="text-facebook-dark dark:text-dark-muted text-center">Ranked #1 for 7+ keywords—SEO that delivers real results.</div>
               </div>
@@ -678,22 +681,22 @@ export default function Contact() {
             <h3 className="text-3xl font-bold text-facebook-dark dark:text-dark-text mb-8 text-center">Why Clients Choose Us</h3>
             <div className="grid md:grid-cols-4 gap-6 max-w-5xl mx-auto">
               <div className="bg-white/95 dark:bg-dark-card/95 rounded-2xl p-6 shadow-xl border border-white/30 dark:border-dark-border flex flex-col items-center">
-                <span className="text-4xl mb-3">⭐</span>
+                <StarIcon className="w-10 h-10 text-blue-600 mb-3" />
                 <div className="font-bold mb-1">5-Star Client Reviews</div>
                 <div className="text-facebook-dark dark:text-dark-muted text-center">Clients love our work, our process, and our results.</div>
               </div>
               <div className="bg-white/95 dark:bg-dark-card/95 rounded-2xl p-6 shadow-xl border border-white/30 dark:border-dark-border flex flex-col items-center">
-                <span className="text-4xl mb-3">💯</span>
+                <CheckCircleIcon className="w-10 h-10 text-blue-600 mb-3" />
                 <div className="font-bold mb-1">100% Satisfaction Guarantee</div>
                 <div className="text-facebook-dark dark:text-dark-muted text-center">We’re not happy until you are—guaranteed.</div>
               </div>
               <div className="bg-white/95 dark:bg-dark-card/95 rounded-2xl p-6 shadow-xl border border-white/30 dark:border-dark-border flex flex-col items-center">
-                <span className="text-4xl mb-3">🔎</span>
+                <MagnifyingGlassIcon className="w-10 h-10 text-blue-600 mb-3" />
                 <div className="font-bold mb-1">Transparent Pricing</div>
                 <div className="text-facebook-dark dark:text-dark-muted text-center">No hidden fees, no surprises—just clear, honest pricing.</div>
               </div>
               <div className="bg-white/95 dark:bg-dark-card/95 rounded-2xl p-6 shadow-xl border border-white/30 dark:border-dark-border flex flex-col items-center">
-                <span className="text-4xl mb-3">⚡</span>
+                <ArrowUpOnSquareIcon className="w-10 h-10 text-blue-600 mb-3" />
                 <div className="font-bold mb-1">Fast Turnaround & Support</div>
                 <div className="text-facebook-dark dark:text-dark-muted text-center">Quick delivery and ongoing support, whenever you need us.</div>
               </div>
@@ -705,19 +708,19 @@ export default function Contact() {
             <h3 className="text-3xl font-bold text-facebook-dark dark:text-dark-text mb-8 text-center">Free Resources & Insights</h3>
             <div className="flex flex-col md:flex-row justify-center items-center gap-8 max-w-4xl mx-auto">
               <div className="bg-white/95 dark:bg-dark-card/95 rounded-2xl p-6 shadow-xl border border-white/30 dark:border-dark-border flex-1 flex flex-col items-center mb-6 md:mb-0">
-                <span className="text-4xl mb-3">📋</span>
+                <InboxIcon className="w-10 h-10 text-blue-600 mb-3" />
                 <div className="font-bold mb-1">Website Growth Checklist</div>
                 <div className="text-facebook-dark dark:text-dark-muted text-center mb-3">Download our proven checklist to boost your site’s results.</div>
                 <a href="#" className="text-blue-700 dark:text-blue-200 font-semibold underline hover:text-blue-900 dark:hover:text-blue-300">Download Free</a>
               </div>
               <div className="bg-white/95 dark:bg-dark-card/95 rounded-2xl p-6 shadow-xl border border-white/30 dark:border-dark-border flex-1 flex flex-col items-center mb-6 md:mb-0">
-                <span className="text-4xl mb-3">🔍</span>
+                <MagnifyingGlassIcon className="w-10 h-10 text-blue-600 mb-3" />
                 <div className="font-bold mb-1">Free Homepage Audit</div>
                 <div className="text-facebook-dark dark:text-dark-muted text-center mb-3">Get a personalized audit and actionable tips—no strings attached.</div>
                 <a href="#" className="text-blue-700 dark:text-blue-200 font-semibold underline hover:text-blue-900 dark:hover:text-blue-300">Request Audit</a>
               </div>
               <div className="bg-white/95 dark:bg-dark-card/95 rounded-2xl p-6 shadow-xl border border-white/30 dark:border-dark-border flex-1 flex flex-col items-center">
-                <span className="text-4xl mb-3">📬</span>
+                <InboxIcon className="w-10 h-10 text-blue-600 mb-3" />
                 <div className="font-bold mb-1">Growth Tips Newsletter</div>
                 <div className="text-facebook-dark dark:text-dark-muted text-center mb-3">Monthly insights to help you grow—delivered to your inbox.</div>
                 <a href="#" className="text-blue-700 dark:text-blue-200 font-semibold underline hover:text-blue-900 dark:hover:text-blue-300">Subscribe Free</a>
