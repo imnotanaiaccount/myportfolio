@@ -8,10 +8,7 @@ const nextConfig = {
   },
   trailingSlash: true,
   output: 'export',
-  distDir: 'out',
-  experimental: {
-    appDir: false
-  }
+  distDir: 'out'
 }
 
 module.exports = nextConfig 
