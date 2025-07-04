@@ -11,11 +11,11 @@ export default function Home() {
   return (
     <Layout>
       <Hero />
+      <Contact />
       <FeaturedProject />
       <Services />
       <WhyChooseMe />
       <Examples />
-      <Contact />
       <Footer />
     </Layout>
   );
