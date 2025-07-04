@@ -32,38 +32,40 @@ export default function Hero() {
     <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 relative z-10">
       <div className="text-center">
         <div className="inline-flex items-center bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 mb-8 border border-white/20">
-          <span className="text-sm font-medium text-riva-blue">Your Growth Engine for the Future</span>
+          <span className="text-sm font-medium text-blue-300">Your Growth Engine for the Future</span>
         </div>
-        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight bg-gradient-to-r from-riva-blue via-riva-violet to-riva-teal bg-clip-text text-transparent">
-          Ready to <span className="bg-gradient-to-r from-riva-violet to-riva-teal bg-clip-text text-transparent">Grow</span> Your Business?
+        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
+          Ready to <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">Transform</span> Your Business?
         </h1>
-        <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-3xl mx-auto leading-relaxed bg-white/10 backdrop-blur-md rounded-2xl px-6 py-4 border border-white/20 shadow-lg">
-          We build high-converting websites, automated funnels, and magnetic brands for ambitious businesses. Scale smarter, not harder, with AI-powered solutions and a proven process.
+        <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-4xl mx-auto leading-relaxed">
+          Get more leads, increase sales, and grow your business with a website and marketing system that works for you 24/7.
         </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-          <button className="bg-gradient-to-r from-riva-blue via-riva-violet to-riva-teal px-8 py-4 rounded-full font-semibold text-lg text-white shadow-lg hover:scale-105 transition-all flex items-center group">
-            Book Free Strategy Call
-          </button>
-          <button className="border border-white/30 hover:border-white/50 px-8 py-4 rounded-full font-semibold text-lg text-white transition-all flex items-center group">
-            Watch Demo
-          </button>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+          <a href="#contact" className="px-8 py-4 bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 text-white font-bold text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+            Get Started Today
+          </a>
+          <a href="#examples" className="px-8 py-4 bg-white/10 backdrop-blur-sm border border-white/20 text-white font-semibold text-lg rounded-full hover:bg-white/20 transition-all duration-300">
+            See Our Work
+          </a>
         </div>
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
+        
+        {/* Stats Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
           <div className="text-center">
-            <div className="text-3xl font-bold text-riva-violet mb-2">340%</div>
-            <div className="text-white/80">Conversion Increase</div>
+            <div className="text-3xl md:text-4xl font-bold text-blue-400 mb-2">50+</div>
+            <div className="text-gray-300 text-sm">Projects Delivered</div>
           </div>
           <div className="text-center">
-            <div className="text-3xl font-bold text-riva-violet mb-2">50K+</div>
-            <div className="text-white/80">Active Users</div>
+            <div className="text-3xl md:text-4xl font-bold text-purple-400 mb-2">100%</div>
+            <div className="text-gray-300 text-sm">Client Satisfaction</div>
           </div>
           <div className="text-center">
-            <div className="text-3xl font-bold text-riva-violet mb-2">100+</div>
-            <div className="text-white/80">Happy Clients</div>
+            <div className="text-3xl md:text-4xl font-bold text-cyan-400 mb-2">10+</div>
+            <div className="text-gray-300 text-sm">Years Experience</div>
           </div>
           <div className="text-center">
-            <div className="text-3xl font-bold text-riva-violet mb-2">2-4 Weeks</div>
-            <div className="text-white/80">Average Delivery</div>
+            <div className="text-3xl md:text-4xl font-bold text-blue-400 mb-2">24/7</div>
+            <div className="text-gray-300 text-sm">Support Available</div>
           </div>
         </div>
       </div>

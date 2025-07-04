@@ -69,28 +69,28 @@ export default function WhyChooseMe() {
   return (
     <section id="why-choose-me" className="py-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto bg-white/10 backdrop-blur-sm rounded-2xl p-12 border border-white/10 shadow-xl">
-        <h2 className="text-3xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-riva-blue via-riva-violet to-riva-teal bg-clip-text text-transparent text-center">
+        <h2 className="text-3xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent text-center">
           Why Choose <span className="font-extrabold">Riva</span>?
         </h2>
-        <p className="text-xl text-white/90 max-w-3xl mx-auto leading-relaxed text-center mb-8">
-          More than just a developer—I'm your strategic partner in <span className="font-bold text-riva-blue">digital success</span> and <span className="font-bold text-riva-blue">business growth</span>.
+        <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed text-center mb-8">
+          More than just a developer—I'm your strategic partner in <span className="font-bold text-blue-400">digital success</span> and <span className="font-bold text-blue-400">business growth</span>.
         </p>
         <ul className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
           <li className="flex items-center gap-3">
-            <span className="w-3 h-3 rounded-full bg-riva-teal inline-block"></span>
-            <span className="text-white/80">10+ years of experience delivering results</span>
+            <span className="w-3 h-3 rounded-full bg-cyan-400 inline-block"></span>
+            <span className="text-gray-300">10+ years of experience delivering results</span>
           </li>
           <li className="flex items-center gap-3">
-            <span className="w-3 h-3 rounded-full bg-riva-teal inline-block"></span>
-            <span className="text-white/80">Proven track record with startups & enterprises</span>
+            <span className="w-3 h-3 rounded-full bg-cyan-400 inline-block"></span>
+            <span className="text-gray-300">Proven track record with startups & enterprises</span>
           </li>
           <li className="flex items-center gap-3">
-            <span className="w-3 h-3 rounded-full bg-riva-teal inline-block"></span>
-            <span className="text-white/80">Cutting-edge design & technology</span>
+            <span className="w-3 h-3 rounded-full bg-cyan-400 inline-block"></span>
+            <span className="text-gray-300">Cutting-edge design & technology</span>
           </li>
           <li className="flex items-center gap-3">
-            <span className="w-3 h-3 rounded-full bg-riva-teal inline-block"></span>
-            <span className="text-white/80">Personalized, hands-on approach</span>
+            <span className="w-3 h-3 rounded-full bg-cyan-400 inline-block"></span>
+            <span className="text-gray-300">Personalized, hands-on approach</span>
           </li>
         </ul>
       </div>

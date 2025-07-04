@@ -168,25 +168,25 @@ export default function Services() {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-5xl font-bold mb-6">
-            The <span className="bg-gradient-to-r from-riva-blue via-riva-violet to-riva-teal bg-clip-text text-transparent">AI core</span> behind scalable growth
+            The <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">AI core</span> behind scalable growth
           </h2>
-          <p className="text-xl text-white/90 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
             Digital solutions aren't here to overwhelm you—they're here to work for you. Effortlessly integrate the right tools into your process, supercharging productivity and growth.
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => (
-            <div key={index} className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/10 hover:border-riva-violet/50 transition-all duration-300 group hover:scale-105">
-              <div className="mb-4 group-hover:scale-110 transition-transform text-riva-blue">
+            <div key={index} className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/10 hover:border-purple-400/50 transition-all duration-300 group hover:scale-105">
+              <div className="mb-4 group-hover:scale-110 transition-transform text-blue-400">
                 {service.icon}
               </div>
-              <h3 className="text-xl font-semibold mb-4 text-white/90">{service.title}</h3>
-              <p className="text-white/80 mb-6">{service.description}</p>
+              <h3 className="text-xl font-semibold mb-4 text-white">{service.title}</h3>
+              <p className="text-gray-300 mb-6">{service.description}</p>
               <div className="space-y-2">
                 {service.features.map((feature, featureIndex) => (
                   <div key={featureIndex} className="flex items-center">
-                    <span className="w-2 h-2 rounded-full bg-riva-teal mr-2 inline-block"></span>
-                    <span className="text-sm text-white/80">{feature}</span>
+                    <span className="w-2 h-2 rounded-full bg-cyan-400 mr-2 inline-block"></span>
+                    <span className="text-sm text-gray-300">{feature}</span>
                   </div>
                 ))}
               </div>

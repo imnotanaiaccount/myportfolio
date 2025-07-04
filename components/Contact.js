@@ -235,24 +235,24 @@ export default function Contact() {
   return (
     <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto bg-white/10 backdrop-blur-sm rounded-2xl p-12 border border-white/10 shadow-xl">
-        <h2 className="text-3xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-riva-blue via-riva-violet to-riva-teal bg-clip-text text-transparent text-center">
+        <h2 className="text-3xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent text-center">
           Get in Touch with <span className="font-extrabold">Riva</span>
         </h2>
-        <p className="text-xl text-white/90 max-w-3xl mx-auto leading-relaxed text-center mb-8">
+        <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed text-center mb-8">
           Ready to unlock more sales, leads, and brand growth? Book your free strategy call today.
         </p>
         <form className="space-y-6" onSubmit={handleSubmit}>
           {/* Form fields here, styled with glassmorphism and accent borders */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <input type="text" name="firstName" placeholder="First Name" value={formData.firstName} onChange={handleInputChange} className="bg-white/20 border border-riva-blue/30 rounded-lg px-4 py-3 text-white placeholder-white/60 focus:ring-2 focus:ring-riva-blue outline-none" required />
-            <input type="text" name="lastName" placeholder="Last Name" value={formData.lastName} onChange={handleInputChange} className="bg-white/20 border border-riva-blue/30 rounded-lg px-4 py-3 text-white placeholder-white/60 focus:ring-2 focus:ring-riva-blue outline-none" required />
+            <input type="text" name="firstName" placeholder="First Name" value={formData.firstName} onChange={handleInputChange} className="bg-white/20 border border-blue-400/30 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-400 outline-none" required />
+            <input type="text" name="lastName" placeholder="Last Name" value={formData.lastName} onChange={handleInputChange} className="bg-white/20 border border-blue-400/30 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-400 outline-none" required />
           </div>
-          <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleInputChange} className="bg-white/20 border border-riva-blue/30 rounded-lg px-4 py-3 text-white placeholder-white/60 focus:ring-2 focus:ring-riva-blue outline-none w-full" required />
-          <textarea name="description" placeholder="Tell us about your project goals, requirements, and timeline..." value={formData.description} onChange={handleInputChange} className="bg-white/20 border border-riva-blue/30 rounded-lg px-4 py-3 text-white placeholder-white/60 focus:ring-2 focus:ring-riva-blue outline-none w-full" rows={5} required />
-          <button type="submit" className="w-full py-4 rounded-xl bg-gradient-to-r from-riva-blue via-riva-violet to-riva-teal text-white font-bold text-lg shadow-lg hover:scale-105 transition-transform">Send Message</button>
+          <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleInputChange} className="bg-white/20 border border-blue-400/30 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-400 outline-none w-full" required />
+          <textarea name="description" placeholder="Tell us about your project goals, requirements, and timeline..." value={formData.description} onChange={handleInputChange} className="bg-white/20 border border-blue-400/30 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-400 outline-none w-full" rows={5} required />
+          <button type="submit" className="w-full py-4 rounded-xl bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 text-white font-bold text-lg shadow-lg hover:scale-105 transition-transform">Send Message</button>
         </form>
-        <div className="mt-10 text-center text-white/80">
-          Or email us directly at <a href="mailto:hello@riva.com" className="text-riva-blue underline hover:text-riva-violet transition">hello@riva.com</a>
+        <div className="mt-10 text-center text-gray-400">
+          Or email us directly at <a href="mailto:hello@riva.com" className="text-blue-400 underline hover:text-purple-400 transition">hello@riva.com</a>
         </div>
       </div>
     </section>
