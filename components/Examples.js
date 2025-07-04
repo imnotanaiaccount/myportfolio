@@ -23,14 +23,17 @@ export default function Examples() {
               </div>
               <h3 className="text-xl font-semibold mb-4 text-white/90">{project.name}</h3>
               <p className="text-white/80 mb-6">{project.description}</p>
-              <div className="space-y-2">
-                {project.results.map((result, resultIndex) => (
-                  <div key={resultIndex} className="flex items-center">
-                    <span className="w-2 h-2 rounded-full bg-riva-teal mr-2 inline-block"></span>
-                    <span className="text-sm text-white/80">{result}</span>
-                  </div>
+              <div className="flex flex-wrap gap-2 mb-4">
+                {project.tech && project.tech.map((tech, techIndex) => (
+                  <span key={techIndex} className="px-3 py-1 bg-riva-blue/10 text-riva-blue rounded-full text-xs font-semibold">{tech}</span>
                 ))}
               </div>
+              {project.testimonial && (
+                <blockquote className="italic text-sm text-white/70 mb-2">"{project.testimonial}"</blockquote>
+              )}
+              {project.client && (
+                <div className="text-xs text-white/50 mb-2">{project.client}</div>
+              )}
             </div>
           ))}
         </div>
