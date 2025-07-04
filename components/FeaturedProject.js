@@ -157,28 +157,16 @@ export default function FeaturedProject() {
                   </div>
                 </div>
                 
-                <motion.div 
-                  className="aspect-video bg-gradient-to-br from-facebook/5 to-facebook/10 dark:from-facebook/10 dark:to-facebook/20 flex items-center justify-center relative overflow-hidden"
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <div className="text-center space-y-6 p-8">
-                    <motion.div 
-                      className="text-8xl"
-                      animate={{ y: [-5, 5, -5] }}
-                      transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                    >
-                      🏠
-                    </motion.div>
-                    <div>
-                      <p className="text-facebook dark:text-facebook font-bold text-xl mb-2">Live Preview</p>
-                      <p className="text-sm text-facebook-light dark:text-dark-muted">
-                        Modern real estate platform with advanced features
-                      </p>
-                    </div>
-                  </div>
-                  
-                </motion.div>
+                <div className="aspect-video w-full rounded-3xl overflow-hidden border border-facebook/10 dark:border-dark-border bg-white dark:bg-dark-card">
+                  <iframe
+                    src="https://jacksoninvestmentsolutions2.netlify.app/"
+                    title="Live Preview"
+                    className="w-full h-full min-h-[300px]"
+                    style={{ border: 'none' }}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    loading="lazy"
+                  ></iframe>
+                </div>
               </motion.div>
             </motion.div>
           </div>
