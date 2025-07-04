@@ -26,10 +26,10 @@ export default function App({ Component, pageProps }) {
         
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://REPLACE-WITH-YOUR-NETLIFY-URL/" />
+        <meta property="og:url" content="https://instagrowmedia.netlify.app/" />
         <meta property="og:title" content="Joshua Hawley | Instagrow Media - Premium Digital Solutions" />
         <meta property="og:description" content="Elevating businesses with elegant, modern digital solutions. 500+ projects delivered with 98% client satisfaction." />
-        <meta property="og:image" content="https://REPLACE-WITH-YOUR-NETLIFY-URL/og-image.svg" />
+        <meta property="og:image" content="https://instagrowmedia.netlify.app/og-image.svg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:site_name" content="Instagrow Media" />
@@ -37,10 +37,10 @@ export default function App({ Component, pageProps }) {
         
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://REPLACE-WITH-YOUR-NETLIFY-URL/" />
+        <meta property="twitter:url" content="https://instagrowmedia.netlify.app/" />
         <meta property="twitter:title" content="Joshua Hawley | Instagrow Media - Premium Digital Solutions" />
         <meta property="twitter:description" content="Elevating businesses with elegant, modern digital solutions. 500+ projects delivered with 98% client satisfaction." />
-        <meta property="twitter:image" content="https://REPLACE-WITH-YOUR-NETLIFY-URL/og-image.svg" />
+        <meta property="twitter:image" content="https://instagrowmedia.netlify.app/og-image.svg" />
         
         {/* Additional Meta Tags */}
         <meta name="theme-color" content="#1877f2" />
@@ -65,7 +65,7 @@ export default function App({ Component, pageProps }) {
                 "name": "Instagrow Media"
               },
               "description": "Elevating businesses with elegant, modern digital solutions",
-              "url": "https://REPLACE-WITH-YOUR-NETLIFY-URL",
+              "url": "https://instagrowmedia.netlify.app",
               "sameAs": [
                 "https://linkedin.com/in/joshua-hawley",
                 "https://github.com/joshua-hawley"
