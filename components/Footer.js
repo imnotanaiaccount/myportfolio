@@ -42,8 +42,8 @@ export default function Footer() {
             &copy; {new Date().getFullYear()} Joshua Hawley · Riva. All rights reserved.
           </div>
           <div className="flex items-center gap-4 sm:gap-6">
-            <a href="#" className="text-gray-400 hover:text-white transition-colors duration-200 text-xs sm:text-sm">Privacy Policy</a>
-            <a href="#" className="text-gray-400 hover:text-white transition-colors duration-200 text-xs sm:text-sm">Terms of Service</a>
+            <a href="/privacy-policy" className="text-gray-400 hover:text-white transition-colors duration-200 text-xs sm:text-sm">Privacy Policy</a>
+            <a href="/terms-of-use" className="text-gray-400 hover:text-white transition-colors duration-200 text-xs sm:text-sm">Terms of Use</a>
           </div>
         </div>
       </div>
