@@ -7,18 +7,17 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 sm:px-6 lg:px-8">
-      {/* Futuristic Background Elements */}
+      {/* Sophisticated Background Elements */}
       <div className="absolute inset-0">
-        {/* Advanced Gradient Orbs */}
+        {/* Subtle Gradient Orbs */}
         <motion.div 
           className="absolute top-20 left-10 w-48 h-48 sm:w-72 sm:h-72 lg:w-96 lg:h-96 rounded-full blur-3xl"
           style={{
-            background: 'radial-gradient(circle, rgba(0, 212, 255, 0.3) 0%, rgba(168, 85, 247, 0.2) 50%, transparent 100%)'
+            background: 'radial-gradient(circle, rgba(124, 58, 237, 0.2) 0%, rgba(168, 85, 247, 0.1) 50%, transparent 100%)'
           }}
           animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.3, 0.6, 0.3],
-            rotate: [0, 180, 360],
+            scale: [1, 1.1, 1],
+            opacity: [0.3, 0.5, 0.3],
           }}
           transition={{
             duration: 8,
@@ -29,12 +28,11 @@ export default function Hero() {
         <motion.div 
           className="absolute bottom-20 right-10 w-64 h-64 sm:w-96 sm:h-96 rounded-full blur-3xl"
           style={{
-            background: 'radial-gradient(circle, rgba(168, 85, 247, 0.3) 0%, rgba(6, 182, 212, 0.2) 50%, transparent 100%)'
+            background: 'radial-gradient(circle, rgba(168, 85, 247, 0.2) 0%, rgba(124, 58, 237, 0.1) 50%, transparent 100%)'
           }}
           animate={{
-            scale: [1.2, 1, 1.2],
-            opacity: [0.4, 0.7, 0.4],
-            rotate: [360, 180, 0],
+            scale: [1.1, 1, 1.1],
+            opacity: [0.4, 0.6, 0.4],
           }}
           transition={{
             duration: 10,
@@ -46,51 +44,50 @@ export default function Hero() {
         <motion.div 
           className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-48 h-48 sm:w-64 sm:h-64 lg:w-[800px] lg:h-[800px] rounded-full blur-3xl"
           style={{
-            background: 'radial-gradient(circle, rgba(6, 182, 212, 0.2) 0%, rgba(255, 0, 128, 0.1) 50%, transparent 100%)'
+            background: 'radial-gradient(circle, rgba(6, 182, 212, 0.1) 0%, rgba(124, 58, 237, 0.05) 50%, transparent 100%)'
           }}
           animate={{
-            scale: [1, 1.1, 1],
-            opacity: [0.2, 0.5, 0.2],
-            rotate: [0, 90, 180, 270, 360],
+            scale: [1, 1.05, 1],
+            opacity: [0.2, 0.4, 0.2],
           }}
           transition={{
             duration: 12,
             repeat: Infinity,
-            ease: "linear"
+            ease: "easeInOut"
           }}
         />
         
-        {/* Holographic Grid */}
-        <div className="absolute inset-0 opacity-20">
+        {/* Subtle Grid Pattern */}
+        <div className="absolute inset-0 opacity-10">
           <div className="absolute inset-0" style={{
             backgroundImage: `
-              linear-gradient(rgba(0, 212, 255, 0.1) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(0, 212, 255, 0.1) 1px, transparent 1px)
+              linear-gradient(rgba(124, 58, 237, 0.1) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(124, 58, 237, 0.1) 1px, transparent 1px)
             `,
             backgroundSize: '50px 50px'
           }} />
         </div>
         
-        {/* Advanced Floating Particles */}
+        {/* Sophisticated Floating Particles */}
         <div className="absolute inset-0">
-          {Array.from({ length: 30 }).map((_, i) => (
+          {Array.from({ length: 20 }).map((_, i) => (
             <motion.div
               key={i}
               className="absolute w-1 h-1 sm:w-2 sm:h-2 rounded-full"
               style={{
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 100}%`,
-                background: `hsl(${Math.random() * 360}, 70%, 60%)`,
-                boxShadow: `0 0 ${Math.random() * 10 + 5}px hsl(${Math.random() * 360}, 70%, 60%)`
+                background: `rgba(124, 58, 237, ${0.3 + Math.random() * 0.4})`,
+                boxShadow: `0 0 ${Math.random() * 8 + 4}px rgba(124, 58, 237, ${0.3 + Math.random() * 0.4})`
               }}
               animate={{
-                y: [0, -30, 0],
-                x: [0, Math.random() * 20 - 10, 0],
-                opacity: [0.2, 1, 0.2],
-                scale: [0.5, 1.5, 0.5],
+                y: [0, -20, 0],
+                x: [0, Math.random() * 10 - 5, 0],
+                opacity: [0.2, 0.8, 0.2],
+                scale: [0.8, 1.2, 0.8],
               }}
               transition={{
-                duration: 4 + Math.random() * 3,
+                duration: 4 + Math.random() * 2,
                 repeat: Infinity,
                 delay: Math.random() * 2,
                 ease: "easeInOut"
@@ -99,37 +96,37 @@ export default function Hero() {
           ))}
         </div>
 
-        {/* Holographic Rings */}
+        {/* Subtle Concentric Rings */}
         <motion.div
           className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 sm:w-[600px] sm:h-[600px] lg:w-[800px] lg:h-[800px]"
           animate={{
-            rotate: 360
+            scale: [1, 1.02, 1]
           }}
           transition={{
-            duration: 20,
+            duration: 15,
             repeat: Infinity,
-            ease: "linear"
+            ease: "easeInOut"
           }}
         >
-          <div className="absolute inset-0 border border-cyan-400/20 rounded-full" />
-          <div className="absolute inset-8 border border-purple-400/20 rounded-full" />
-          <div className="absolute inset-16 border border-blue-400/20 rounded-full" />
+          <div className="absolute inset-0 border border-purple-400/10 rounded-full" />
+          <div className="absolute inset-8 border border-purple-400/8 rounded-full" />
+          <div className="absolute inset-16 border border-purple-400/6 rounded-full" />
         </motion.div>
       </div>
 
       <div className="container-premium relative z-10 text-center max-w-7xl mx-auto">
-        {/* Futuristic Badge */}
+        {/* Professional Badge */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="inline-flex items-center glass rounded-full px-4 py-2 sm:px-6 sm:py-3 mb-8 sm:mb-12 border border-white/20 holographic-glow"
+          className="inline-flex items-center glass rounded-full px-4 py-2 sm:px-6 sm:py-3 mb-8 sm:mb-12 border border-white/20 subtle-glow"
         >
           <motion.div 
             className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-green-400 rounded-full mr-2 sm:mr-3"
             animate={{
-              scale: [1, 1.5, 1],
-              opacity: [0.5, 1, 0.5]
+              scale: [1, 1.3, 1],
+              opacity: [0.7, 1, 0.7]
             }}
             transition={{
               duration: 2,
@@ -140,7 +137,7 @@ export default function Hero() {
           <span className="text-xs sm:text-sm font-medium text-white">Trusted by Fortune 500 Companies</span>
         </motion.div>
         
-        {/* Hero Title with Advanced Effects */}
+        {/* Hero Title with Sophisticated Effects */}
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -153,13 +150,13 @@ export default function Hero() {
             className="text-white"
             animate={{
               textShadow: [
-                "0 0 20px rgba(255, 255, 255, 0.5)",
-                "0 0 40px rgba(0, 212, 255, 0.8)",
-                "0 0 20px rgba(255, 255, 255, 0.5)"
+                "0 0 20px rgba(255, 255, 255, 0.3)",
+                "0 0 30px rgba(124, 58, 237, 0.5)",
+                "0 0 20px rgba(255, 255, 255, 0.3)"
               ]
             }}
             transition={{
-              duration: 3,
+              duration: 4,
               repeat: Infinity,
               ease: "easeInOut"
             }}
@@ -176,10 +173,10 @@ export default function Hero() {
           className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-300 mb-12 sm:mb-16 max-w-4xl mx-auto leading-relaxed px-4"
         >
           Get more leads, increase sales, and grow your business with a website and marketing system that works for you 24/7. 
-          <span className="text-cyan-400 font-semibold"> Average 340% increase in conversions.</span>
+          <span className="text-purple-400 font-semibold"> Average 340% increase in conversions.</span>
         </motion.p>
         
-        {/* CTA Buttons with Advanced Effects */}
+        {/* CTA Buttons with Professional Effects */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -191,7 +188,7 @@ export default function Hero() {
             className="btn-apple-primary group text-sm sm:text-base px-6 py-3 sm:px-8 sm:py-4 rounded-full relative overflow-hidden"
             whileHover={{ 
               scale: 1.05,
-              boxShadow: "0 0 30px rgba(0, 212, 255, 0.6)"
+              boxShadow: "0 0 25px rgba(124, 58, 237, 0.4)"
             }}
             whileTap={{ scale: 0.95 }}
           >
@@ -202,7 +199,7 @@ export default function Hero() {
               stroke="currentColor" 
               viewBox="0 0 24 24"
               animate={{
-                x: [0, 5, 0]
+                x: [0, 3, 0]
               }}
               transition={{
                 duration: 2,
@@ -218,7 +215,7 @@ export default function Hero() {
             className="btn-apple-secondary group text-sm sm:text-base px-6 py-3 sm:px-8 sm:py-4 rounded-full relative overflow-hidden"
             whileHover={{ 
               scale: 1.05,
-              boxShadow: "0 0 30px rgba(168, 85, 247, 0.6)"
+              boxShadow: "0 0 25px rgba(168, 85, 247, 0.4)"
             }}
             whileTap={{ scale: 0.95 }}
           >
@@ -229,12 +226,12 @@ export default function Hero() {
               stroke="currentColor" 
               viewBox="0 0 24 24"
               animate={{
-                rotate: [0, 360]
+                scale: [1, 1.1, 1]
               }}
               transition={{
-                duration: 3,
+                duration: 2,
                 repeat: Infinity,
-                ease: "linear"
+                ease: "easeInOut"
               }}
             >
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -243,7 +240,7 @@ export default function Hero() {
           </motion.a>
         </motion.div>
 
-        {/* Technology Stack with Advanced Effects */}
+        {/* Technology Stack with Professional Effects */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -260,9 +257,9 @@ export default function Hero() {
                 transition={{ duration: 0.3, delay: 1 + index * 0.05 }}
                 whileHover={{ 
                   scale: 1.1,
-                  boxShadow: "0 0 20px rgba(0, 212, 255, 0.5)"
+                  boxShadow: "0 0 15px rgba(124, 58, 237, 0.4)"
                 }}
-                className="glass px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-medium text-gray-300 border border-white/10 hover:border-cyan-400/50 transition-all duration-300"
+                className="glass px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-medium text-gray-300 border border-white/10 hover:border-purple-400/50 transition-all duration-300"
               >
                 {tech}
               </motion.span>
@@ -270,12 +267,12 @@ export default function Hero() {
           </div>
         </motion.div>
 
-        {/* Premium Testimonial Preview with Holographic Effect */}
+        {/* Professional Testimonial Preview */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 1 }}
-          className="glass-strong rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-12 max-w-4xl mx-auto px-4 holographic-glow"
+          className="glass-strong rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-12 max-w-4xl mx-auto px-4 subtle-glow"
         >
           <div className="flex items-center justify-center mb-4 sm:mb-6">
             {[...Array(5)].map((_, i) => (
@@ -285,8 +282,8 @@ export default function Hero() {
                 fill="currentColor" 
                 viewBox="0 0 20 20"
                 animate={{
-                  scale: [1, 1.2, 1],
-                  rotate: [0, 10, 0]
+                  scale: [1, 1.1, 1],
+                  rotate: [0, 5, 0]
                 }}
                 transition={{
                   duration: 2,
@@ -309,7 +306,7 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      {/* Advanced Scroll Indicator */}
+      {/* Professional Scroll Indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -319,15 +316,15 @@ export default function Hero() {
         <motion.div
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
-          className="w-5 h-8 sm:w-6 sm:h-10 border-2 border-cyan-400/50 rounded-full flex justify-center relative overflow-hidden"
+          className="w-5 h-8 sm:w-6 sm:h-10 border-2 border-purple-400/50 rounded-full flex justify-center relative overflow-hidden"
         >
           <motion.div
             animate={{ y: [0, 10, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
-            className="w-0.5 h-2 sm:h-3 bg-cyan-400 rounded-full mt-1.5 sm:mt-2"
+            className="w-0.5 h-2 sm:h-3 bg-purple-400 rounded-full mt-1.5 sm:mt-2"
           />
           <motion.div
-            className="absolute inset-0 bg-gradient-to-b from-cyan-400/20 to-transparent"
+            className="absolute inset-0 bg-gradient-to-b from-purple-400/20 to-transparent"
             animate={{
               y: [0, 20, 0]
             }}

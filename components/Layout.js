@@ -33,56 +33,56 @@ export default function Layout({ children, currentPage = 'home' }) {
 
   return (
     <div className="min-h-screen relative overflow-hidden">
-      {/* Futuristic Background */}
+      {/* Sophisticated Background */}
       <div className="absolute inset-0">
         <motion.div
           animate={{ 
-            rotate: 360,
-            scale: [1, 1.1, 1],
-          }}
-          transition={{ 
-            duration: 30, 
-            repeat: Infinity, 
-            ease: "linear" 
-          }}
-          className="absolute top-20 left-10 w-72 h-72 rounded-full blur-3xl"
-          style={{
-            background: 'radial-gradient(circle, rgba(0, 212, 255, 0.2) 0%, rgba(168, 85, 247, 0.1) 50%, transparent 100%)'
-          }}
-        />
-        <motion.div
-          animate={{ 
-            rotate: -360,
-            scale: [1.1, 1, 1.1],
-          }}
-          transition={{ 
-            duration: 25, 
-            repeat: Infinity, 
-            ease: "linear" 
-          }}
-          className="absolute bottom-20 right-10 w-96 h-96 rounded-full blur-3xl"
-          style={{
-            background: 'radial-gradient(circle, rgba(168, 85, 247, 0.2) 0%, rgba(6, 182, 212, 0.1) 50%, transparent 100%)'
-          }}
-        />
-        <motion.div
-          animate={{ 
-            scale: [1, 1.2, 1],
-            opacity: [0.3, 0.6, 0.3],
+            scale: [1, 1.05, 1],
+            opacity: [0.3, 0.5, 0.3],
           }}
           transition={{ 
             duration: 20, 
             repeat: Infinity, 
             ease: "easeInOut" 
           }}
+          className="absolute top-20 left-10 w-72 h-72 rounded-full blur-3xl"
+          style={{
+            background: 'radial-gradient(circle, rgba(124, 58, 237, 0.15) 0%, rgba(168, 85, 247, 0.08) 50%, transparent 100%)'
+          }}
+        />
+        <motion.div
+          animate={{ 
+            scale: [1.05, 1, 1.05],
+            opacity: [0.4, 0.6, 0.4],
+          }}
+          transition={{ 
+            duration: 25, 
+            repeat: Infinity, 
+            ease: "easeInOut" 
+          }}
+          className="absolute bottom-20 right-10 w-96 h-96 rounded-full blur-3xl"
+          style={{
+            background: 'radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, rgba(124, 58, 237, 0.08) 50%, transparent 100%)'
+          }}
+        />
+        <motion.div
+          animate={{ 
+            scale: [1, 1.02, 1],
+            opacity: [0.2, 0.4, 0.2],
+          }}
+          transition={{ 
+            duration: 30, 
+            repeat: Infinity, 
+            ease: "easeInOut" 
+          }}
           className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full blur-2xl"
           style={{
-            background: 'radial-gradient(circle, rgba(6, 182, 212, 0.1) 0%, rgba(255, 0, 128, 0.05) 50%, transparent 100%)'
+            background: 'radial-gradient(circle, rgba(6, 182, 212, 0.08) 0%, rgba(124, 58, 237, 0.04) 50%, transparent 100%)'
           }}
         />
       </div>
 
-      {/* Advanced Navigation Bar */}
+      {/* Professional Navigation Bar */}
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
@@ -94,25 +94,25 @@ export default function Layout({ children, currentPage = 'home' }) {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16 sm:h-20">
-            {/* Logo with Holographic Effect */}
+            {/* Logo with Professional Effect */}
             <motion.div 
               className="flex items-center space-x-2"
               whileHover={{ scale: 1.05 }}
             >
               <motion.span 
-                className="rounded-xl px-3 py-2 sm:px-4 sm:py-3 text-white font-extrabold shadow-lg border border-white/20 holographic-glow"
+                className="rounded-xl px-3 py-2 sm:px-4 sm:py-3 text-white font-extrabold shadow-lg border border-white/20 subtle-glow"
                 style={{
-                  background: 'linear-gradient(135deg, var(--neon-blue) 0%, var(--neon-purple) 50%, var(--neon-cyan) 100%)'
+                  background: 'linear-gradient(135deg, #7c3aed 0%, #a855f7 50%, #c084fc 100%)'
                 }}
                 animate={{
                   boxShadow: [
-                    "0 0 20px rgba(0, 212, 255, 0.3)",
-                    "0 0 40px rgba(168, 85, 247, 0.5)",
-                    "0 0 20px rgba(0, 212, 255, 0.3)"
+                    "0 0 20px rgba(124, 58, 237, 0.3)",
+                    "0 0 30px rgba(168, 85, 247, 0.4)",
+                    "0 0 20px rgba(124, 58, 237, 0.3)"
                   ]
                 }}
                 transition={{
-                  duration: 3,
+                  duration: 4,
                   repeat: Infinity,
                   ease: "easeInOut"
                 }}
@@ -133,7 +133,7 @@ export default function Layout({ children, currentPage = 'home' }) {
                   >
                     Services
                     <motion.span 
-                      className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-cyan-400 to-purple-400 transition-all duration-300 group-hover:w-full"
+                      className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-400 to-pink-400 transition-all duration-300 group-hover:w-full"
                       whileHover={{ width: "100%" }}
                     />
                   </motion.button>
@@ -144,7 +144,7 @@ export default function Layout({ children, currentPage = 'home' }) {
                   >
                     Our Work
                     <motion.span 
-                      className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-cyan-400 to-purple-400 transition-all duration-300 group-hover:w-full"
+                      className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-400 to-pink-400 transition-all duration-300 group-hover:w-full"
                       whileHover={{ width: "100%" }}
                     />
                   </motion.button>
@@ -155,7 +155,7 @@ export default function Layout({ children, currentPage = 'home' }) {
                   >
                     About
                     <motion.span 
-                      className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-cyan-400 to-purple-400 transition-all duration-300 group-hover:w-full"
+                      className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-400 to-pink-400 transition-all duration-300 group-hover:w-full"
                       whileHover={{ width: "100%" }}
                     />
                   </motion.button>
@@ -166,7 +166,7 @@ export default function Layout({ children, currentPage = 'home' }) {
                   >
                     Contact
                     <motion.span 
-                      className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-cyan-400 to-purple-400 transition-all duration-300 group-hover:w-full"
+                      className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-400 to-pink-400 transition-all duration-300 group-hover:w-full"
                       whileHover={{ width: "100%" }}
                     />
                   </motion.button>
@@ -184,7 +184,7 @@ export default function Layout({ children, currentPage = 'home' }) {
                 className="btn-apple px-6 py-2.5 sm:px-8 sm:py-3 text-white font-semibold rounded-full text-sm sm:text-base"
                 whileHover={{ 
                   scale: 1.05,
-                  boxShadow: "0 0 20px rgba(0, 212, 255, 0.4)"
+                  boxShadow: "0 0 20px rgba(124, 58, 237, 0.4)"
                 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -269,7 +269,7 @@ export default function Layout({ children, currentPage = 'home' }) {
                   className="btn-apple w-full px-6 py-3 text-white font-semibold rounded-full"
                   whileHover={{ 
                     scale: 1.02,
-                    boxShadow: "0 0 20px rgba(0, 212, 255, 0.4)"
+                    boxShadow: "0 0 20px rgba(124, 58, 237, 0.4)"
                   }}
                   whileTap={{ scale: 0.98 }}
                 >
@@ -286,7 +286,7 @@ export default function Layout({ children, currentPage = 'home' }) {
         {children}
       </main>
 
-      {/* Advanced Back to Top Button */}
+      {/* Professional Back to Top Button */}
       <AnimatePresence>
         {showBackToTop && (
           <motion.button
@@ -294,10 +294,10 @@ export default function Layout({ children, currentPage = 'home' }) {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0 }}
             onClick={scrollToTop}
-            className="fixed bottom-6 right-6 z-40 p-3 btn-apple text-white rounded-full hover:scale-110 transition-all duration-300 holographic-glow"
+            className="fixed bottom-6 right-6 z-40 p-3 btn-apple text-white rounded-full hover:scale-110 transition-all duration-300 subtle-glow"
             whileHover={{ 
               scale: 1.1,
-              boxShadow: "0 0 30px rgba(0, 212, 255, 0.6)"
+              boxShadow: "0 0 25px rgba(124, 58, 237, 0.5)"
             }}
             whileTap={{ scale: 0.9 }}
           >
@@ -307,7 +307,7 @@ export default function Layout({ children, currentPage = 'home' }) {
               stroke="currentColor"
               viewBox="0 0 24 24"
               animate={{
-                y: [0, -5, 0]
+                y: [0, -3, 0]
               }}
               transition={{
                 duration: 2,
