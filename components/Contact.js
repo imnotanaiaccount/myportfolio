@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { businessTypes, filterBusinessTypes } from '../data/businessTypes';
 // 1. Import Heroicons at the top
 import { CheckCircleIcon, ChartBarIcon, RocketLaunchIcon, UserGroupIcon, LockClosedIcon, MagnifyingGlassIcon, PaintBrushIcon, ComputerDesktopIcon, ArrowTrendingUpIcon, StarIcon, ShieldCheckIcon, CurrencyDollarIcon, ShoppingCartIcon, ArrowUpOnSquareIcon, InboxIcon } from '@heroicons/react/24/solid';
@@ -200,77 +200,77 @@ export default function Contact() {
       answer: "Yes! We offer comprehensive support packages including maintenance, updates, security monitoring, and 24/7 technical support to ensure your project continues to perform optimally."
     },
     {
-      question: "What is your pricing structure?",
-      answer: "Our pricing is project-based and depends on complexity, features, and timeline. We provide detailed quotes after understanding your requirements. Most projects range from $5,000 to $50,000+."
+      question: "What technologies do you specialize in?",
+      answer: "We work with modern technologies including React, Next.js, Node.js, Python, AWS, and more. We choose the best tech stack for each project based on your specific needs and goals."
     },
     {
-      question: "Do you work with international clients?",
-      answer: "Absolutely! We work with clients worldwide and have experience with various time zones and cultural considerations. We use modern collaboration tools to ensure smooth communication."
+      question: "How do you handle project communication?",
+      answer: "We maintain transparent communication throughout the project with regular updates, progress reports, and dedicated project management tools. You'll always know exactly where your project stands."
     }
   ];
 
   return (
     <section id="contact" className="py-16 sm:py-24 lg:py-32 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-12 sm:mb-16 lg:mb-20">
+        {/* Section Header */}
+        <div className="text-center mb-16 sm:mb-20 lg:mb-24">
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-6 sm:mb-8 leading-tight">
-            Ready to <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">Transform</span> Your Business?
+            Ready to <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">Get Started?</span>
           </h2>
           <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-300 max-w-4xl mx-auto font-light leading-relaxed px-4">
-            Let's discuss your project and see how our expertise can help you achieve your goals. Get a free consultation and project estimate.
+            Let's discuss your project and create something amazing together. Fill out the form below and we'll get back to you within 24 hours.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 sm:gap-16 lg:gap-20">
           {/* Contact Form */}
           <div className="order-2 lg:order-1">
             <div className="glass-strong rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-12">
-              <h3 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-white">Get Your Free Consultation</h3>
-              
-              {submitStatus && (
-                <div className={`mb-6 p-4 rounded-xl ${
-                  submitStatus.type === 'success' 
-                    ? 'bg-green-500/20 border border-green-400/50 text-green-300' 
-                    : 'bg-red-500/20 border border-red-400/50 text-red-300'
-                }`}>
-                  {submitStatus.message}
-                </div>
-              )}
-
-              <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-6 sm:space-y-8">
                 {/* Name Fields */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                   <div>
-                    <label className="block text-sm font-medium text-gray-300 mb-2">First Name *</label>
+                    <label htmlFor="firstName" className="block text-sm font-semibold text-white mb-2">
+                      First Name *
+                    </label>
                     <input
                       type="text"
+                      id="firstName"
                       name="firstName"
                       value={formData.firstName}
                       onChange={handleInputChange}
-                      className={`w-full px-4 py-3 bg-white/10 border rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 ${
-                        validationErrors.firstName ? 'border-red-400' : 'border-white/20'
+                      className={`w-full px-4 py-3 rounded-xl border transition-all duration-300 ${
+                        validationErrors.firstName 
+                          ? 'border-red-400 bg-red-400/10' 
+                          : 'border-white/20 bg-white/10 focus:border-blue-400/50 focus:bg-white/15'
                       }`}
                       placeholder="John"
+                      required
                     />
                     {validationErrors.firstName && (
-                      <p className="text-red-400 text-xs mt-1">{validationErrors.firstName}</p>
+                      <p className="text-red-400 text-sm mt-1">{validationErrors.firstName}</p>
                     )}
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-300 mb-2">Last Name *</label>
+                    <label htmlFor="lastName" className="block text-sm font-semibold text-white mb-2">
+                      Last Name *
+                    </label>
                     <input
                       type="text"
+                      id="lastName"
                       name="lastName"
                       value={formData.lastName}
                       onChange={handleInputChange}
-                      className={`w-full px-4 py-3 bg-white/10 border rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 ${
-                        validationErrors.lastName ? 'border-red-400' : 'border-white/20'
+                      className={`w-full px-4 py-3 rounded-xl border transition-all duration-300 ${
+                        validationErrors.lastName 
+                          ? 'border-red-400 bg-red-400/10' 
+                          : 'border-white/20 bg-white/10 focus:border-blue-400/50 focus:bg-white/15'
                       }`}
                       placeholder="Doe"
+                      required
                     />
                     {validationErrors.lastName && (
-                      <p className="text-red-400 text-xs mt-1">{validationErrors.lastName}</p>
+                      <p className="text-red-400 text-sm mt-1">{validationErrors.lastName}</p>
                     )}
                   </div>
                 </div>
@@ -278,77 +278,98 @@ export default function Contact() {
                 {/* Contact Fields */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                   <div>
-                    <label className="block text-sm font-medium text-gray-300 mb-2">Email *</label>
+                    <label htmlFor="email" className="block text-sm font-semibold text-white mb-2">
+                      Email *
+                    </label>
                     <input
                       type="email"
+                      id="email"
                       name="email"
                       value={formData.email}
                       onChange={handleInputChange}
-                      className={`w-full px-4 py-3 bg-white/10 border rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 ${
-                        validationErrors.email ? 'border-red-400' : 'border-white/20'
+                      className={`w-full px-4 py-3 rounded-xl border transition-all duration-300 ${
+                        validationErrors.email 
+                          ? 'border-red-400 bg-red-400/10' 
+                          : 'border-white/20 bg-white/10 focus:border-blue-400/50 focus:bg-white/15'
                       }`}
-                      placeholder="john@example.com"
+                      placeholder="john@company.com"
+                      required
                     />
                     {validationErrors.email && (
-                      <p className="text-red-400 text-xs mt-1">{validationErrors.email}</p>
+                      <p className="text-red-400 text-sm mt-1">{validationErrors.email}</p>
                     )}
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-300 mb-2">Phone (Optional)</label>
+                    <label htmlFor="phone" className="block text-sm font-semibold text-white mb-2">
+                      Phone
+                    </label>
                     <input
                       type="tel"
+                      id="phone"
                       name="phone"
                       value={formData.phone}
                       onChange={handleInputChange}
-                      className={`w-full px-4 py-3 bg-white/10 border rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 ${
-                        validationErrors.phone ? 'border-red-400' : 'border-white/20'
+                      className={`w-full px-4 py-3 rounded-xl border transition-all duration-300 ${
+                        validationErrors.phone 
+                          ? 'border-red-400 bg-red-400/10' 
+                          : 'border-white/20 bg-white/10 focus:border-blue-400/50 focus:bg-white/15'
                       }`}
                       placeholder="+1 (555) 123-4567"
                     />
                     {validationErrors.phone && (
-                      <p className="text-red-400 text-xs mt-1">{validationErrors.phone}</p>
+                      <p className="text-red-400 text-sm mt-1">{validationErrors.phone}</p>
                     )}
                   </div>
                 </div>
 
-                {/* Company & Business Type */}
+                {/* Company and Business Type */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                   <div>
-                    <label className="block text-sm font-medium text-gray-300 mb-2">Company (Optional)</label>
+                    <label htmlFor="company" className="block text-sm font-semibold text-white mb-2">
+                      Company
+                    </label>
                     <input
                       type="text"
+                      id="company"
                       name="company"
                       value={formData.company}
                       onChange={handleInputChange}
-                      className={`w-full px-4 py-3 bg-white/10 border rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 ${
-                        validationErrors.company ? 'border-red-400' : 'border-white/20'
+                      className={`w-full px-4 py-3 rounded-xl border transition-all duration-300 ${
+                        validationErrors.company 
+                          ? 'border-red-400 bg-red-400/10' 
+                          : 'border-white/20 bg-white/10 focus:border-blue-400/50 focus:bg-white/15'
                       }`}
                       placeholder="Your Company"
                     />
                     {validationErrors.company && (
-                      <p className="text-red-400 text-xs mt-1">{validationErrors.company}</p>
+                      <p className="text-red-400 text-sm mt-1">{validationErrors.company}</p>
                     )}
                   </div>
                   <div className="relative">
-                    <label className="block text-sm font-medium text-gray-300 mb-2">Business Type</label>
+                    <label htmlFor="businessType" className="block text-sm font-semibold text-white mb-2">
+                      Business Type
+                    </label>
                     <input
                       type="text"
+                      id="businessType"
                       value={businessType}
                       onChange={handleBusinessTypeChange}
                       onFocus={handleBusinessTypeFocus}
                       onBlur={handleBusinessTypeBlur}
                       onKeyDown={handleBusinessTypeKeyDown}
-                      className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
+                      className="w-full px-4 py-3 rounded-xl border border-white/20 bg-white/10 focus:border-blue-400/50 focus:bg-white/15 transition-all duration-300"
                       placeholder="e.g., E-commerce, SaaS, Agency"
                     />
                     {showSuggestions && businessTypeSuggestions.length > 0 && (
-                      <div className="absolute z-50 w-full mt-1 bg-gray-900/95 backdrop-blur-xl border border-white/20 rounded-xl shadow-2xl max-h-60 overflow-y-auto">
+                      <div className="absolute z-10 w-full mt-1 bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl shadow-2xl max-h-60 overflow-y-auto">
                         {businessTypeSuggestions.map((suggestion, index) => (
                           <button
-                            key={index}
+                            key={suggestion}
                             type="button"
-                            className={`w-full px-4 py-3 text-left text-sm hover:bg-white/10 transition-colors duration-200 ${
-                              index === highlightedIndex ? 'bg-white/10' : ''
+                            className={`w-full px-4 py-3 text-left text-sm transition-colors duration-200 ${
+                              index === highlightedIndex 
+                                ? 'bg-blue-500/20 text-white' 
+                                : 'text-gray-300 hover:bg-white/10 hover:text-white'
                             } ${index === 0 ? 'rounded-t-xl' : ''} ${index === businessTypeSuggestions.length - 1 ? 'rounded-b-xl' : ''}`}
                             onClick={() => {
                               setBusinessType(suggestion);
@@ -365,11 +386,13 @@ export default function Contact() {
 
                 {/* Services Selection */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-3 sm:mb-4">What are your main goals? *</label>
+                  <label className="block text-sm font-semibold text-white mb-4">
+                    What are you looking to achieve? *
+                  </label>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-                    {services.map((service, index) => (
+                    {services.map((service) => (
                       <button
-                        key={index}
+                        key={service.name}
                         type="button"
                         onClick={() => {
                           setSelectedServices(prev => 
@@ -379,98 +402,129 @@ export default function Contact() {
                           );
                           if (serviceError) setServiceError('');
                         }}
-                        className={`flex items-center gap-3 p-3 sm:p-4 rounded-xl border transition-all duration-300 text-left ${
+                        className={`flex items-center gap-3 p-3 sm:p-4 rounded-xl border transition-all duration-300 ${
                           selectedServices.includes(service.name)
-                            ? 'bg-blue-500/20 border-blue-400/50 text-blue-300'
-                            : 'bg-white/5 border-white/20 text-gray-300 hover:bg-white/10 hover:border-white/30'
+                            ? 'border-blue-400/50 bg-blue-400/10 text-white'
+                            : 'border-white/20 bg-white/5 text-gray-300 hover:border-white/40 hover:bg-white/10'
                         }`}
                       >
-                        <div className="flex-shrink-0">
-                          {service.icon}
-                        </div>
+                        <span className="text-blue-400">{service.icon}</span>
                         <span className="text-sm font-medium">{service.name}</span>
                       </button>
                     ))}
                   </div>
                   {validationErrors.services && (
-                    <p className="text-red-400 text-xs mt-2">{validationErrors.services}</p>
+                    <p className="text-red-400 text-sm mt-2">{validationErrors.services}</p>
                   )}
                 </div>
 
-                {/* Project Description */}
+                {/* Project Details */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-2">Project Description *</label>
+                  <label htmlFor="description" className="block text-sm font-semibold text-white mb-2">
+                    Tell us about your project *
+                  </label>
                   <textarea
+                    id="description"
                     name="description"
                     value={formData.description}
                     onChange={handleInputChange}
                     rows={4}
-                    className={`w-full px-4 py-3 bg-white/10 border rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 resize-none ${
-                      validationErrors.description ? 'border-red-400' : 'border-white/20'
+                    className={`w-full px-4 py-3 rounded-xl border transition-all duration-300 resize-none ${
+                      validationErrors.description 
+                        ? 'border-red-400 bg-red-400/10' 
+                        : 'border-white/20 bg-white/10 focus:border-blue-400/50 focus:bg-white/15'
                     }`}
-                    placeholder="Tell us about your project, goals, and any specific requirements..."
+                    placeholder="Describe your project goals, requirements, and any specific features you need..."
+                    required
                   />
                   {validationErrors.description && (
-                    <p className="text-red-400 text-xs mt-1">{validationErrors.description}</p>
+                    <p className="text-red-400 text-sm mt-1">{validationErrors.description}</p>
                   )}
                 </div>
 
                 {/* Submit Button */}
                 <button
                   type="submit"
-                  disabled={isSubmitting}
-                  className="w-full px-6 py-4 bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-600 text-white font-bold rounded-xl shadow-2xl hover:shadow-blue-500/25 transition-all duration-300 hover:scale-105 border border-white/20 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                  disabled={isSubmitting || isValidating}
+                  className="btn-apple-primary w-full py-4 text-white font-semibold rounded-full text-lg disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  {isSubmitting ? 'Sending...' : 'Get Free Consultation'}
+                  {isSubmitting ? (
+                    <div className="flex items-center justify-center gap-2">
+                      <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                      Sending Message...
+                    </div>
+                  ) : (
+                    'Send Message'
+                  )}
                 </button>
+
+                {/* Status Messages */}
+                {submitStatus && (
+                  <div className={`p-4 rounded-xl border ${
+                    submitStatus.type === 'success' 
+                      ? 'bg-green-400/10 border-green-400/30 text-green-400' 
+                      : 'bg-red-400/10 border-red-400/30 text-red-400'
+                  }`}>
+                    {submitStatus.message}
+                  </div>
+                )}
               </form>
             </div>
           </div>
 
           {/* Contact Info & FAQs */}
           <div className="order-1 lg:order-2 space-y-8 sm:space-y-12">
-            {/* Contact Info */}
-            <div className="glass-strong rounded-2xl sm:rounded-3xl p-6 sm:p-8">
-              <h3 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-white">Get in Touch</h3>
-              <div className="space-y-4 sm:space-y-6">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl flex items-center justify-center">
+            {/* Contact Information */}
+            <div className="glass-strong rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-12">
+              <h3 className="text-2xl sm:text-3xl font-bold text-white mb-6 sm:mb-8">
+                Get in Touch
+              </h3>
+              <div className="space-y-6 sm:space-y-8">
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl flex items-center justify-center flex-shrink-0">
                     <InboxIcon className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-white">Email</h4>
+                    <h4 className="text-lg font-semibold text-white mb-2">Email</h4>
                     <p className="text-gray-300">hello@riva.com</p>
+                    <p className="text-sm text-gray-400">We'll respond within 24 hours</p>
                   </div>
                 </div>
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-xl flex items-center justify-center">
-                    <StarIcon className="w-6 h-6 text-white" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-white">Response Time</h4>
-                    <p className="text-gray-300">Within 24 hours</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-xl flex items-center justify-center">
+                
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-cyan-600 rounded-xl flex items-center justify-center flex-shrink-0">
                     <ShieldCheckIcon className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-white">100% Confidential</h4>
-                    <p className="text-gray-300">Your information is secure</p>
+                    <h4 className="text-lg font-semibold text-white mb-2">Secure & Confidential</h4>
+                    <p className="text-gray-300">Your information is protected</p>
+                    <p className="text-sm text-gray-400">We never share your data</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <StarIcon className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-semibold text-white mb-2">Free Consultation</h4>
+                    <p className="text-gray-300">No obligation, no pressure</p>
+                    <p className="text-sm text-gray-400">Let's discuss your project</p>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* FAQs */}
-            <div className="glass-strong rounded-2xl sm:rounded-3xl p-6 sm:p-8">
-              <h3 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-white">Frequently Asked Questions</h3>
-              <div className="space-y-4 sm:space-y-6">
+            <div className="glass-strong rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-12">
+              <h3 className="text-2xl sm:text-3xl font-bold text-white mb-6 sm:mb-8">
+                Frequently Asked Questions
+              </h3>
+              <div className="space-y-6">
                 {faqs.map((faq, index) => (
-                  <div key={index} className="border-b border-white/10 pb-4 sm:pb-6 last:border-b-0">
-                    <h4 className="font-semibold text-white mb-2 sm:mb-3 text-sm sm:text-base">{faq.question}</h4>
-                    <p className="text-gray-300 text-sm leading-relaxed">{faq.answer}</p>
+                  <div key={index} className="border-b border-white/10 pb-6 last:border-b-0 last:pb-0">
+                    <h4 className="text-lg font-semibold text-white mb-3">{faq.question}</h4>
+                    <p className="text-gray-300 leading-relaxed">{faq.answer}</p>
                   </div>
                 ))}
               </div>

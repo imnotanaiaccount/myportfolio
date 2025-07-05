@@ -79,7 +79,7 @@ export default function Examples() {
                   href={project.url} 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="inline-flex items-center px-3 py-2 sm:px-4 sm:py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-xs sm:text-sm font-semibold rounded-full hover:from-blue-700 hover:to-purple-700 transition-all duration-300 group-hover:scale-105"
+                  className="btn-apple-primary inline-flex items-center px-3 py-2 sm:px-4 sm:py-2 text-white text-xs sm:text-sm font-semibold rounded-full group-hover:scale-105"
                 >
                   View Project
                   <svg className="w-3 h-3 sm:w-4 sm:h-4 ml-1.5 sm:ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -102,7 +102,7 @@ export default function Examples() {
             </p>
             <a 
               href="#contact" 
-              className="inline-flex items-center px-6 py-3 sm:px-8 sm:py-4 bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-600 text-white font-bold text-sm sm:text-lg rounded-full shadow-2xl hover:shadow-blue-500/25 transition-all duration-300 hover:scale-105 border border-white/20"
+              className="btn-apple-primary inline-flex items-center px-6 py-3 sm:px-8 sm:py-4 text-white font-bold text-sm sm:text-lg rounded-full group-hover:scale-105"
             >
               Start Your Project
               <svg className="w-4 h-4 sm:w-5 sm:h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">

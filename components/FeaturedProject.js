@@ -116,7 +116,7 @@ export default function FeaturedProject() {
                     rel="noopener"
                     whileHover={{ scale: 1.03, y: -2 }}
                     whileTap={{ scale: 0.98 }}
-                    className="inline-block px-7 py-3 bg-white/90 dark:bg-neutral-900 text-riva-700 dark:text-riva-200 font-semibold text-base rounded-xl shadow-md border border-neutral-200 dark:border-neutral-800 hover:shadow-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-riva-300"
+                    className="btn-apple-primary inline-block px-7 py-3 text-white font-semibold text-base rounded-xl"
                   >
                     View Project
                   </motion.a>
@@ -124,7 +124,7 @@ export default function FeaturedProject() {
                     href="#contact" 
                     whileHover={{ scale: 1.05, y: -5 }}
                     whileTap={{ scale: 0.95 }}
-                    className="px-8 py-4 rounded-xl bg-riva/10 dark:bg-riva-darkest/70 text-riva dark:text-white font-semibold text-center hover:bg-riva-lighter/50 dark:hover:bg-riva-dark hover:text-white transition-all duration-300 border border-riva/20"
+                    className="btn-apple-secondary px-8 py-4 rounded-xl text-white font-semibold text-center"
                   >
                     Similar Project
                   </motion.a>
@@ -149,7 +149,7 @@ export default function FeaturedProject() {
                 <div className="aspect-video w-full rounded-3xl overflow-hidden border border-riva/10 dark:border-dark-border bg-white dark:bg-dark-card relative flex flex-col items-center justify-center">
                   <img src="/jackson-preview.png" alt="Preview Screenshot" className="w-full h-full object-cover rounded-3xl" />
                   <div className="absolute bottom-6 left-0 right-0 flex flex-col items-center">
-                    <a href="https://jacksoninvestmentsolutions2.netlify.app/" target="_blank" rel="noopener" className="px-6 py-3 bg-riva-600 text-white rounded-xl font-bold shadow-lg hover:bg-riva-700 transition">Open Site</a>
+                    <a href="https://jacksoninvestmentsolutions2.netlify.app/" target="_blank" rel="noopener" className="btn-apple-primary px-6 py-3 text-white rounded-xl font-bold">Open Site</a>
                   </div>
                 </div>
               </div>
