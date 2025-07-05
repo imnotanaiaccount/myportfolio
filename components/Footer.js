@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export default function Footer() {
   return (
     <footer className="w-full py-8 sm:py-10 px-4 sm:px-6 lg:px-8 bg-black/20 backdrop-blur-sm border-t border-white/10 shadow-xl mt-16 sm:mt-20">
@@ -42,8 +44,12 @@ export default function Footer() {
             &copy; {new Date().getFullYear()} Joshua Hawley · Riva. All rights reserved.
           </div>
           <div className="flex items-center gap-4 sm:gap-6">
-            <a href="/privacy-policy" className="text-gray-400 hover:text-white transition-colors duration-200 text-xs sm:text-sm">Privacy Policy</a>
-            <a href="/terms-of-use" className="text-gray-400 hover:text-white transition-colors duration-200 text-xs sm:text-sm">Terms of Use</a>
+            <Link href="/privacy-policy" className="text-gray-400 hover:text-white transition-colors duration-200 text-xs sm:text-sm">
+              Privacy Policy
+            </Link>
+            <Link href="/terms-of-use" className="text-gray-400 hover:text-white transition-colors duration-200 text-xs sm:text-sm">
+              Terms of Use
+            </Link>
           </div>
         </div>
       </div>

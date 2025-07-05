@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import Layout from '../components/Layout';
 import { motion } from 'framer-motion';
 
@@ -14,6 +15,14 @@ export default function PrivacyPolicy() {
             transition={{ duration: 0.8 }}
             className="text-center mb-16 sm:mb-20"
           >
+            <div className="mb-6 sm:mb-8">
+              <Link href="/" className="inline-flex items-center text-blue-400 hover:text-white transition-colors duration-200 text-sm sm:text-base">
+                <svg className="w-4 h-4 sm:w-5 sm:h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                Back to Home
+              </Link>
+            </div>
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-6 sm:mb-8 leading-tight">
               <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">Privacy Policy</span>
             </h1>
