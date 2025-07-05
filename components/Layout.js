@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Layout({ children }) {
   const [dark, setDark] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     if (dark) {
@@ -24,13 +26,29 @@ export default function Layout({ children }) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Check if we're on the main page
+  const isMainPage = router.pathname === '/';
+
   const navItems = [
-    { href: '#services', label: 'Services' },
-    { href: '#examples', label: 'Work' },
-    { href: '#about', label: 'About' },
-    { href: '#testimonials', label: 'Reviews' },
-    { href: '#contact', label: 'Contact' }
+    { href: isMainPage ? '#services' : '/#services', label: 'Services' },
+    { href: isMainPage ? '#examples' : '/#examples', label: 'Work' },
+    { href: isMainPage ? '#about' : '/#about', label: 'About' },
+    { href: isMainPage ? '#contact' : '/#contact', label: 'Contact' }
   ];
+
+  const handleNavClick = (href) => {
+    if (href.startsWith('/#')) {
+      // Navigate to main page and scroll to section
+      router.push(href);
+    } else if (href.startsWith('#')) {
+      // Scroll to section on current page
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+    setMobileMenuOpen(false);
+  };
 
   return (
     <div className="min-h-screen relative overflow-hidden bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 text-white">
@@ -67,25 +85,25 @@ export default function Layout({ children }) {
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center space-x-8">
               {navItems.map((item) => (
-                <a 
+                <button 
                   key={item.href}
-                  href={item.href} 
+                  onClick={() => handleNavClick(item.href)}
                   className="text-white/90 hover:text-white transition-colors duration-200 font-medium relative group"
                 >
                   {item.label}
                   <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 transition-all duration-300 group-hover:w-full"></span>
-                </a>
+                </button>
               ))}
             </div>
             
             {/* Desktop CTA */}
             <div className="hidden lg:block">
-              <a 
-                href="#contact" 
-                className="px-6 py-2.5 sm:px-8 sm:py-3 bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-600 text-white font-bold rounded-full shadow-2xl hover:shadow-blue-500/25 transition-all duration-300 hover:scale-105 border border-white/20 text-sm sm:text-base"
+              <button 
+                onClick={() => handleNavClick(isMainPage ? '#contact' : '/#contact')}
+                className="btn-apple px-6 py-2.5 sm:px-8 sm:py-3 text-white font-semibold rounded-full text-sm sm:text-base"
               >
                 Get Started
-              </a>
+              </button>
             </div>
 
             {/* Mobile Menu Button */}
@@ -115,17 +133,16 @@ export default function Layout({ children }) {
             >
               <div className="px-4 py-6 space-y-4">
                 {navItems.map((item, index) => (
-                  <motion.a
+                  <motion.button
                     key={item.href}
-                    href={item.href}
+                    onClick={() => handleNavClick(item.href)}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.3, delay: index * 0.1 }}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block text-white/90 hover:text-white transition-colors duration-200 font-medium py-3 border-b border-white/10 last:border-b-0"
+                    className="block w-full text-left text-white/90 hover:text-white transition-colors duration-200 font-medium py-3 border-b border-white/10 last:border-b-0"
                   >
                     {item.label}
-                  </motion.a>
+                  </motion.button>
                 ))}
                 <motion.div
                   initial={{ opacity: 0, x: -20 }}
@@ -133,13 +150,12 @@ export default function Layout({ children }) {
                   transition={{ duration: 0.3, delay: navItems.length * 0.1 }}
                   className="pt-4"
                 >
-                  <a 
-                    href="#contact" 
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block w-full text-center px-6 py-3 bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-600 text-white font-bold rounded-full shadow-2xl hover:shadow-blue-500/25 transition-all duration-300 border border-white/20"
+                  <button 
+                    onClick={() => handleNavClick(isMainPage ? '#contact' : '/#contact')}
+                    className="btn-apple w-full px-6 py-3 text-white font-semibold rounded-full"
                   >
                     Get Started
-                  </a>
+                  </button>
                 </motion.div>
               </div>
             </motion.div>
@@ -160,7 +176,7 @@ export default function Layout({ children }) {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0 }}
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="fixed bottom-6 right-6 z-40 p-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full shadow-2xl hover:shadow-blue-500/25 transition-all duration-300 hover:scale-110 border border-white/20"
+            className="fixed bottom-6 right-6 z-40 p-3 btn-apple text-white rounded-full hover:scale-110 transition-all duration-300"
             aria-label="Back to top"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -82,7 +82,7 @@ export default function Hero() {
         >
           <a 
             href="#contact" 
-            className="btn-primary btn-premium group text-sm sm:text-base px-6 py-3 sm:px-8 sm:py-4"
+            className="btn-apple-primary group text-sm sm:text-base px-6 py-3 sm:px-8 sm:py-4 rounded-full"
           >
             Get Started Today
             <svg className="w-4 h-4 sm:w-5 sm:h-5 ml-2 inline group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -91,7 +91,7 @@ export default function Hero() {
           </a>
           <a 
             href="#examples" 
-            className="btn-secondary group text-sm sm:text-base px-6 py-3 sm:px-8 sm:py-4"
+            className="btn-apple-secondary group text-sm sm:text-base px-6 py-3 sm:px-8 sm:py-4 rounded-full"
           >
             See Our Work
             <svg className="w-4 h-4 sm:w-5 sm:h-5 ml-2 inline group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
