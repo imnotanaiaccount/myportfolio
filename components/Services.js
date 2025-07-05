@@ -154,15 +154,6 @@ export default function Services() {
     }
   ];
 
-  const stats = [
-    { number: "50+", label: "Projects Completed", icon: "🚀" },
-    { number: "100%", label: "Client Satisfaction", icon: "⭐" },
-    { number: "10+", label: "Years Experience", icon: "🏆" },
-    { number: "24/7", label: "Support Available", icon: "🛡️" },
-    { number: "20+", label: "Technologies Mastered", icon: "⚡" },
-    { number: "100%", label: "On-time Delivery", icon: "⏰" }
-  ];
-
   return (
     <section id="services" className="py-16 sm:py-24 lg:py-32 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
@@ -175,7 +166,7 @@ export default function Services() {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-16 sm:mb-24 lg:mb-32">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {services.map((service, index) => (
             <motion.div
               key={index}
@@ -228,34 +219,6 @@ export default function Services() {
             </motion.div>
           ))}
         </div>
-
-        {/* Stats Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-center"
-        >
-          <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-8 sm:mb-12 text-white">
-            Why Choose <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">Riva</span>
-          </h3>
-          
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6 lg:gap-8">
-            {stats.map((stat, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="text-center p-4 sm:p-6"
-              >
-                <div className="text-2xl sm:text-3xl lg:text-4xl mb-2">{stat.icon}</div>
-                <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-1 sm:mb-2">{stat.number}</div>
-                <div className="text-xs sm:text-sm text-gray-400 font-medium">{stat.label}</div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
       </div>
     </section>
   );

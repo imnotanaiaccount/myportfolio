@@ -100,40 +100,12 @@ export default function Hero() {
             </svg>
           </a>
         </motion.div>
-        
-        {/* Enhanced Stats Grid */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.8 }}
-          className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 max-w-5xl mx-auto mb-16 sm:mb-20 px-4"
-        >
-          {[
-            { number: "50+", label: "Projects Delivered", color: "blue" },
-            { number: "100%", label: "Client Satisfaction", color: "purple" },
-            { number: "10+", label: "Years Experience", color: "cyan" },
-            { number: "24/7", label: "Support Available", color: "blue" }
-          ].map((stat, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 1 + index * 0.1 }}
-              className="card-premium p-4 sm:p-6 lg:p-8 text-center interactive-card"
-            >
-              <div className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black mb-2 sm:mb-3 text-${stat.color}-400`}>
-                {stat.number}
-              </div>
-              <div className="text-gray-300 text-xs sm:text-sm font-medium">{stat.label}</div>
-            </motion.div>
-          ))}
-        </motion.div>
 
         {/* Technology Stack */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 1.2 }}
+          transition={{ duration: 1, delay: 0.8 }}
           className="mb-12 sm:mb-16 px-4"
         >
           <h3 className="text-sm sm:text-base lg:text-lg font-semibold text-gray-400 mb-6 sm:mb-8 uppercase tracking-wide">Built with Modern Technologies</h3>
@@ -143,7 +115,7 @@ export default function Hero() {
                 key={index}
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.3, delay: 1.4 + index * 0.05 }}
+                transition={{ duration: 0.3, delay: 1 + index * 0.05 }}
                 className="glass px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-medium text-gray-300 border border-white/10 hover:border-blue-400/50 transition-all duration-300"
               >
                 {tech}
@@ -156,7 +128,7 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 1.4 }}
+          transition={{ duration: 1, delay: 1 }}
           className="glass-strong rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-12 max-w-4xl mx-auto px-4"
         >
           <div className="flex items-center justify-center mb-4 sm:mb-6">
@@ -180,7 +152,7 @@ export default function Hero() {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 2 }}
+        transition={{ duration: 1, delay: 1.5 }}
         className="absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2"
       >
         <motion.div
