@@ -63,7 +63,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Enhanced Card Styles */
 .card-premium {
-  @apply bg-white/8 backdrop-blur-xl rounded-3xl border border-white/20 shadow-2xl;
+  @apply backdrop-blur-xl rounded-3xl border border-white/20 shadow-2xl;
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.04) 100%);
 }
 
