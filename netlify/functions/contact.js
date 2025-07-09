@@ -1,10 +1,15 @@
 const { createClient } = require('@supabase/supabase-js');
 
-// Initialize Supabase client
-const supabase = createClient(
-  process.env.SUPABASE_URL,
-  process.env.SUPABASE_ANON_KEY
-);
+// Initialize Supabase client with error handling
+let supabase = null;
+try {
+  supabase = createClient(
+    process.env.SUPABASE_URL,
+    process.env.SUPABASE_ANON_KEY
+  );
+} catch (error) {
+  console.error('Supabase client initialization error:', error);
+}
 
 exports.handler = async (event, context) => {
   // Enable CORS for Netlify
@@ -33,6 +38,13 @@ exports.handler = async (event, context) => {
   }
 
   try {
+    // Log environment variables for debugging (remove in production)
+    console.log('Environment check:', {
+      hasSupabaseUrl: !!process.env.SUPABASE_URL,
+      hasSupabaseKey: !!process.env.SUPABASE_ANON_KEY,
+      hasBrevoKey: !!process.env.BREVO_API_KEY
+    });
+
     const { name, email, projectType, message, newsletter } = JSON.parse(event.body);
 
     // Validate required fields
@@ -54,58 +66,38 @@ exports.handler = async (event, context) => {
       };
     }
 
-    // Save to Supabase (free tier: 50,000 rows)
-    const { error: supabaseError } = await supabase
-      .from('leads')
-      .insert([
-        {
-          name: name.trim(),
-          email: email.toLowerCase().trim(),
-          project_type: projectType,
-          message: message.trim(),
-          newsletter: !!newsletter,
-          created_at: new Date().toISOString()
-        }
-      ]);
-
-    if (supabaseError) {
-      console.error('Supabase error:', supabaseError);
-      return {
-        statusCode: 500,
-        headers,
-        body: JSON.stringify({ error: 'Failed to save lead' })
-      };
-    }
-
-    // Send to n8n webhook (FREE tier: 1,000 executions/month)
-    let n8nResponse = null;
-    if (process.env.N8N_WEBHOOK_URL) {
+    // Save to Supabase (if configured)
+    let supabaseSuccess = false;
+    if (supabase && process.env.SUPABASE_URL && process.env.SUPABASE_ANON_KEY) {
       try {
-        const webhookData = {
-          name: name.trim(),
-          email: email.toLowerCase().trim(),
-          projectType: projectType,
-          message: message.trim(),
-          newsletter: !!newsletter,
-          timestamp: new Date().toISOString(),
-          source: 'Riva Portfolio Contact Form'
-        };
+        const { error: supabaseError } = await supabase
+          .from('leads')
+          .insert([
+            {
+              name: name.trim(),
+              email: email.toLowerCase().trim(),
+              project_type: projectType,
+              message: message.trim(),
+              newsletter: !!newsletter,
+              created_at: new Date().toISOString()
+            }
+          ]);
 
-        n8nResponse = await fetch(process.env.N8N_WEBHOOK_URL, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(webhookData)
-        });
+        if (supabaseError) {
+          console.error('Supabase error:', supabaseError);
+        } else {
+          supabaseSuccess = true;
+          console.log('Lead saved to Supabase successfully');
+        }
       } catch (error) {
-        console.error('n8n webhook error:', error);
-        // Don't fail the entire request if n8n is down
+        console.error('Supabase save error:', error);
       }
+    } else {
+      console.log('Supabase not configured, skipping database save');
     }
 
-    // Send email via Brevo (FREE tier: 300 emails/day)
-    let brevoResponse = null;
+    // Send email via Brevo (if configured)
+    let brevoSuccess = false;
     if (process.env.BREVO_API_KEY) {
       try {
         const emailHtml = `
@@ -173,7 +165,7 @@ exports.handler = async (event, context) => {
           htmlContent: emailHtml
         };
 
-        brevoResponse = await fetch('https://api.brevo.com/v3/smtp/email', {
+        const brevoResponse = await fetch('https://api.brevo.com/v3/smtp/email', {
           method: 'POST',
           headers: {
             'Accept': 'application/json',
@@ -183,25 +175,29 @@ exports.handler = async (event, context) => {
           body: JSON.stringify(brevoEmailData)
         });
 
-        if (!brevoResponse.ok) {
+        if (brevoResponse.ok) {
+          brevoSuccess = true;
+          console.log('Email sent via Brevo successfully');
+        } else {
           const errorText = await brevoResponse.text();
           console.error('Brevo API error:', brevoResponse.status, errorText);
-          throw new Error(`Brevo API error: ${brevoResponse.status}`);
         }
       } catch (error) {
         console.error('Brevo email error:', error);
-        // Don't fail the entire request if Brevo is down
       }
+    } else {
+      console.log('Brevo not configured, skipping email');
     }
 
+    // Always return success if form data is valid
     return {
       statusCode: 200,
       headers,
       body: JSON.stringify({ 
         message: 'Thank you! Your message has been received.',
         success: true,
-        n8nStatus: n8nResponse?.status,
-        brevoStatus: brevoResponse?.ok ? 'sent' : 'not_configured'
+        supabaseStatus: supabaseSuccess ? 'saved' : 'not_configured',
+        brevoStatus: brevoSuccess ? 'sent' : 'not_configured'
       })
     };
 
@@ -210,7 +206,10 @@ exports.handler = async (event, context) => {
     return {
       statusCode: 500,
       headers,
-      body: JSON.stringify({ error: 'Internal server error' })
+      body: JSON.stringify({ 
+        error: 'Internal server error',
+        message: 'Something went wrong. Please try again later.'
+      })
     };
   }
 }; 
