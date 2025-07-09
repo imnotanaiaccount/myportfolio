@@ -1,8 +1,10 @@
-# 🚀 Professional Portfolio Website
+# Riva Portfolio
 
-A modern, responsive portfolio website built with Next.js, Tailwind CSS, and Facebook-inspired design. Features contact form automation with Brevo and n8n integration.
+A modern, professional portfolio website built with Next.js, featuring a sleek Apple-inspired design and automated lead capture system.
 
-## ✨ Features
+**Last Deployment:** August 1, 2024 - Production Ready ✅
+
+## 🚀 Features
 
 - **Modern Design**: Facebook-inspired color palette with professional animations
 - **Responsive**: Mobile-first design that works on all devices
