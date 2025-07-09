@@ -1,5 +1,13 @@
+const { createClient } = require('@supabase/supabase-js');
+
+// Initialize Supabase client
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+);
+
 exports.handler = async (event, context) => {
-  // Enable CORS
+  // Enable CORS for Netlify
   const headers = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Headers': 'Content-Type',
@@ -20,59 +28,69 @@ exports.handler = async (event, context) => {
     return {
       statusCode: 405,
       headers,
-      body: JSON.stringify({ message: 'Method not allowed' })
+      body: JSON.stringify({ error: 'Method not allowed' })
     };
   }
 
   try {
-    // Parse the request body
-    const formData = JSON.parse(event.body);
+    const { name, email, projectType, message, newsletter } = JSON.parse(event.body);
 
     // Validate required fields
-    const requiredFields = ['firstName', 'lastName', 'email'];
-    for (const field of requiredFields) {
-      if (!formData[field] || !formData[field].trim()) {
-        return {
-          statusCode: 400,
-          headers,
-          body: JSON.stringify({ 
-            message: `Missing required field: ${field}` 
-          })
-        };
-      }
+    if (!name || !email || !projectType || !message) {
+      return {
+        statusCode: 400,
+        headers,
+        body: JSON.stringify({ error: 'Missing required fields' })
+      };
     }
 
     // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(formData.email)) {
+    if (!emailRegex.test(email)) {
       return {
         statusCode: 400,
         headers,
-        body: JSON.stringify({ 
-          message: 'Invalid email format' 
-        })
+        body: JSON.stringify({ error: 'Invalid email format' })
       };
     }
 
-    // Prepare data for n8n webhook
-    const webhookData = {
-      firstName: formData.firstName.trim(),
-      lastName: formData.lastName.trim(),
-      email: formData.email.trim(),
-      phone: formData.phone || '',
-      company: formData.company || '',
-      projectType: formData.projectType || '',
-      budget: formData.budget || '',
-      description: formData.description || '',
-      businessType: formData.businessType || '',
-      timestamp: new Date().toISOString(),
-      source: 'Portfolio Contact Form'
-    };
+    // Save to Supabase (free tier: 50,000 rows)
+    const { error: supabaseError } = await supabase
+      .from('leads')
+      .insert([
+        {
+          name: name.trim(),
+          email: email.toLowerCase().trim(),
+          project_type: projectType,
+          message: message.trim(),
+          newsletter: !!newsletter,
+          created_at: new Date().toISOString()
+        }
+      ]);
 
-    // Send to n8n webhook if configured
+    if (supabaseError) {
+      console.error('Supabase error:', supabaseError);
+      return {
+        statusCode: 500,
+        headers,
+        body: JSON.stringify({ error: 'Failed to save lead' })
+      };
+    }
+
+    // Send to n8n webhook (FREE tier: 1,000 executions/month)
     let n8nResponse = null;
     if (process.env.N8N_WEBHOOK_URL) {
       try {
+        const webhookData = {
+          name: name.trim(),
+          email: email.toLowerCase().trim(),
+          projectType: projectType,
+          message: message.trim(),
+          newsletter: !!newsletter,
+          timestamp: new Date().toISOString(),
+          source: 'Riva Portfolio Contact Form'
+        };
+
         n8nResponse = await fetch(process.env.N8N_WEBHOOK_URL, {
           method: 'POST',
           headers: {
@@ -86,68 +104,55 @@ exports.handler = async (event, context) => {
       }
     }
 
-    // Send email via Brevo if configured
+    // Send email via Brevo (FREE tier: 300 emails/day)
     let brevoResponse = null;
     if (process.env.BREVO_API_KEY) {
       try {
-        // Create a simple HTML email without using templates
         const emailHtml = `
           <!DOCTYPE html>
           <html>
           <head>
             <meta charset="utf-8">
-            <title>New Contact Form Submission</title>
+            <title>New Contact Form Submission - Riva</title>
             <style>
               body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
               .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-              .header { background: #1877f2; color: white; padding: 20px; text-align: center; }
+              .header { background: #007AFF; color: white; padding: 20px; text-align: center; }
               .content { padding: 20px; background: #f9f9f9; }
               .field { margin-bottom: 15px; }
-              .label { font-weight: bold; color: #1877f2; }
+              .label { font-weight: bold; color: #007AFF; }
               .value { background: white; padding: 10px; border-radius: 5px; }
             </style>
           </head>
           <body>
             <div class="container">
               <div class="header">
-                <h1>🎉 New Contact Form Submission</h1>
+                <h1>🎉 New Lead from Riva Portfolio</h1>
               </div>
               <div class="content">
                 <div class="field">
                   <div class="label">👤 Name:</div>
-                  <div class="value">${webhookData.firstName} ${webhookData.lastName}</div>
+                  <div class="value">${name}</div>
                 </div>
                 <div class="field">
                   <div class="label">📧 Email:</div>
-                  <div class="value">${webhookData.email}</div>
-                </div>
-                <div class="field">
-                  <div class="label">📞 Phone:</div>
-                  <div class="value">${webhookData.phone || 'Not provided'}</div>
-                </div>
-                <div class="field">
-                  <div class="label">🏢 Company:</div>
-                  <div class="value">${webhookData.company || 'Not provided'}</div>
-                </div>
-                <div class="field">
-                  <div class="label">🏷️ Business Type:</div>
-                  <div class="value">${webhookData.businessType || 'Not specified'}</div>
+                  <div class="value">${email}</div>
                 </div>
                 <div class="field">
                   <div class="label">🛠️ Project Type:</div>
-                  <div class="value">${webhookData.projectType || 'Not specified'}</div>
-                </div>
-                <div class="field">
-                  <div class="label">💰 Budget:</div>
-                  <div class="value">${webhookData.budget || 'Not specified'}</div>
+                  <div class="value">${projectType}</div>
                 </div>
                 <div class="field">
                   <div class="label">💬 Message:</div>
-                  <div class="value">${webhookData.description || 'No message provided'}</div>
+                  <div class="value">${message}</div>
+                </div>
+                <div class="field">
+                  <div class="label">📧 Newsletter:</div>
+                  <div class="value">${newsletter ? 'Yes' : 'No'}</div>
                 </div>
                 <div class="field">
                   <div class="label">⏰ Submitted:</div>
-                  <div class="value">${webhookData.timestamp}</div>
+                  <div class="value">${new Date().toLocaleString()}</div>
                 </div>
               </div>
             </div>
@@ -157,14 +162,14 @@ exports.handler = async (event, context) => {
 
         const brevoEmailData = {
           sender: {
-            name: 'Portfolio Contact Form',
-            email: 'contact@brevo.com'
+            name: 'Riva Portfolio',
+            email: 'noreply@riva.com'
           },
           to: [{
-            email: process.env.NOTIFICATION_EMAIL || 'joshhawleyproductions@gmail.com',
-            name: 'Portfolio Contact'
+            email: process.env.NOTIFICATION_EMAIL || 'hello@riva.com',
+            name: 'Riva Team'
           }],
-          subject: `New Contact Form Submission - ${webhookData.firstName} ${webhookData.lastName}`,
+          subject: `New Lead: ${name} - ${projectType}`,
           htmlContent: emailHtml
         };
 
@@ -189,12 +194,11 @@ exports.handler = async (event, context) => {
       }
     }
 
-    // Return success response
     return {
       statusCode: 200,
       headers,
-      body: JSON.stringify({
-        message: 'Thank you for your message! We\'ll get back to you soon.',
+      body: JSON.stringify({ 
+        message: 'Thank you! Your message has been received.',
         success: true,
         n8nStatus: n8nResponse?.status,
         brevoStatus: brevoResponse?.ok ? 'sent' : 'not_configured'
@@ -202,15 +206,11 @@ exports.handler = async (event, context) => {
     };
 
   } catch (error) {
-    console.error('Contact form error:', error);
-    
+    console.error('Function error:', error);
     return {
       statusCode: 500,
       headers,
-      body: JSON.stringify({
-        message: 'An error occurred while processing your request. Please try again later.',
-        error: process.env.NODE_ENV === 'development' ? error.message : 'Internal server error'
-      })
+      body: JSON.stringify({ error: 'Internal server error' })
     };
   }
 }; 

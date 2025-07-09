@@ -49,7 +49,7 @@ A modern, responsive portfolio website built with Next.js, Tailwind CSS, and Fac
    ```
 
 4. **Open your browser**
-   Navigate to [http://localhost:3000](http://localhost:3000)
+   Navigate to [http://localhost:3000](http://localhost:3000) (or your deployed URL)
 
 ## 📧 Email Setup with Brevo
 
@@ -188,10 +188,9 @@ Go to Site settings → Environment variables and add:
 
 ```
 BREVO_API_KEY=your_brevo_api_key
-BREVO_TEMPLATE_ID=your_template_id
-BREVO_SENDER_EMAIL=noreply@yourdomain.com
-NOTIFICATION_EMAIL=your-email@example.com
-N8N_WEBHOOK_URL=your_n8n_webhook_url
+BREVO_SENDER_EMAIL=noreply@riva.com
+NOTIFICATION_EMAIL=hello@riva.com
+N8N_WEBHOOK_URL=https://your-n8n-instance.com/webhook/lead-capture
 ```
 
 ### 4. Deploy

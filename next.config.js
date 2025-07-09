@@ -3,12 +3,11 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ['api.placeholder.com'],
     unoptimized: true
   },
   trailingSlash: true,
-  output: 'export',
-  distDir: 'out'
+  // Remove output: 'export' to enable API routes
+  // output: 'export' // Comment this out for API routes to work
 }
 
 module.exports = nextConfig 
