@@ -219,6 +219,40 @@ exports.handler = async (event, context) => {
       console.log('Brevo not configured, skipping email');
     }
 
+    // Add to Brevo list if newsletter opt-in
+    let brevoListStatus = 'not_subscribed';
+    if (newsletter && process.env.BREVO_API_KEY && process.env.BREVO_LIST_ID) {
+      try {
+        const addToListResponse = await fetch('https://api.brevo.com/v3/contacts', {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'api-key': process.env.BREVO_API_KEY
+          },
+          body: JSON.stringify({
+            email: email.toLowerCase().trim(),
+            attributes: { FIRSTNAME: name.trim() },
+            listIds: [parseInt(process.env.BREVO_LIST_ID, 10)],
+            updateEnabled: true
+          })
+        });
+        if (addToListResponse.ok) {
+          brevoListStatus = 'subscribed';
+          console.log('User added to Brevo list');
+        } else {
+          const errorText = await addToListResponse.text();
+          brevoListStatus = 'error';
+          console.error('Brevo list add error:', addToListResponse.status, errorText);
+        }
+      } catch (error) {
+        brevoListStatus = 'error';
+        console.error('Brevo list add exception:', error);
+      }
+    } else if (newsletter) {
+      console.log('Newsletter opt-in, but Brevo API key or list ID missing');
+    }
+
     // Always return success if form data is valid
     return {
       statusCode: 200,
@@ -228,7 +262,8 @@ exports.handler = async (event, context) => {
         success: true,
         supabaseStatus: supabaseSuccess ? 'saved' : 'not_configured',
         brevoStatus: brevoSuccess ? 'sent' : 'not_configured',
-        n8nStatus: n8nStatus
+        n8nStatus: n8nStatus,
+        brevoListStatus: brevoListStatus
       })
     };
 
