@@ -155,7 +155,7 @@ exports.handler = async (event, context) => {
         const brevoEmailData = {
           sender: {
             name: 'Riva Portfolio',
-            email: 'noreply@riva.com'
+            email: process.env.BREVO_SENDER_EMAIL || 'joshhawleyofficial@gmail.com'
           },
           to: [{
             email: process.env.NOTIFICATION_EMAIL || 'hello@riva.com',
