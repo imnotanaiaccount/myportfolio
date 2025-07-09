@@ -96,6 +96,36 @@ exports.handler = async (event, context) => {
       console.log('Supabase not configured, skipping database save');
     }
 
+    // Send to n8n webhook (if configured)
+    let n8nStatus = 'not_configured';
+    if (process.env.N8N_WEBHOOK_URL) {
+      try {
+        const webhookData = {
+          name: name.trim(),
+          email: email.toLowerCase().trim(),
+          projectType: projectType,
+          message: message.trim(),
+          newsletter: !!newsletter,
+          timestamp: new Date().toISOString(),
+          source: 'Riva Portfolio Contact Form'
+        };
+        const n8nResponse = await fetch(process.env.N8N_WEBHOOK_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(webhookData)
+        });
+        n8nStatus = n8nResponse.status;
+        console.log('n8n webhook response status:', n8nResponse.status);
+      } catch (error) {
+        n8nStatus = 'error';
+        console.error('n8n webhook error:', error);
+      }
+    } else {
+      console.log('N8N_WEBHOOK_URL not set, skipping n8n webhook');
+    }
+
     // Send email via Brevo (if configured)
     let brevoSuccess = false;
     if (process.env.BREVO_API_KEY) {
@@ -197,7 +227,8 @@ exports.handler = async (event, context) => {
         message: 'Thank you! Your message has been received.',
         success: true,
         supabaseStatus: supabaseSuccess ? 'saved' : 'not_configured',
-        brevoStatus: brevoSuccess ? 'sent' : 'not_configured'
+        brevoStatus: brevoSuccess ? 'sent' : 'not_configured',
+        n8nStatus: n8nStatus
       })
     };
 
