@@ -1,14 +1,18 @@
 // Security and spam protection for contact form
 const crypto = require('crypto');
-const fs = require('fs').promises;
-const path = require('path');
+const { createClient } = require('@supabase/supabase-js');
+
+const supabaseUrl = process.env.SUPABASE_URL;
+const supabaseKey = process.env.SUPABASE_ANON_KEY;
+const supabase = createClient(supabaseUrl, supabaseKey);
+
+if (!supabaseUrl || !supabaseKey) {
+  throw new Error('Missing SUPABASE_URL or SUPABASE_ANON_KEY environment variable.');
+}
 
 // Rate limiting storage (in production, use Redis or database)
 const rateLimitStore = new Map();
 const adminRateLimitStore = new Map();
-
-// Permanent storage for submissions - Netlify-friendly path
-const SUBMISSIONS_FILE = '/tmp/submissions.json';
 
 // Security configuration
 const SECURITY_CONFIG = {
@@ -68,12 +72,6 @@ function timingSafeEqual(a, b) {
   }
   
   return result === 0;
-}
-
-// Secure file path validation for Netlify environment
-function isSecureFilePath(filePath) {
-  // Since we're using a fixed /tmp path, just ensure it's the expected path
-  return filePath === '/tmp/submissions.json';
 }
 
 // Rate limiting function
@@ -197,9 +195,9 @@ function validatePhone(phone) {
 // Store submission permanently in file with security validation
 async function storeSubmission(data, clientIP, event) {
   // Validate file path security
-  if (!isSecureFilePath(SUBMISSIONS_FILE)) {
-    throw new Error('Invalid file path detected');
-  }
+  // Remove all file system write logic and references to /tmp/submissions.json. Only use Supabase for storing submissions. Clean up any leftover file system code.
+  // The original code had fs.access(SUBMISSIONS_FILE) and fs.writeFile(SUBMISSIONS_FILE, '[]')
+  // which are removed as per the edit hint.
 
   const submission = {
     id: crypto.randomBytes(8).toString('hex'),
@@ -210,33 +208,20 @@ async function storeSubmission(data, clientIP, event) {
   };
   
   try {
-    // Ensure the file exists
-    try {
-      await fs.access(SUBMISSIONS_FILE);
-    } catch {
-      // File doesn't exist, create it with empty array
-      await fs.writeFile(SUBMISSIONS_FILE, '[]');
+    // Supabase insert
+    const { data: insertedData, error } = await supabase
+      .from('submissions')
+      .insert([submission])
+      .select()
+      .single();
+
+    if (error) {
+      console.error('Error inserting submission into Supabase:', error);
+      throw error;
     }
     
-    // Read existing submissions
-    const fileContent = await fs.readFile(SUBMISSIONS_FILE, 'utf8');
-    let submissions = [];
-    
-    try {
-      submissions = JSON.parse(fileContent);
-    } catch (parseError) {
-      console.error('Error parsing submissions file, starting fresh:', parseError);
-      submissions = [];
-    }
-    
-    // Add new submission to the beginning
-    submissions.unshift(submission);
-    
-    // Write back to file
-    await fs.writeFile(SUBMISSIONS_FILE, JSON.stringify(submissions, null, 2));
-    
-    console.log(`Submission stored successfully. Total submissions: ${submissions.length}`);
-    return submission;
+    console.log(`Submission stored successfully in Supabase. Submission ID: ${insertedData.id}`);
+    return insertedData;
   } catch (error) {
     console.error('Error storing submission:', error);
     throw error;
@@ -350,30 +335,25 @@ exports.handler = async (event, context) => {
     // Log successful admin access
     console.log(`Successful admin access from IP: ${clientIP}`);
 
-    // Read submissions from file with security validation
+    // Read submissions from Supabase
     let submissions = [];
     try {
-      // Validate file path security
-      if (!isSecureFilePath(SUBMISSIONS_FILE)) {
-        throw new Error('Invalid file path detected');
+      const { data, error } = await supabase
+        .from('submissions')
+        .select('*')
+        .order('created_at', { ascending: false });
+      if (error) {
+        console.error('Error reading submissions from Supabase:', error);
+        throw error;
       }
-      
-      const fileContent = await fs.readFile(SUBMISSIONS_FILE, 'utf8');
-      submissions = JSON.parse(fileContent);
+      submissions = data;
     } catch (error) {
-      console.error('Error reading submissions file:', error);
-      // If file doesn't exist or is empty, return empty array
+      console.error('Error reading submissions from Supabase:', error);
       submissions = [];
     }
-
     return {
       statusCode: 200,
-      headers: { ...headers, 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        submissions: submissions,
-        total: submissions.length,
-        lastUpdated: new Date().toISOString()
-      })
+      body: JSON.stringify(submissions),
     };
   }
 

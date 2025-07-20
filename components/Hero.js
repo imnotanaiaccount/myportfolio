@@ -33,6 +33,17 @@ const Hero = () => {
     }
   };
 
+  const handleHeroPlanClick = (planId) => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('selectedPlan', planId);
+      window.dispatchEvent(new CustomEvent('planSelected', { detail: planId }));
+      const el = document.getElementById('signup');
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+
   const [expanded, setExpanded] = useState(false);
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden space-bg">
@@ -51,21 +62,23 @@ const Hero = () => {
 
           {/* CTA Buttons: Main Conversion Path */}
           <div className="mb-10 flex flex-wrap gap-4 justify-center items-center">
-            <a 
-              href="#signup?plan=trial" 
+            <button
               className="btn-apple-primary text-lg px-12 py-6"
+              onClick={() => handleHeroPlanClick('trial')}
+              type="button"
             >
               Start My 1-Month Trial
               <svg className="ml-3 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
-            </a>
-            <a
-              href="#signup?plan=starter"
+            </button>
+            <button
               className="btn-apple-paid text-lg px-12 py-6"
+              onClick={() => handleHeroPlanClick('starter')}
+              type="button"
             >
               Get Started Now
-            </a>
+            </button>
           </div>
           {/* Subtle text link for 'See How It Works' */}
           <div className="mb-12 flex justify-center">

@@ -22,6 +22,7 @@ export default function Pricing() {
   const handlePlanClick = (planId) => {
     if (typeof window !== 'undefined') {
       localStorage.setItem('selectedPlan', planId);
+      window.dispatchEvent(new CustomEvent('planSelected', { detail: planId }));
       scrollToSignup();
     }
   };

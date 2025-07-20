@@ -348,7 +348,7 @@ const PaymentForm = ({ formData, setFormData, errors, setErrors, handleSubmit, i
       {/* Submit Button */}
       <button
         type="submit"
-        disabled={isSubmitting || !stripe}
+        disabled={isSubmitting || (showPayment && !stripe)}
         className="btn-apple-primary w-full text-lg py-5 disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {isSubmitting ? (
@@ -399,6 +399,16 @@ const SignupForm = () => {
         localStorage.removeItem('selectedPlan');
       }
       setFormData(prev => ({ ...prev, selectedPlan: plan }));
+
+      // Listen for planSelected event
+      const handlePlanSelected = (e) => {
+        const planId = e.detail;
+        if (STRIPE_PLANS[planId]) {
+          setFormData(prev => ({ ...prev, selectedPlan: planId }));
+        }
+      };
+      window.addEventListener('planSelected', handlePlanSelected);
+      return () => window.removeEventListener('planSelected', handlePlanSelected);
     }
   }, []);
 
