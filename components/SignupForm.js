@@ -389,6 +389,7 @@ const SignupForm = () => {
   const totals = calculateTotals(selectedPlan);
   const showPayment = formData.selectedPlan !== 'trial';
 
+  // Always default to trial if no plan is pre-selected
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const hash = window.location.hash;
@@ -532,71 +533,19 @@ const SignupForm = () => {
     );
   }
 
-  const planOptions = [
-    STRIPE_PLANS.trial,
-    STRIPE_PLANS.starter,
-    STRIPE_PLANS.pro,
-    STRIPE_PLANS.payperlead,
-    STRIPE_PLANS.enterprise
-  ];
-
-  // Determine if a plan is pre-selected from the URL
-  const planPreselected = typeof window !== 'undefined' && window.location.hash.includes('plan=');
-
   return (
     <section id="signup" className="py-16 sm:py-24 lg:py-32 px-4 sm:px-6 lg:px-8 bg-black space-bg">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-black mb-6 leading-tight">
-            Choose Your <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">Plan</span>
+            Sign Up <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">for Your Plan</span>
           </h2>
           <p className="text-base sm:text-lg md:text-xl text-gray-300 max-w-3xl mx-auto font-light leading-relaxed">
-            Start with a free trial or jump straight into a paid plan. All plans include pre-qualified leads and full support.
+            Complete the form below to get started. All plans include pre-qualified leads and full support.
           </p>
         </div>
 
-        {/* Plan Selection - only show if not pre-selected */}
-        {!planPreselected && (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-            {planOptions.map((plan) => (
-              <div
-                key={plan.id}
-                className={`relative glass-strong border rounded-2xl p-8 cursor-pointer transition-all duration-300 ${
-                  formData.selectedPlan === plan.id
-                    ? 'border-blue-500 bg-blue-500/10'
-                    : 'border-white/10 hover:border-white/20'
-                } ${plan.popular ? 'ring-2 ring-blue-500/50' : ''}`}
-                onClick={() => setFormData(prev => ({ ...prev, selectedPlan: plan.id }))}
-              >
-                {plan.popular && (
-                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                    <span className="bg-blue-500 text-white px-4 py-1 rounded-full text-sm font-semibold">
-                      Most Popular
-                    </span>
-                  </div>
-                )}
-                <div className="text-center">
-                  <h3 className="text-2xl font-bold text-white mb-2">{plan.name}</h3>
-                  <div className="mb-4">
-                    <span className="text-4xl font-bold text-white">{plan.price === 0 ? (plan.id === 'trial' ? 'Free' : 'Custom') : `$${plan.price}${plan.duration === 'per month' ? '/mo' : plan.duration === 'per lead' ? '/lead' : ''}`}</span>
-                    <span className="text-gray-400 ml-2">{plan.duration}</span>
-                  </div>
-                  <p className="text-gray-300 mb-6">{plan.description}</p>
-                  <ul className="text-left space-y-3 mb-6">
-                    {plan.features.map((feature, index) => (
-                      <li key={index} className="flex items-start">
-                        <span className="text-blue-400 mr-3 mt-1">✓</span>
-                        <span className="text-gray-300 text-sm">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-
-        {/* Signup/payment form for the selected plan */}
+        {/* Signup/payment form for the selected plan only */}
         <div className="max-w-2xl mx-auto">
           <div className="glass-strong p-8 rounded-2xl">
             <h3 className="text-2xl font-bold text-white mb-6 text-center">
