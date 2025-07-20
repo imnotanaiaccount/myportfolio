@@ -1,12 +1,25 @@
 const Stripe = require('stripe');
 const crypto = require('crypto');
 const fs = require('fs').promises;
+const { SupabaseClient } = require('@supabase/supabase-js');
 
 // Initialize Stripe with secret key
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
   apiVersion: '2024-06-20',
   maxNetworkRetries: 3,
 });
+
+// Initialize Supabase
+const supabase = new SupabaseClient(
+  process.env.SUPABASE_URL,
+  process.env.SUPABASE_ANON_KEY,
+  {
+    auth: {
+      autoRefreshToken: false,
+      persistSession: false,
+    },
+  }
+);
 
 // Storage for signups
 const SIGNUPS_FILE = '/tmp/signups.json';
@@ -449,6 +462,26 @@ exports.handler = async (event, context) => {
     // Process signup based on type
     let result;
     if (data.isTrial) {
+      // Prevent duplicate free trials by email or IP
+      const { data: existingTrials, error: trialCheckError } = await supabase
+        .from('submissions')
+        .select('id')
+        .eq('plan', 'trial')
+        .or(`email.eq.${data.email},clientIP.eq.${clientIP}`);
+      if (trialCheckError) {
+        return {
+          statusCode: 500,
+          headers,
+          body: JSON.stringify({ error: 'Error checking for existing trials' })
+        };
+      }
+      if (existingTrials && existingTrials.length > 0) {
+        return {
+          statusCode: 400,
+          headers,
+          body: JSON.stringify({ error: 'A free trial has already been used with this email or IP address.' })
+        };
+      }
       result = await processTrialSignup(data, clientIP, event);
     } else {
       // Only require payment method for paid plans
