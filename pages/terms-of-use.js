@@ -233,6 +233,13 @@ export default function TermsOfUse() {
                 </div>
               </div>
 
+              <div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Lead Volume Disclaimer</h2>
+                <p className="text-gray-300 leading-relaxed mb-4">
+                  <strong>Lead Volume Disclaimer:</strong> All references to lead quantities (e.g., "up to 15 leads per month") are estimates. Actual lead volume may vary based on market demand, client criteria, and other factors. Riva will make best efforts to deliver as many qualified leads as possible, but does not guarantee a minimum number of leads for any plan. No refunds or credits will be issued solely for lower-than-expected lead volume unless otherwise stated in a separate written agreement.
+                </p>
+              </div>
+
             </div>
           </motion.div>
         </div>

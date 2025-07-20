@@ -13,9 +13,9 @@ export const STRIPE_PLANS = {
     duration: '1 month',
     taxRate: 0,
     stripePriceId: null, // No Stripe price for trial
-    description: 'Up to 5 qualified leads',
+    description: 'Up to 5 qualified leads (volume may vary)',
     features: [
-      'Up to 5 pre-qualified leads',
+      'Up to 5 pre-qualified leads (volume may vary)',
       'No credit card required',
       'Full lead details & contact info',
       'Email & phone support',
@@ -32,9 +32,9 @@ export const STRIPE_PLANS = {
     duration: 'per month',
     taxRate: 0.08,
     stripePriceId: process.env.STRIPE_STARTER_PRICE_ID,
-    description: 'Up to 15 qualified leads',
+    description: 'Up to 15 qualified leads per month (volume may vary)',
     features: [
-      'Up to 15 pre-qualified leads',
+      'Up to 15 pre-qualified leads per month (volume may vary)',
       'Priority lead delivery',
       'Full lead details & contact info',
       'Email & phone support',
@@ -52,9 +52,9 @@ export const STRIPE_PLANS = {
     duration: 'per month',
     taxRate: 0.08,
     stripePriceId: process.env.STRIPE_PRO_PRICE_ID,
-    description: 'Up to 35 qualified leads',
+    description: 'Up to 35 qualified leads per month (volume may vary)',
     features: [
-      'Up to 35 pre-qualified leads',
+      'Up to 35 pre-qualified leads per month (volume may vary)',
       'Priority lead delivery',
       'Full lead details & contact info',
       'Dedicated account manager',
@@ -73,9 +73,9 @@ export const STRIPE_PLANS = {
     duration: 'per lead',
     taxRate: 0.08,
     stripePriceId: process.env.STRIPE_PAYPERLEAD_PRICE_ID,
-    description: 'Buy leads one at a time. No subscription required.',
+    description: 'Buy leads one at a time. No subscription required. Volume may vary.',
     features: [
-      '1 pre-qualified lead',
+      '1 pre-qualified lead (as available)',
       'Full lead details & contact info',
       'No subscription required',
       'Email & phone support',
@@ -92,9 +92,9 @@ export const STRIPE_PLANS = {
     duration: 'Custom',
     taxRate: 0.08,
     stripePriceId: null, // Handled via contact
-    description: 'Unlimited leads, custom integrations, dedicated support.',
+    description: 'Unlimited leads (as available), custom integrations, dedicated support.',
     features: [
-      'Unlimited pre-qualified leads',
+      'Unlimited pre-qualified leads (as available)',
       'Custom integrations',
       'Dedicated account manager',
       'White-glove onboarding',

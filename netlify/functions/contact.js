@@ -414,7 +414,8 @@ exports.handler = async (event, context) => {
       idealClient: sanitizeInput(parsedBody.idealClient, SECURITY_CONFIG.MAX_IDEAL_CLIENT_LENGTH),
       hearAbout: sanitizeInput(parsedBody.hearAbout, 50),
       leadGoal: sanitizeInput(parsedBody.leadGoal, 10),
-      budget: sanitizeInput(parsedBody.budget, 100) // Sanitize budget field
+      budget: sanitizeInput(parsedBody.budget, 100), // Sanitize budget field
+      status: parsedBody.status // Extract status from parsed body
     };
 
     // Validate required fields
@@ -514,7 +515,17 @@ exports.handler = async (event, context) => {
       .digest('hex');
 
     // Extract known fields
-    const { name, email, message, plan, phone, budget, ...rest } = data;
+    const { name, email, message, plan, phone, budget, status, ...rest } = data;
+
+    // Determine status
+    let submissionStatus = status;
+    if (!submissionStatus) {
+      if (plan === 'trial') {
+        submissionStatus = 'trial_active';
+      } else {
+        submissionStatus = 'pending';
+      }
+    }
 
     // Insert into Supabase
     const { data: insertedData, error } = await supabase
@@ -526,7 +537,8 @@ exports.handler = async (event, context) => {
           message,
           plan,
           phone,
-          budget, // include budget as a top-level field
+          budget,
+          status: submissionStatus,
           metadata: rest,
         },
       ])
@@ -546,6 +558,7 @@ exports.handler = async (event, context) => {
       hearAbout: data.hearAbout || 'Not provided',
       leadGoal: data.leadGoal || 'Not provided',
       budget: data.budget || 'Not provided',
+      status: submissionStatus,
       clientIP,
       submissionHash,
       timestamp: new Date().toISOString(),
