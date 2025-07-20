@@ -451,7 +451,7 @@ exports.handler = async (event, context) => {
     if (data.isTrial) {
       result = await processTrialSignup(data, clientIP, event);
     } else {
-      // Validate payment method for paid plans
+      // Only require payment method for paid plans
       if (!data.paymentMethodId) {
         return {
           statusCode: 400,
@@ -459,7 +459,6 @@ exports.handler = async (event, context) => {
           body: JSON.stringify({ error: 'Payment method is required for paid plans' })
         };
       }
-      
       result = await processPaidSignup(data, data.paymentMethodId, clientIP, event);
     }
 

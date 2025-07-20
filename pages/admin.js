@@ -15,7 +15,11 @@ export default function Admin() {
 
   const fetchSubmissions = async () => {
     setLoading(true);
-    const res = await fetch('/.netlify/functions/contact');
+    const res = await fetch('/.netlify/functions/admin-submissions', {
+      headers: {
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_ADMIN_SECRET_KEY || ''}`
+      }
+    });
     const data = await res.json();
     setSubmissions(data);
     setLoading(false);

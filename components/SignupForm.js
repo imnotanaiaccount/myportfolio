@@ -423,7 +423,8 @@ const SignupForm = () => {
       email: formData.email.trim(),
       website: formData.website ? validateUrl(formData.website).url : '',
       phone: formData.phone ? formData.phone.trim() : '',
-      paymentMethodId
+      paymentMethodId,
+      isTrial: formData.selectedPlan === 'trial',
     };
 
     try {
