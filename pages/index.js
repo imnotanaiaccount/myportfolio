@@ -1,20 +1,26 @@
 import React from 'react';
 import Layout from '../components/Layout';
 import Hero from '../components/Hero';
-import Services from '../components/Services';
-import Examples from '../components/Examples';
+import HowItWorks from '../components/Services';
+import LeadExamples from '../components/Examples';
+import SignupForm from '../components/SignupForm';
+import Pricing from '../components/Pricing';
+import LeadMagnetSection from '../components/LeadMagnetSection';
 import About from '../components/About';
-import Contact from '../components/Contact';
+import FAQ from '../components/FAQ';
 import Footer from '../components/Footer';
 
 export default function Home() {
   return (
     <Layout>
       <Hero />
-      <Services />
-      <Examples />
+      <HowItWorks />
+      <LeadExamples />
+      <SignupForm />
+      <Pricing />
+      <LeadMagnetSection />
       <About />
-      <Contact />
+      <FAQ />
       <Footer />
     </Layout>
   );

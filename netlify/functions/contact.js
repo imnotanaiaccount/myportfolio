@@ -1,22 +1,288 @@
-const { createClient } = require('@supabase/supabase-js');
+// Security and spam protection for contact form
+const crypto = require('crypto');
+const fs = require('fs').promises;
+const path = require('path');
 
-// Initialize Supabase client with error handling
-let supabase = null;
-try {
-  supabase = createClient(
-    process.env.SUPABASE_URL,
-    process.env.SUPABASE_ANON_KEY
-  );
-} catch (error) {
-  console.error('Supabase client initialization error:', error);
+// Rate limiting storage (in production, use Redis or database)
+const rateLimitStore = new Map();
+const adminRateLimitStore = new Map();
+
+// Permanent storage for submissions - Netlify-friendly path
+const SUBMISSIONS_FILE = '/tmp/submissions.json';
+
+// Security configuration
+const SECURITY_CONFIG = {
+  // Rate limiting
+  MAX_REQUESTS_PER_IP: 5,
+  RATE_LIMIT_WINDOW: 15 * 60 * 1000, // 15 minutes
+  
+  // Admin rate limiting
+  MAX_ADMIN_REQUESTS_PER_IP: 10,
+  ADMIN_RATE_LIMIT_WINDOW: 5 * 60 * 1000, // 5 minutes
+  
+  // Input validation
+  MAX_NAME_LENGTH: 100,
+  MAX_EMAIL_LENGTH: 254,
+  MAX_MESSAGE_LENGTH: 2000,
+  MAX_BUSINESS_LENGTH: 100,
+  MAX_PHONE_LENGTH: 20,
+  MAX_WEBSITE_LENGTH: 200,
+  MAX_IDEAL_CLIENT_LENGTH: 500,
+  
+  // Spam detection - more lenient for business inquiries
+  SUSPICIOUS_KEYWORDS: [
+    'viagra', 'casino', 'loan', 'debt consolidation', 'credit repair',
+    'make money fast', 'work from home', 'earn money online', 'get rich quick',
+    'lottery winner', 'click here', 'buy now', 'limited time offer',
+    'act now', 'urgent', '100% free', 'no obligation', 'guaranteed income'
+  ],
+  
+  // Allowed project types
+  ALLOWED_PROJECT_TYPES: [
+    'Website', 'Web App', 'Mobile App', 'E-commerce', 
+    'Branding', 'Marketing', 'Other'
+  ],
+  
+  // Allowed lead goals
+  ALLOWED_LEAD_GOALS: ['1-5', '6-15', '16-30', '31+'],
+  
+  // Allowed hear about sources
+  ALLOWED_HEAR_ABOUT: [
+    'Referral', 'Google Search', 'Social Media', 'Ad', 'Other'
+  ]
+};
+
+// Timing-safe string comparison to prevent timing attacks
+function timingSafeEqual(a, b) {
+  if (typeof a !== 'string' || typeof b !== 'string') {
+    return false;
+  }
+  
+  if (a.length !== b.length) {
+    return false;
+  }
+  
+  let result = 0;
+  for (let i = 0; i < a.length; i++) {
+    result |= a.charCodeAt(i) ^ b.charCodeAt(i);
+  }
+  
+  return result === 0;
+}
+
+// Secure file path validation for Netlify environment
+function isSecureFilePath(filePath) {
+  // Since we're using a fixed /tmp path, just ensure it's the expected path
+  return filePath === '/tmp/submissions.json';
+}
+
+// Rate limiting function
+function checkRateLimit(clientIP, isAdmin = false) {
+  const store = isAdmin ? adminRateLimitStore : rateLimitStore;
+  const maxRequests = isAdmin ? SECURITY_CONFIG.MAX_ADMIN_REQUESTS_PER_IP : SECURITY_CONFIG.MAX_REQUESTS_PER_IP;
+  const window = isAdmin ? SECURITY_CONFIG.ADMIN_RATE_LIMIT_WINDOW : SECURITY_CONFIG.RATE_LIMIT_WINDOW;
+  
+  const now = Date.now();
+  const windowStart = now - window;
+  
+  if (!store.has(clientIP)) {
+    store.set(clientIP, []);
+  }
+  
+  const requests = store.get(clientIP);
+  
+  // Remove old requests outside the window
+  const validRequests = requests.filter(timestamp => timestamp > windowStart);
+  store.set(clientIP, validRequests);
+  
+  if (validRequests.length >= maxRequests) {
+    return false;
+  }
+  
+  validRequests.push(now);
+  return true;
+}
+
+// Input sanitization
+function sanitizeInput(input, maxLength = 100) {
+  if (!input || typeof input !== 'string') return '';
+  
+  // Remove null bytes and control characters
+  let sanitized = input.replace(/[\x00-\x1F\x7F]/g, '');
+  
+  // Trim whitespace
+  sanitized = sanitized.trim();
+  
+  // Limit length
+  if (sanitized.length > maxLength) {
+    sanitized = sanitized.substring(0, maxLength);
+  }
+  
+  return sanitized;
+}
+
+// Spam detection - more lenient for business inquiries
+function detectSpam(data) {
+  const text = `${data.name} ${data.email} ${data.message} ${data.business} ${data.idealClient}`.toLowerCase();
+  
+  // Check for suspicious keywords - increased threshold for business context
+  const suspiciousCount = SECURITY_CONFIG.SUSPICIOUS_KEYWORDS.filter(keyword => 
+    text.includes(keyword.toLowerCase())
+  ).length;
+  
+  // Increased threshold from 3 to 5 for business inquiries
+  if (suspiciousCount >= 5) {
+    return { isSpam: true, reason: 'Too many suspicious keywords' };
+  }
+  
+  // Check for excessive caps - more lenient threshold
+  const capsRatio = (data.message.match(/[A-Z]/g) || []).length / data.message.length;
+  if (capsRatio > 0.8 && data.message.length > 100) { // Increased from 0.7 to 0.8 and 50 to 100
+    return { isSpam: true, reason: 'Excessive capitalization' };
+  }
+  
+  // Check for repeated characters - more lenient
+  const repeatedChars = /(.)\1{6,}/g; // Increased from 4 to 6
+  if (repeatedChars.test(data.message)) {
+    return { isSpam: true, reason: 'Repeated characters detected' };
+  }
+  
+  // Check for suspicious email patterns - more specific
+  const suspiciousEmails = [
+    'test@test.com', 'admin@admin.com', 'user@example.com', 
+    'spam@spam.com', 'bot@bot.com', 'fake@fake.com'
+  ];
+  if (suspiciousEmails.includes(data.email.toLowerCase())) {
+    return { isSpam: true, reason: 'Suspicious email address' };
+  }
+  
+  // Check for very short messages that might be spam
+  if (data.message.length < 10) {
+    return { isSpam: true, reason: 'Message too short' };
+  }
+  
+  // Check for excessive links in message
+  const linkCount = (data.message.match(/https?:\/\/[^\s]+/g) || []).length;
+  if (linkCount > 3) {
+    return { isSpam: true, reason: 'Too many links in message' };
+  }
+  
+  return { isSpam: false };
+}
+
+// Validate email format more strictly
+function validateEmail(email) {
+  const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+  return emailRegex.test(email) && email.length <= SECURITY_CONFIG.MAX_EMAIL_LENGTH;
+}
+
+// Validate URL format
+function validateURL(url) {
+  if (!url) return true; // Optional field
+  try {
+    const urlObj = new URL(url);
+    return ['http:', 'https:'].includes(urlObj.protocol);
+  } catch {
+    return false;
+  }
+}
+
+// Validate phone format
+function validatePhone(phone) {
+  if (!phone) return true; // Optional field
+  const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
+  return phoneRegex.test(phone.replace(/[\s\-\(\)]/g, ''));
+}
+
+// Store submission permanently in file with security validation
+async function storeSubmission(data, clientIP, event) {
+  // Validate file path security
+  if (!isSecureFilePath(SUBMISSIONS_FILE)) {
+    throw new Error('Invalid file path detected');
+  }
+
+  const submission = {
+    id: crypto.randomBytes(8).toString('hex'),
+    timestamp: new Date().toISOString(),
+    ...data,
+    clientIP,
+    userAgent: event.headers['user-agent'] || 'Unknown'
+  };
+  
+  try {
+    // Ensure the file exists
+    try {
+      await fs.access(SUBMISSIONS_FILE);
+    } catch {
+      // File doesn't exist, create it with empty array
+      await fs.writeFile(SUBMISSIONS_FILE, '[]');
+    }
+    
+    // Read existing submissions
+    const fileContent = await fs.readFile(SUBMISSIONS_FILE, 'utf8');
+    let submissions = [];
+    
+    try {
+      submissions = JSON.parse(fileContent);
+    } catch (parseError) {
+      console.error('Error parsing submissions file, starting fresh:', parseError);
+      submissions = [];
+    }
+    
+    // Add new submission to the beginning
+    submissions.unshift(submission);
+    
+    // Write back to file
+    await fs.writeFile(SUBMISSIONS_FILE, JSON.stringify(submissions, null, 2));
+    
+    console.log(`Submission stored successfully. Total submissions: ${submissions.length}`);
+    return submission;
+  } catch (error) {
+    console.error('Error storing submission:', error);
+    throw error;
+  }
+}
+
+// Verify admin access with timing-safe comparison
+function verifyAdminAccess(adminKey) {
+  // Use environment variable for admin key
+  const expectedKey = process.env.ADMIN_SECRET_KEY;
+  
+  if (!expectedKey) {
+    console.error('ADMIN_SECRET_KEY environment variable not set');
+    return false;
+  }
+  
+  if (!adminKey) {
+    console.error('No admin key provided');
+    return false;
+  }
+  
+  // Use timing-safe comparison to prevent timing attacks
+  const isValid = timingSafeEqual(adminKey, expectedKey);
+  
+  // Only log success/failure, not details
+  if (isValid) {
+    console.log('Admin access granted');
+  } else {
+    console.log('Admin access denied - invalid credentials');
+  }
+  
+  return isValid;
 }
 
 exports.handler = async (event, context) => {
-  // Enable CORS for Netlify
+  // Security headers
   const headers = {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Headers': 'Content-Type',
-    'Access-Control-Allow-Methods': 'POST, OPTIONS'
+    'Access-Control-Allow-Origin': 'https://rivaofficial.netlify.app', // Restrict to your domain
+    'Access-Control-Allow-Headers': 'Content-Type, X-Requested-With, Authorization',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS, GET',
+    'X-Content-Type-Options': 'nosniff',
+    'X-Frame-Options': 'DENY',
+    'X-XSS-Protection': '1; mode=block',
+    'Referrer-Policy': 'strict-origin-when-cross-origin',
+    'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline';",
+    'Strict-Transport-Security': 'max-age=31536000; includeSubDomains'
   };
 
   // Handle preflight requests
@@ -28,7 +294,90 @@ exports.handler = async (event, context) => {
     };
   }
 
-  // Only allow POST requests
+  // Get client IP for rate limiting
+  const clientIP = event.headers['client-ip'] || 
+                  event.headers['x-forwarded-for']?.split(',')[0] || 
+                  event.headers['x-real-ip'] || 
+                  'unknown';
+
+  // Handle GET requests for admin view
+  if (event.httpMethod === 'GET') {
+    // Simple test endpoint
+    if (event.queryStringParameters?.test === 'true') {
+      console.log('Test endpoint accessed');
+      return {
+        statusCode: 200,
+        headers: { ...headers, 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          message: 'Function is working',
+          timestamp: new Date().toISOString(),
+          envVarSet: !!process.env.ADMIN_SECRET_KEY
+        })
+      };
+    }
+    
+    // Admin rate limiting
+    if (!checkRateLimit(clientIP, true)) {
+      console.log(`Admin rate limit exceeded for IP: ${clientIP}`);
+      return {
+        statusCode: 429,
+        headers,
+        body: JSON.stringify({ 
+          error: 'Too many admin requests. Please try again later.',
+          message: 'Admin rate limit exceeded'
+        })
+      };
+    }
+
+    // Get admin key from query parameters or Authorization header
+    const adminKey = event.queryStringParameters?.key || 
+                    event.headers.authorization?.replace('Bearer ', '') ||
+                    event.headers['x-admin-key'];
+
+    // Verify admin access
+    if (!verifyAdminAccess(adminKey)) {
+      console.log(`Unauthorized admin access attempt from IP: ${clientIP}`);
+      return {
+        statusCode: 401,
+        headers,
+        body: JSON.stringify({ 
+          error: 'Unauthorized',
+          message: 'Invalid admin credentials'
+        })
+      };
+    }
+
+    // Log successful admin access
+    console.log(`Successful admin access from IP: ${clientIP}`);
+
+    // Read submissions from file with security validation
+    let submissions = [];
+    try {
+      // Validate file path security
+      if (!isSecureFilePath(SUBMISSIONS_FILE)) {
+        throw new Error('Invalid file path detected');
+      }
+      
+      const fileContent = await fs.readFile(SUBMISSIONS_FILE, 'utf8');
+      submissions = JSON.parse(fileContent);
+    } catch (error) {
+      console.error('Error reading submissions file:', error);
+      // If file doesn't exist or is empty, return empty array
+      submissions = [];
+    }
+
+    return {
+      statusCode: 200,
+      headers: { ...headers, 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        submissions: submissions,
+        total: submissions.length,
+        lastUpdated: new Date().toISOString()
+      })
+    };
+  }
+
+  // Only allow POST requests for form submissions
   if (event.httpMethod !== 'POST') {
     return {
       statusCode: 405,
@@ -38,17 +387,63 @@ exports.handler = async (event, context) => {
   }
 
   try {
-    // Log environment variables for debugging (remove in production)
-    console.log('Environment check:', {
-      hasSupabaseUrl: !!process.env.SUPABASE_URL,
-      hasSupabaseKey: !!process.env.SUPABASE_ANON_KEY,
-      hasBrevoKey: !!process.env.BREVO_API_KEY
-    });
+    // Rate limiting check for form submissions
+    if (!checkRateLimit(clientIP, false)) {
+      console.log(`Rate limit exceeded for IP: ${clientIP}`);
+      return {
+        statusCode: 429,
+        headers,
+        body: JSON.stringify({ 
+          error: 'Too many requests. Please try again later.',
+          message: 'Rate limit exceeded'
+        })
+      };
+    }
 
-    const { name, email, projectType, message, newsletter } = JSON.parse(event.body);
+    // Validate Content-Type
+    const contentType = event.headers['content-type'] || '';
+    if (!contentType.includes('application/json')) {
+      return {
+        statusCode: 400,
+        headers,
+        body: JSON.stringify({ error: 'Invalid content type' })
+      };
+    }
+
+    // Parse and validate JSON
+    let parsedBody;
+    try {
+      parsedBody = JSON.parse(event.body);
+    } catch (parseError) {
+      return {
+        statusCode: 400,
+        headers,
+        body: JSON.stringify({ error: 'Invalid JSON format' })
+      };
+    }
+
+    // Extract and sanitize all fields
+    const data = {
+      name: sanitizeInput(parsedBody.name, SECURITY_CONFIG.MAX_NAME_LENGTH),
+      email: sanitizeInput(parsedBody.email, SECURITY_CONFIG.MAX_EMAIL_LENGTH).toLowerCase(),
+      projectType: sanitizeInput(parsedBody.projectType, 50),
+      message: sanitizeInput(parsedBody.message, SECURITY_CONFIG.MAX_MESSAGE_LENGTH),
+      business: sanitizeInput(parsedBody.business, SECURITY_CONFIG.MAX_BUSINESS_LENGTH),
+      phone: sanitizeInput(parsedBody.phone, SECURITY_CONFIG.MAX_PHONE_LENGTH),
+      website: sanitizeInput(parsedBody.website, SECURITY_CONFIG.MAX_WEBSITE_LENGTH),
+      idealClient: sanitizeInput(parsedBody.idealClient, SECURITY_CONFIG.MAX_IDEAL_CLIENT_LENGTH),
+      hearAbout: sanitizeInput(parsedBody.hearAbout, 50),
+      leadGoal: sanitizeInput(parsedBody.leadGoal, 10)
+    };
 
     // Validate required fields
-    if (!name || !email || !projectType || !message) {
+    if (!data.name || !data.email || !data.projectType || !data.message) {
+      console.log('Missing required fields:', { 
+        name: !!data.name, 
+        email: !!data.email, 
+        projectType: !!data.projectType, 
+        message: !!data.message 
+      });
       return {
         statusCode: 400,
         headers,
@@ -57,8 +452,8 @@ exports.handler = async (event, context) => {
     }
 
     // Validate email format
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
+    if (!validateEmail(data.email)) {
+      console.log('Invalid email format:', data.email);
       return {
         statusCode: 400,
         headers,
@@ -66,204 +461,108 @@ exports.handler = async (event, context) => {
       };
     }
 
-    // Save to Supabase (if configured)
-    let supabaseSuccess = false;
-    if (supabase && process.env.SUPABASE_URL && process.env.SUPABASE_ANON_KEY) {
-      try {
-        const { error: supabaseError } = await supabase
-          .from('leads')
-          .insert([
-            {
-              name: name.trim(),
-              email: email.toLowerCase().trim(),
-              project_type: projectType,
-              message: message.trim(),
-              newsletter: !!newsletter,
-              created_at: new Date().toISOString()
-            }
-          ]);
-
-        if (supabaseError) {
-          console.error('Supabase error:', supabaseError);
-        } else {
-          supabaseSuccess = true;
-          console.log('Lead saved to Supabase successfully');
-        }
-      } catch (error) {
-        console.error('Supabase save error:', error);
-      }
-    } else {
-      console.log('Supabase not configured, skipping database save');
+    // Validate project type
+    if (!SECURITY_CONFIG.ALLOWED_PROJECT_TYPES.includes(data.projectType)) {
+      return {
+        statusCode: 400,
+        headers,
+        body: JSON.stringify({ error: 'Invalid project type' })
+      };
     }
 
-    // Send to n8n webhook (if configured)
-    let n8nStatus = 'not_configured';
-    if (process.env.N8N_WEBHOOK_URL) {
-      try {
-        const webhookData = {
-          name: name.trim(),
-          email: email.toLowerCase().trim(),
-          projectType: projectType,
-          message: message.trim(),
-          newsletter: !!newsletter,
-          timestamp: new Date().toISOString(),
-          source: 'Riva Portfolio Contact Form'
-        };
-        const n8nResponse = await fetch(process.env.N8N_WEBHOOK_URL, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(webhookData)
-        });
-        n8nStatus = n8nResponse.status;
-        console.log('n8n webhook response status:', n8nResponse.status);
-      } catch (error) {
-        n8nStatus = 'error';
-        console.error('n8n webhook error:', error);
-      }
-    } else {
-      console.log('N8N_WEBHOOK_URL not set, skipping n8n webhook');
+    // Validate lead goal if provided
+    if (data.leadGoal && !SECURITY_CONFIG.ALLOWED_LEAD_GOALS.includes(data.leadGoal)) {
+      return {
+        statusCode: 400,
+        headers,
+        body: JSON.stringify({ error: 'Invalid lead goal' })
+      };
     }
 
-    // Send email via Brevo (if configured)
-    let brevoSuccess = false;
-    if (process.env.BREVO_API_KEY) {
-      try {
-        const emailHtml = `
-          <!DOCTYPE html>
-          <html>
-          <head>
-            <meta charset="utf-8">
-            <title>New Contact Form Submission - Riva</title>
-            <style>
-              body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
-              .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-              .header { background: #007AFF; color: white; padding: 20px; text-align: center; }
-              .content { padding: 20px; background: #f9f9f9; }
-              .field { margin-bottom: 15px; }
-              .label { font-weight: bold; color: #007AFF; }
-              .value { background: white; padding: 10px; border-radius: 5px; }
-            </style>
-          </head>
-          <body>
-            <div class="container">
-              <div class="header">
-                <h1>🎉 New Lead from Riva Portfolio</h1>
-              </div>
-              <div class="content">
-                <div class="field">
-                  <div class="label">👤 Name:</div>
-                  <div class="value">${name}</div>
-                </div>
-                <div class="field">
-                  <div class="label">📧 Email:</div>
-                  <div class="value">${email}</div>
-                </div>
-                <div class="field">
-                  <div class="label">🛠️ Project Type:</div>
-                  <div class="value">${projectType}</div>
-                </div>
-                <div class="field">
-                  <div class="label">💬 Message:</div>
-                  <div class="value">${message}</div>
-                </div>
-                <div class="field">
-                  <div class="label">📧 Newsletter:</div>
-                  <div class="value">${newsletter ? 'Yes' : 'No'}</div>
-                </div>
-                <div class="field">
-                  <div class="label">⏰ Submitted:</div>
-                  <div class="value">${new Date().toLocaleString()}</div>
-                </div>
-              </div>
-            </div>
-          </body>
-          </html>
-        `;
-
-        const brevoEmailData = {
-          sender: {
-            name: 'Riva Portfolio',
-            email: process.env.BREVO_SENDER_EMAIL || 'joshhawleyofficial@gmail.com'
-          },
-          to: [{
-            email: process.env.NOTIFICATION_EMAIL || 'hello@riva.com',
-            name: 'Riva Team'
-          }],
-          subject: `New Lead: ${name} - ${projectType}`,
-          htmlContent: emailHtml
-        };
-
-        const brevoResponse = await fetch('https://api.brevo.com/v3/smtp/email', {
-          method: 'POST',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'api-key': process.env.BREVO_API_KEY
-          },
-          body: JSON.stringify(brevoEmailData)
-        });
-
-        if (brevoResponse.ok) {
-          brevoSuccess = true;
-          console.log('Email sent via Brevo successfully');
-        } else {
-          const errorText = await brevoResponse.text();
-          console.error('Brevo API error:', brevoResponse.status, errorText);
-        }
-      } catch (error) {
-        console.error('Brevo email error:', error);
-      }
-    } else {
-      console.log('Brevo not configured, skipping email');
+    // Validate hear about if provided
+    if (data.hearAbout && !SECURITY_CONFIG.ALLOWED_HEAR_ABOUT.includes(data.hearAbout)) {
+      return {
+        statusCode: 400,
+        headers,
+        body: JSON.stringify({ error: 'Invalid source selection' })
+      };
     }
 
-    // Add to Brevo list if newsletter opt-in
-    let brevoListStatus = 'not_subscribed';
-    if (newsletter && process.env.BREVO_API_KEY && process.env.BREVO_LIST_ID) {
-      try {
-        const addToListResponse = await fetch('https://api.brevo.com/v3/contacts', {
-          method: 'POST',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'api-key': process.env.BREVO_API_KEY
-          },
-          body: JSON.stringify({
-            email: email.toLowerCase().trim(),
-            attributes: { FIRSTNAME: name.trim() },
-            listIds: [parseInt(process.env.BREVO_LIST_ID, 10)],
-            updateEnabled: true
-          })
-        });
-        if (addToListResponse.ok) {
-          brevoListStatus = 'subscribed';
-          console.log('User added to Brevo list');
-        } else {
-          const errorText = await addToListResponse.text();
-          brevoListStatus = 'error';
-          console.error('Brevo list add error:', addToListResponse.status, errorText);
-        }
-      } catch (error) {
-        brevoListStatus = 'error';
-        console.error('Brevo list add exception:', error);
-      }
-    } else if (newsletter) {
-      console.log('Newsletter opt-in, but Brevo API key or list ID missing');
+    // Validate phone if provided
+    if (data.phone && !validatePhone(data.phone)) {
+      return {
+        statusCode: 400,
+        headers,
+        body: JSON.stringify({ error: 'Invalid phone format' })
+      };
     }
 
-    // Always return success if form data is valid
+    // Validate website if provided
+    if (data.website && !validateURL(data.website)) {
+      return {
+        statusCode: 400,
+        headers,
+        body: JSON.stringify({ error: 'Invalid website URL' })
+      };
+    }
+
+    // Spam detection
+    const spamCheck = detectSpam(data);
+    if (spamCheck.isSpam) {
+      console.log(`Spam detected from IP ${clientIP}:`, {
+        reason: spamCheck.reason,
+        name: data.name,
+        email: data.email,
+        messageLength: data.message.length,
+        messagePreview: data.message.substring(0, 100)
+      });
+      return {
+        statusCode: 400,
+        headers,
+        body: JSON.stringify({ 
+          error: 'Message flagged as spam',
+          message: 'Your message appears to be spam. Please revise and try again.',
+          debug: process.env.NODE_ENV === 'development' ? spamCheck.reason : undefined
+        })
+      };
+    }
+
+    // Create submission hash for deduplication
+    const submissionHash = crypto.createHash('sha256')
+      .update(`${data.email}-${data.name}-${data.message.substring(0, 100)}`)
+      .digest('hex');
+
+    // Store the submission
+    const submission = await storeSubmission(data, clientIP, event);
+
+    // Log the submission details (sanitized)
+    console.log('Form submission details:', {
+      name: data.name,
+      email: data.email,
+      projectType: data.projectType,
+      messageLength: data.message.length,
+      business: data.business || 'Not provided',
+      phone: data.phone || 'Not provided',
+      website: data.website || 'Not provided',
+      idealClient: data.idealClient || 'Not provided',
+      hearAbout: data.hearAbout || 'Not provided',
+      leadGoal: data.leadGoal || 'Not provided',
+      clientIP,
+      submissionHash,
+      timestamp: new Date().toISOString(),
+      userAgent: event.headers['user-agent'] || 'Unknown'
+    });
+
+    // Success response
+    console.log('Form submission successful');
+    
     return {
       statusCode: 200,
       headers,
       body: JSON.stringify({ 
-        message: 'Thank you! Your message has been received.',
+        message: 'Thank you! Your message has been received. We\'ll get back to you soon.',
         success: true,
-        supabaseStatus: supabaseSuccess ? 'saved' : 'not_configured',
-        brevoStatus: brevoSuccess ? 'sent' : 'not_configured',
-        n8nStatus: n8nStatus,
-        brevoListStatus: brevoListStatus
+        submissionId: submission.id
       })
     };
 

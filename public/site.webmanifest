@@ -1,22 +1,22 @@
 {
-  "name": "Joshua Hawley | Instagrow Media",
-  "short_name": "Instagrow Media",
-  "description": "Premium digital solutions for modern businesses",
+  "name": "Riva | Premium Lead Generation",
+  "short_name": "Riva",
+  "description": "Premium lead generation solutions for modern businesses",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#1877f2",
-  "theme_color": "#1877f2",
+  "background_color": "#000000",
+  "theme_color": "#007AFF",
   "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "/favicon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml"
+      "src": "/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
     },
     {
-      "src": "/og-image.svg",
-      "sizes": "any",
-      "type": "image/svg+xml"
+      "src": "/favicon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png"
     }
   ],
   "categories": ["business", "productivity", "utilities"],
