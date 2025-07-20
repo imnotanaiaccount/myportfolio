@@ -12,6 +12,20 @@ export default function Pricing() {
     STRIPE_PLANS.enterprise
   ];
 
+  const scrollToSignup = () => {
+    const el = document.getElementById('signup');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const handlePlanClick = (planId) => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('selectedPlan', planId);
+      scrollToSignup();
+    }
+  };
+
   return (
     <section id="pricing" className="py-20 px-4 sm:px-6 lg:px-8 bg-black space-bg">
       <div className="max-w-5xl mx-auto text-center mb-16">
@@ -24,7 +38,12 @@ export default function Pricing() {
         {plans.map((plan, idx) => (
           <div
             key={plan.id}
-            className={`rounded-3xl p-8 shadow-xl border-2 ${plan.popular ? 'border-blue-400 animate-glow-card ring-2 ring-blue-400/30 bg-white/10' : 'border-white/10 bg-white/5'} flex flex-col items-center`}
+            className={`rounded-3xl p-8 shadow-xl border-2 ${plan.popular ? 'border-blue-400 animate-glow-card ring-2 ring-blue-400/30 bg-white/10' : 'border-white/10 bg-white/5'} flex flex-col items-center cursor-pointer hover:scale-105 transition-transform duration-200`}
+            onClick={() => handlePlanClick(plan.id)}
+            tabIndex={0}
+            role="button"
+            aria-label={`Select ${plan.name}`}
+            onKeyDown={e => (e.key === 'Enter' || e.key === ' ') && handlePlanClick(plan.id)}
           >
             <h2 className="text-2xl font-bold mb-2 text-white">{plan.name}</h2>
             <div className="text-4xl font-extrabold mb-4 bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
@@ -38,15 +57,14 @@ export default function Pricing() {
                 </li>
               ))}
             </ul>
-            {plan.id === 'enterprise' ? (
-              <a href="#contact" className="btn-apple-primary w-full py-4 text-lg font-bold rounded-full">{plan.buttonText}</a>
-            ) : plan.id === 'payperlead' ? (
-              <a href="#contact" className="btn-apple-paid w-full py-4 text-lg font-bold rounded-full">{plan.buttonText}</a>
-            ) : plan.id === 'trial' ? (
-              <a href="#signup" className="btn-apple-leadmagnet-solid w-full py-4 text-lg font-bold rounded-full">{plan.buttonText}</a>
-            ) : (
-              <a href="#signup" className="btn-apple-primary w-full py-4 text-lg font-bold rounded-full {plan.popular ? 'scale-105' : ''}">{plan.buttonText}</a>
-            )}
+            <div className="w-full mt-auto">
+              <button
+                className={`w-full py-4 text-lg font-bold rounded-full ${plan.id === 'enterprise' ? 'btn-apple-primary' : plan.id === 'payperlead' ? 'btn-apple-paid' : plan.id === 'trial' ? 'btn-apple-leadmagnet-solid' : 'btn-apple-primary'} ${plan.popular ? 'scale-105' : ''}`}
+                onClick={e => { e.stopPropagation(); handlePlanClick(plan.id); }}
+              >
+                {plan.buttonText}
+              </button>
+            </div>
           </div>
         ))}
       </div>

@@ -389,16 +389,14 @@ const SignupForm = () => {
   const totals = calculateTotals(selectedPlan);
   const showPayment = formData.selectedPlan !== 'trial';
 
-  // Always default to trial if no plan is pre-selected
+  // On mount, read selected plan from localStorage (if present)
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      const hash = window.location.hash;
+      const storedPlan = localStorage.getItem('selectedPlan');
       let plan = 'trial';
-      if (hash.includes('plan=')) {
-        const match = hash.match(/plan=([a-zA-Z0-9_-]+)/);
-        if (match && STRIPE_PLANS[match[1]]) {
-          plan = match[1];
-        }
+      if (storedPlan && STRIPE_PLANS[storedPlan]) {
+        plan = storedPlan;
+        localStorage.removeItem('selectedPlan');
       }
       setFormData(prev => ({ ...prev, selectedPlan: plan }));
     }
