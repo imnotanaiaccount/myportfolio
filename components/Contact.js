@@ -194,6 +194,16 @@ const Contact = () => {
     }
   };
 
+  // Add budget options for enterprise leads
+  const BUDGET_OPTIONS = [
+    '',
+    '<$5,000',
+    '$5,000 – $10,000',
+    '$10,000 – $25,000',
+    '$25,000+',
+    'Not sure',
+  ];
+
   return (
     <section id="contact" className="py-16 sm:py-24 lg:py-32 px-4 sm:px-6 lg:px-8 bg-black space-bg">
       <div className="max-w-2xl mx-auto">
@@ -376,6 +386,21 @@ const Contact = () => {
                 <option value="6-15">6-15</option>
                 <option value="16-30">16-30</option>
                 <option value="31+">31+</option>
+              </select>
+              {/* Add budget options for enterprise leads */}
+              <label htmlFor="budget" className="block text-sm font-medium text-gray-300 mb-2">
+                Estimated Budget (optional)
+              </label>
+              <select
+                id="budget"
+                name="budget"
+                value={formData.budget || ''}
+                onChange={handleChange}
+                className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white mb-4"
+              >
+                {BUDGET_OPTIONS.map((option, idx) => (
+                  <option key={idx} value={option}>{option || 'Select a range'}</option>
+                ))}
               </select>
             </div>
             {/* Trust Messaging */}

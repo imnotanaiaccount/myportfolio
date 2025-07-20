@@ -413,7 +413,8 @@ exports.handler = async (event, context) => {
       website: sanitizeInput(parsedBody.website, SECURITY_CONFIG.MAX_WEBSITE_LENGTH),
       idealClient: sanitizeInput(parsedBody.idealClient, SECURITY_CONFIG.MAX_IDEAL_CLIENT_LENGTH),
       hearAbout: sanitizeInput(parsedBody.hearAbout, 50),
-      leadGoal: sanitizeInput(parsedBody.leadGoal, 10)
+      leadGoal: sanitizeInput(parsedBody.leadGoal, 10),
+      budget: sanitizeInput(parsedBody.budget, 100) // Sanitize budget field
     };
 
     // Validate required fields
@@ -512,8 +513,25 @@ exports.handler = async (event, context) => {
       .update(`${data.email}-${data.name}-${data.message.substring(0, 100)}`)
       .digest('hex');
 
-    // Store the submission
-    const submission = await storeSubmission(data, clientIP, event);
+    // Extract known fields
+    const { name, email, message, plan, phone, budget, ...rest } = data;
+
+    // Insert into Supabase
+    const { data: insertedData, error } = await supabase
+      .from('submissions')
+      .insert([
+        {
+          name,
+          email,
+          message,
+          plan,
+          phone,
+          budget, // include budget as a top-level field
+          metadata: rest,
+        },
+      ])
+      .select()
+      .single();
 
     // Log the submission details (sanitized)
     console.log('Form submission details:', {
@@ -527,6 +545,7 @@ exports.handler = async (event, context) => {
       idealClient: data.idealClient || 'Not provided',
       hearAbout: data.hearAbout || 'Not provided',
       leadGoal: data.leadGoal || 'Not provided',
+      budget: data.budget || 'Not provided',
       clientIP,
       submissionHash,
       timestamp: new Date().toISOString(),
@@ -542,7 +561,7 @@ exports.handler = async (event, context) => {
       body: JSON.stringify({ 
         message: 'Thank you! Your message has been received. We\'ll get back to you soon.',
         success: true,
-        submissionId: submission.id
+        submissionId: insertedData ? insertedData.id : undefined
       })
     };
 
